@@ -1,5 +1,5 @@
 -- Tables creation
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE users (
     role VARCHAR(20) NOT NULL
 );
 
-CREATE TABLE currencies (
+CREATE TABLE IF NOT EXISTS currencies (
     id SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL,
     usd_value DECIMAL NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE currencies (
     liquidity DECIMAL NOT NULL DEFAULT 0
 );
 
-CREATE TABLE wallets (
+CREATE TABLE IF NOT EXISTS wallets (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     address VARCHAR(100) NOT NULL UNIQUE,
@@ -28,7 +28,7 @@ CREATE TABLE wallets (
 );
 
 -- Junction table: wallet_currencies (many-to-many)
-CREATE TABLE wallet_currencies (
+CREATE TABLE IF NOT EXISTS wallet_currencies (
     wallet_id INTEGER REFERENCES wallets(id) ON DELETE CASCADE,
     currency_id INTEGER REFERENCES currencies(id) ON DELETE CASCADE,
     PRIMARY KEY (wallet_id, currency_id)
