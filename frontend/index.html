@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="shortcut icon" href="assets/icon.svg" type="image/x-icon" />
+		<link rel="stylesheet" href="styles/styles.css" />
+		<link rel="stylesheet" href="styles/home.css" />
+		<title>Crypto Masivos</title>
+	</head>
+	<body>
+		<header>
+			<div class="logo-container">
+				<h1><a href="index.html">CryptoMasivos</a></h1>
+			</div>
+
+			<div class="btn-container">
+				<button>Log In</button>
+				<button class="primary-btn">Sign Up</button>
+			</div>
+		</header>
+
+		<main>
+			<section class="about">
+				<h2>¿Quiénes somos?</h2>
+				<p>
+					Somos un equipo de entusiastas de las criptomonedas
+					dedicados a proporcionar información y recursos sobre el
+					mundo de las criptomonedas.
+				</p>
+				<p>
+					En Crypto Masivos, creemos en la transparencia y la
+					educación. Nuestro objetivo es ayudar a las personas a
+					entender mejor el ecosistema de las criptomonedas y cómo
+					pueden beneficiarse de él.
+				</p>
+				<button id="about-link">Saber más</button>
+			</section>
+			<section class="currencies"></section>
+			<section class="convert">
+				<h2>Conversor</h2>
+
+				<div class="convert-container">
+					<div class="currency-field">
+						<input type="number" id="amount1" value="999" />
+						<select name="currencies" id="currencies1">
+							<option value="USD" selected>USD</option>
+							<option value="USD">EUR</option>
+							<option value="USD">GBP</option>
+							<option value="USD">BTC</option>
+							<option value="USD">ETH</option>
+						</select>
+					</div>
+
+					<span class="swap-icon"></span>
+
+					<div class="currency-field">
+						<input type="number" id="amount2" value="1" />
+						<select name="currencies1" id="currencies2">
+							<option value="USD">USD</option>
+							<option value="USD">EUR</option>
+							<option value="USD">GBP</option>
+							<option value="USD" selected>BTC</option>
+							<option value="USD">ETH</option>
+						</select>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<script src="scripts/index.js"></script>
+	</body>
+</html>

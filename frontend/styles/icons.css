@@ -1,0 +1,12 @@
+[class$='icon'] {
+	width: 1.25em;
+	height: 1.25em;
+	display: inline-block;
+	background-image: var(--svg);
+	background-size: cover;
+	background-position: center;
+}
+
+.swap-icon {
+	--svg: url(https://icongr.am/octicons/arrow-both.svg?size=128&color=ffffff);
+}

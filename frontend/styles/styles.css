@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import 'header.css';
+
+:root {
+	font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, system-ui,
+		sans-serif;
+
+	--color-1: hsl(0, 0%, 60%);
+	--color-2: hsl(0, 0%, 25%);
+	--color-3: hsl(138, 60%, 60%);
+	--color-4: hsl(0, 75%, 60%);
+
+	color: var(--color-fg);
+	background-color: var(--color-bg);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-user-drag: none;
+}
+
+* ::selection {
+	background-color: var(--color-5);
+	color: var(--color-bg);
+}
+
+body {
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+button {
+	background-color: var(--color-bg);
+	color: var(--color-fg);
+	border: 0;
+	cursor: pointer;
+}
+
+a {
+	color: inherit;
+}
+
+section {
+	background-color: var(--color-2);
+	border-radius: 32px;
+	padding: 1.5em 1em;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-bg: hsl(0, 0%, 15%);
+		--color-fg: hsl(0, 0%, 100%);
+
+		--color-5: hsl(60, 85%, 60%);
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--color-bg: hsl(0, 0%, 100%);
+		--color-fg: hsl(0, 0%, 15%);
+
+		--color-5: hsl(60, 85%, 50%);
+	}
+}
