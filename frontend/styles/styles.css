@@ -43,7 +43,8 @@ a {
 	color: inherit;
 }
 
-section {
+section,
+article {
 	background-color: var(--color-2);
 	border-radius: 32px;
 	padding: 1.5em 1em;
