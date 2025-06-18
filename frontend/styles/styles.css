@@ -49,6 +49,45 @@ section {
 	padding: 1.5em 1em;
 }
 
+.primary,
+.secondary {
+	position: relative;
+}
+
+.primary {
+	background-color: var(--color-fg);
+	color: var(--color-bg);
+}
+
+.primary::before,
+.secondary::before {
+	content: '';
+	position: absolute;
+	top: 1.75em;
+	height: 2px;
+	display: block;
+	border-radius: 99px;
+	--width: max(75%, 3em);
+	width: var(--width);
+	left: calc((100% - var(--width)) / 2);
+	transform: scale(0, 1);
+	transform-origin: center;
+	transition: all 0.5s ease-in-out;
+}
+
+.primary::before {
+	background-color: var(--color-bg);
+}
+
+.secondary::before {
+	background-color: var(--color-fg);
+}
+
+.primary:hover::before,
+.secondary:hover::before {
+	transform: scale(1);
+}
+
 @media (prefers-color-scheme: dark) {
 	:root {
 		--color-bg: hsl(0, 0%, 15%);
