@@ -7,10 +7,6 @@
 	background-position: center;
 }
 
-.swap-icon {
-	--svg: url(https://icongr.am/octicons/arrow-both.svg?size=128&color=ffffff);
-}
-
 .github-icon {
 	--svg: url(https://icongr.am/simple/github.svg?size=128&color=ffffff&colored=false);
 }

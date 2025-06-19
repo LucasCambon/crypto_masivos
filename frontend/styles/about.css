@@ -3,7 +3,7 @@
 .group-name {
 	color: var(--color-1);
 	text-align: center;
-	margin-left: 2em;
+	margin-left: 5em;
 }
 
 .developers-container {
@@ -24,6 +24,7 @@
 	height: 350px;
 	padding: 16px;
 	border-radius: 16px;
+	background-color: var(--color-1);
 }
 
 .developer > * {
@@ -41,7 +42,7 @@
 }
 
 .developer hr {
-	background-color: var(--color-1);
+	background-color: var(--color-2);
 	height: 1px;
 	border-radius: 99px;
 	border: 0;
