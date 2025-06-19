@@ -1,4 +1,4 @@
-header {
+nav {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -6,16 +6,9 @@ header {
 	user-select: none;
 }
 
-.logo-container {
-	width: fit-content;
-}
-
-.logo-container h1 {
+.site-logo {
 	font-size: 2.5rem;
 	font-weight: bold;
-}
-
-.logo-container h1 a {
 	text-decoration: none;
 }
 
@@ -24,10 +17,7 @@ header {
 	gap: 16px;
 }
 
-.primary-btn {
-	background-color: var(--color-fg);
-	color: var(--color-bg);
-
+.btn-container .primary {
 	border-radius: 99px;
 	padding: 0.5em 1em;
 }

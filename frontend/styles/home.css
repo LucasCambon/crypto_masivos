@@ -1,11 +1,9 @@
-@import 'icons.css';
-
 main {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-areas:
-		'about currencies'
-		'convert convert';
+		'about .'
+		'. .';
 	gap: 64px;
 	flex-grow: 1;
 	padding: 0 32px 32px;
@@ -25,56 +23,28 @@ section p {
 	padding-left: 1em;
 }
 
-section button {
-	background-color: inherit;
-	text-decoration: underline;
+section a {
+	text-decoration: none;
 	color: var(--color-1);
-	position: absolute;
-	right: 2em;
-	bottom: 1em;
+	width: fit-content;
+	height: fit-content;
+	align-self: flex-end;
+
 	user-select: none;
-	padding: 0.5em;
+
+	border-radius: 7px;
+	padding: 0.4em;
 }
 
 section a::after {
-	user-select: none;
 	content: ' →';
 }
 
 .about {
 	grid-area: about;
+	display: flex;
+	flex-direction: column;
 	min-width: 500px;
 	margin-top: 32px;
 	margin-left: 32px;
-}
-
-.currencies {
-	grid-area: currencies;
-	min-width: 500px;
-	margin-top: 32px;
-	margin-right: 32px;
-}
-
-.convert-container {
-	display: flex;
-	gap: 32px;
-	align-items: center;
-	justify-content: center;
-}
-
-.convert {
-	grid-area: convert;
-}
-
-.currency-field * {
-	color: var(--color-fg);
-	border: 1px solid var(--color-fg);
-	background-color: var(--color-bg);
-	border-radius: 8px;
-	padding: 0.75em;
-}
-
-.swap-icon {
-	width: 2em;
-	height: 2em;
 }
