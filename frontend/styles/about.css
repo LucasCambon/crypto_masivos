@@ -4,6 +4,7 @@
 	color: var(--color-1);
 	text-align: center;
 	margin-left: 5em;
+	font-style: italic;
 }
 
 .developers-container {
@@ -25,10 +26,7 @@
 	padding: 16px;
 	border-radius: 16px;
 	background-color: var(--color-1);
-}
-
-.developer > * {
-	margin-bottom: 16px;
+	gap: 16px;
 }
 
 .developer img {
@@ -38,7 +36,7 @@
 }
 
 .developer h2 {
-	margin-bottom: 8px;
+	margin-bottom: -8px;
 }
 
 .developer hr {
@@ -84,4 +82,8 @@ q {
 .author {
 	margin-top: 1.5em;
 	margin-left: 5em;
+}
+
+.author::before {
+	content: '— ';
 }
