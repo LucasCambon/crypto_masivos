@@ -4,6 +4,7 @@ main {
 	gap: 64px;
 	justify-content: center;
 	align-items: center;
+	margin-top: 64px;
 }
 
 section a {
@@ -75,6 +76,11 @@ section a::after {
 
 .currency-symbol {
 	font-weight: bold;
+}
+
+.currency-name {
+	margin-left: 2em;
+	color: var(--color-4);
 }
 
 .currency-usd-value::before {
