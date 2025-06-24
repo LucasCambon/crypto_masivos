@@ -62,7 +62,7 @@ section a::after {
 }
 
 .currencies a {
-	justify-self: flex-end; /* FIXME */
+	margin-top: auto;
 	border-radius: var(--INF);
 }
 
