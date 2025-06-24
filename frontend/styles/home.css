@@ -52,8 +52,16 @@ section a::after {
 }
 
 .currencies {
-	background: linear-gradient(to bottom right, #343257, #1e1c41),
-		linear-gradient(to bottom right, #666489, #312f54);
+	background: linear-gradient(
+			to bottom right,
+			var(--currencies-gradient-1),
+			var(--currencies-gradient-2)
+		),
+		linear-gradient(
+			to bottom right,
+			var(--currencies-border-gradient-1),
+			var(--currencies-border-gradient-2)
+		);
 
 	background-clip: padding-box, border-box;
 	background-origin: padding-box, border-box;
@@ -111,5 +119,29 @@ section a::after {
 		flex-direction: row;
 		gap: 96px;
 		padding: 0 32px;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--currencies-gradient-1: #343257;
+		--currencies-gradient-2: #1e1c41;
+
+		--currencies-border-gradient-1: #666489;
+		--currencies-border-gradient-2: #312f54;
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--currencies-gradient-1: var(--color-bg);
+		--currencies-gradient-2: var(--color-bg);
+
+		--currencies-border-gradient-1: #666489;
+		--currencies-border-gradient-2: #312f54;
+
+		.currencies {
+			box-shadow: 10px 10px 20px -10px black;
+		}
 	}
 }

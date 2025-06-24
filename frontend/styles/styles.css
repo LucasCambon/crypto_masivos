@@ -6,7 +6,8 @@
 		sans-serif;
 
 	--color-1: #544f57;
-	--color-2: #ecc887;
+	--color-2-dark: #b4904f;
+	--color-2-light: #ecc887;
 	--color-3: #faf0ff;
 	--color-4: #aaaaaa;
 
@@ -50,7 +51,6 @@ a {
 }
 
 .primary:hover {
-	background-color: var(--color-3);
 	color: var(--color-bg);
 }
 
@@ -67,6 +67,12 @@ a {
 	:root {
 		--color-bg: #242247;
 		--color-fg: #faf0ff;
+
+		--color-2: var(--color-2-light);
+	}
+
+	.primary:hover {
+		background-color: var(--color-2-dark);
 	}
 }
 
@@ -74,6 +80,12 @@ a {
 	:root {
 		--color-bg: #faf0ff;
 		--color-fg: #242247;
+
+		--color-2: var(--color-2-dark);
+	}
+
+	.primary:hover {
+		background-color: var(--color-2-light);
 	}
 }
 
