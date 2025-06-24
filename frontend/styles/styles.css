@@ -28,13 +28,6 @@
 	color: var(--color-bg);
 }
 
-body {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
 button {
 	background-color: var(--color-bg);
 	color: var(--color-fg);
@@ -56,6 +49,20 @@ a {
 	text-wrap: nowrap;
 }
 
+.primary:hover {
+	background-color: var(--color-3);
+	color: var(--color-bg);
+}
+
+.secondary {
+	color: var(--color-4);
+	text-wrap: nowrap;
+}
+
+.secondary:hover {
+	color: var(--color-fg);
+}
+
 @media (prefers-color-scheme: dark) {
 	:root {
 		--color-bg: #242247;
@@ -67,5 +74,13 @@ a {
 	:root {
 		--color-bg: #faf0ff;
 		--color-fg: #242247;
+	}
+}
+
+@media (min-width: 1440px) {
+	body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 }

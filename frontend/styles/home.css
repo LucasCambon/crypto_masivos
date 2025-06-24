@@ -1,7 +1,11 @@
-/* FIXME: mobile first*/
+:root {
+	--section-max-width: 400px;
+}
+
 main {
 	display: flex;
-	gap: 64px;
+	flex-direction: column;
+	gap: 96px;
 	justify-content: center;
 	align-items: center;
 	margin-top: 64px;
@@ -24,24 +28,27 @@ section a::after {
 .about {
 	display: flex;
 	flex-direction: column;
-	width: 400px;
+	width: min(100%, var(--section-max-width));
 }
 
 .about a {
 	border-radius: 7px;
+	align-self: center;
 }
 
 .about h2 {
 	font-weight: normal;
 	font-style: italic;
-	font-size: 3em;
-	margin-left: 1em;
+	font-size: 2.5rem;
 	line-height: 48px;
+	margin-left: 50%;
+	transform: translateX(-50%);
 }
 
 .about p {
 	margin-top: 32px;
 	margin-bottom: 48px;
+	text-align: center;
 }
 
 .currencies {
@@ -53,7 +60,7 @@ section a::after {
 	border: 2px solid transparent;
 	border-radius: 16px;
 
-	width: 400px;
+	width: min(100%, var(--section-max-width));
 	height: 350px;
 	display: flex;
 	flex-direction: column;
@@ -83,8 +90,26 @@ section a::after {
 	color: var(--color-4);
 }
 
-.currency-usd-value::before {
-	content: '$';
+@media (min-width: 425px) {
+	.about h2 {
+		font-size: 3em;
+		margin-left: 1em;
+		transform: translateX(0);
+	}
+
+	.about p {
+		text-align: left;
+	}
+
+	.about a {
+		align-self: flex-start;
+	}
 }
 
-/* TODO: media queries */
+@media (min-width: 768px) {
+	main {
+		flex-direction: row;
+		gap: 96px;
+		padding: 0 32px;
+	}
+}

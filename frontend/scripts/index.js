@@ -1,18 +1,6 @@
 function createCurrency(currency) {
 	const newCurrency = document.createElement('div');
 
-	/*	
-			newCurrency.innerHTML = `
-				<div>
-					<span class="currency-symbol">${currency.symbol}</span>
-					<span class="currency-name">${currency.name}</span>
-				</div>
-				<span class="currency-usd-value">${currency.usd_value}</span>
-			`;
-
-			currencyList.insertBefore(newCurrency, currencyList.firstChild);
-*/
-
 	const container = document.createElement('div');
 
 	const currencySymbol = document.createElement('span');
@@ -21,7 +9,7 @@ function createCurrency(currency) {
 
 	currencySymbol.innerHTML = currency.symbol;
 	currencyName.innerHTML = currency.name;
-	currencyUSDValue.innerHTML = currency.usd_value;
+	currencyUSDValue.innerHTML = '$' + currency.usd_value;
 
 	newCurrency.classList.add('currency');
 
