@@ -1,0 +1,20 @@
+[
+	{
+		"id": 1,
+		"user_id": 1,
+		"address": "addr1",
+		"alias": "Tomas Wallet",
+		"balance": 2.5,
+		"last_activity": null,
+		"currencies": [1, 2]
+	},
+	{
+		"id": 2,
+		"user_id": 2,
+		"address": "addr2",
+		"alias": "Lucas Wallet",
+		"balance": 1.0,
+		"last_activity": null,
+		"currencies": [1]
+	}
+]
