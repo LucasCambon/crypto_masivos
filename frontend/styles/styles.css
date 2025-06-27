@@ -6,8 +6,12 @@
 		sans-serif;
 
 	--color-1: #544f57;
-	--color-2: #e0aaff;
+	--color-2-dark: #b4904f;
+	--color-2-light: #ecc887;
 	--color-3: #faf0ff;
+	--color-4: #aaaaaa;
+
+	--INF: 999px;
 
 	color: var(--color-fg);
 	background-color: var(--color-bg);
@@ -25,12 +29,6 @@
 	color: var(--color-bg);
 }
 
-body {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
-}
-
 button {
 	background-color: var(--color-bg);
 	color: var(--color-fg);
@@ -42,61 +40,59 @@ a {
 	color: inherit;
 }
 
-section {
-	background-color: var(--color-1);
-	border-radius: 20px;
-	padding: 1.5em 1em;
-}
-
-.primary,
-.secondary {
-	position: relative;
+.highlight {
+	color: var(--color-2);
 }
 
 .primary {
 	background-color: var(--color-2);
 	color: var(--color-bg);
+	text-wrap: nowrap;
 }
 
-.primary::before,
-.secondary::before {
-	content: '';
-	position: absolute;
-	top: 1.75em;
-	height: 2px;
-	display: block;
-	border-radius: 99px;
-	--width: max(75%, 3em);
-	width: var(--width);
-	left: calc((100% - var(--width)) / 2);
-	transform: scale(0, 1);
-	transform-origin: center;
-	transition: all 0.5s ease-in-out;
+.primary:hover {
+	color: var(--color-bg);
 }
 
-.primary::before {
-	background-color: var(--color-bg);
+.secondary {
+	color: var(--color-4);
+	text-wrap: nowrap;
 }
 
-.secondary::before {
-	background-color: var(--color-fg);
-}
-
-.primary:hover::before,
-.secondary:hover::before {
-	transform: scale(1);
+.secondary:hover {
+	color: var(--color-fg);
 }
 
 @media (prefers-color-scheme: dark) {
 	:root {
-		--color-bg: #201f21;
+		--color-bg: #242247;
 		--color-fg: #faf0ff;
+
+		--color-2: var(--color-2-light);
+	}
+
+	.primary:hover {
+		background-color: var(--color-2-dark);
 	}
 }
 
 @media (prefers-color-scheme: light) {
 	:root {
 		--color-bg: #faf0ff;
-		--color-fg: #201f21;
+		--color-fg: #242247;
+
+		--color-2: var(--color-2-dark);
+	}
+
+	.primary:hover {
+		background-color: var(--color-2-light);
+	}
+}
+
+@media (min-width: 1440px) {
+	body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
 }

@@ -1,38 +1,23 @@
+:root {
+	--section-max-width: 400px;
+}
+
 main {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	grid-template-areas:
-		'about .'
-		'. .';
-	gap: 64px;
-	flex-grow: 1;
-	padding: 0 32px 32px;
-}
-
-section {
-	position: relative;
-}
-
-section h2 {
-	font-weight: bold;
-	margin-bottom: 0.5em;
-}
-
-section p {
-	margin-bottom: 1em;
-	padding-left: 1em;
+	display: flex;
+	flex-direction: column;
+	gap: 96px;
+	justify-content: center;
+	align-items: center;
+	margin-top: 64px;
 }
 
 section a {
 	text-decoration: none;
-	color: var(--color-1);
 	width: fit-content;
 	height: fit-content;
-	align-self: flex-end;
 
 	user-select: none;
 
-	border-radius: 7px;
 	padding: 0.4em;
 }
 
@@ -41,10 +26,122 @@ section a::after {
 }
 
 .about {
-	grid-area: about;
 	display: flex;
 	flex-direction: column;
-	min-width: 500px;
+	width: min(100%, var(--section-max-width));
+}
+
+.about a {
+	border-radius: 7px;
+	align-self: center;
+}
+
+.about h2 {
+	font-weight: normal;
+	font-style: italic;
+	font-size: 2.5rem;
+	line-height: 48px;
+	margin-left: 50%;
+	transform: translateX(-50%);
+}
+
+.about p {
 	margin-top: 32px;
-	margin-left: 32px;
+	margin-bottom: 48px;
+	text-align: center;
+}
+
+.currencies {
+	background: linear-gradient(
+			to bottom right,
+			var(--currencies-gradient-1),
+			var(--currencies-gradient-2)
+		),
+		linear-gradient(
+			to bottom right,
+			var(--currencies-border-gradient-1),
+			var(--currencies-border-gradient-2)
+		);
+
+	background-clip: padding-box, border-box;
+	background-origin: padding-box, border-box;
+	border: 2px solid transparent;
+	border-radius: 16px;
+
+	width: min(100%, var(--section-max-width));
+	height: 350px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	padding: 16px 32px;
+}
+
+.currencies a {
+	margin-top: auto;
+	border-radius: var(--INF);
+}
+
+.currency {
+	display: flex;
+	gap: 8px;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.currency-symbol {
+	font-weight: bold;
+}
+
+.currency-name {
+	margin-left: 2em;
+	color: var(--color-4);
+}
+
+@media (min-width: 425px) {
+	.about h2 {
+		font-size: 3em;
+		margin-left: 1em;
+		transform: translateX(0);
+	}
+
+	.about p {
+		text-align: left;
+	}
+
+	.about a {
+		align-self: flex-start;
+	}
+}
+
+@media (min-width: 768px) {
+	main {
+		flex-direction: row;
+		gap: 96px;
+		padding: 0 32px;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--currencies-gradient-1: #343257;
+		--currencies-gradient-2: #1e1c41;
+
+		--currencies-border-gradient-1: #666489;
+		--currencies-border-gradient-2: #312f54;
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--currencies-gradient-1: var(--color-bg);
+		--currencies-gradient-2: var(--color-bg);
+
+		--currencies-border-gradient-1: #666489;
+		--currencies-border-gradient-2: #312f54;
+
+		.currencies {
+			box-shadow: 10px 10px 20px -10px black;
+		}
+	}
 }
