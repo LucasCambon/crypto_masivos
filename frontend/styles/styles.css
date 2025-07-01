@@ -1,14 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import 'header.css';
 
 :root {
 	font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, system-ui,
 		sans-serif;
 
-	--color-1: #544f57;
-	--color-2-dark: #b4904f;
+	--color-1: #1f1f1f;
+	--color-2-dark: #8a6c38;
 	--color-2-light: #ecc887;
-	--color-3: #faf0ff;
+	--color-3: #525252;
 	--color-4: #aaaaaa;
 
 	--INF: 999px;
@@ -55,7 +54,7 @@ a {
 }
 
 .secondary {
-	color: var(--color-4);
+	color: var(--color-3);
 	text-wrap: nowrap;
 }
 
@@ -66,7 +65,7 @@ a {
 @media (prefers-color-scheme: dark) {
 	:root {
 		--color-bg: #242247;
-		--color-fg: #faf0ff;
+		--color-fg: #f5f5fa;
 
 		--color-2: var(--color-2-light);
 	}
@@ -74,11 +73,15 @@ a {
 	.primary:hover {
 		background-color: var(--color-2-dark);
 	}
+
+	.secondary {
+		color: var(--color-4);
+	}
 }
 
 @media (prefers-color-scheme: light) {
 	:root {
-		--color-bg: #faf0ff;
+		--color-bg: #f5f5fa;
 		--color-fg: #242247;
 
 		--color-2: var(--color-2-dark);
