@@ -1,10 +1,12 @@
 @import 'icons.css';
 
 .group-name {
-	color: var(--color-1);
+	display: block;
+	color: var(--color-4);
 	text-align: center;
-	margin-left: 5em;
 	font-style: italic;
+	margin-top: 2em;
+	user-select: none;
 }
 
 .developers-container {
@@ -24,15 +26,32 @@
 	width: 275px;
 	height: 350px;
 	padding: 16px;
-	border-radius: 16px;
-	background-color: var(--color-1);
+
 	gap: 16px;
+
+	background: linear-gradient(
+			to bottom right,
+			var(--developer-gradient-1),
+			var(--developer-gradient-2)
+		),
+		linear-gradient(
+			to bottom right,
+			var(--developer-border-gradient-1),
+			var(--developer-border-gradient-2)
+		);
+
+	background-clip: padding-box, border-box;
+	background-origin: padding-box, border-box;
+	border: 2px solid transparent;
+	border-radius: 16px;
 }
 
 .developer img {
 	border-radius: 50%;
 	width: 128px;
+	height: 128px;
 	object-fit: cover;
+	border: 2px solid var(--color-2);
 }
 
 .developer h2 {
@@ -66,12 +85,10 @@
 }
 
 .quote {
-	width: 375px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	margin-top: 32px;
-	margin-left: 325px;
+	padding: 1em;
 }
 
 q {
@@ -86,4 +103,47 @@ q {
 
 .author::before {
 	content: '— ';
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--developer-gradient-1: #343257;
+		--developer-gradient-2: #1e1c41;
+
+		--developer-border-gradient-1: #666489;
+		--developer-border-gradient-2: #312f54;
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--developer-gradient-1: var(--color-bg);
+		--developer-gradient-2: var(--color-bg);
+
+		--developer-border-gradient-1: #666489;
+		--developer-border-gradient-2: #312f54;
+	}
+
+	.developer {
+		box-shadow: 10px 10px 20px -10px black;
+	}
+}
+
+@media (min-width: 425px) {
+	.group-name {
+		margin-left: 50px;
+		text-align: left;
+	}
+}
+
+@media (min-width: 768px) {
+	.group-name {
+		margin-top: 0;
+	}
+
+	.quote {
+		margin-top: 32px;
+		width: 375px;
+		margin-left: min(25vw, 325px);
+	}
 }
