@@ -7,14 +7,30 @@
 	background-position: center;
 }
 
-.github-icon {
-	--svg: url(https://icongr.am/simple/github.svg?size=128&color=ffffff&colored=false);
+@media (prefers-color-scheme: light) {
+	.github-icon {
+		--svg: url(https://icongr.am/simple/github.svg?color=242247);
+	}
+
+	.linkedin-icon {
+		--svg: url(https://icongr.am/simple/linkedin.svg?color=242247);
+	}
+
+	.instagram-icon {
+		--svg: url(https://icongr.am/simple/instagram.svg?color=242247);
+	}
 }
 
-.linkedin-icon {
-	--svg: url(https://icongr.am/simple/linkedin.svg?size=128&color=ffffff&colored=false);
-}
+@media (prefers-color-scheme: dark) {
+	.github-icon {
+		--svg: url(https://icongr.am/simple/github.svg?color=ffffff);
+	}
 
-.instagram-icon {
-	--svg: url(https://icongr.am/simple/instagram.svg?size=128&color=ffffff&colored=false);
+	.linkedin-icon {
+		--svg: url(https://icongr.am/simple/linkedin.svg?color=ffffff);
+	}
+
+	.instagram-icon {
+		--svg: url(https://icongr.am/simple/instagram.svg?color=ffffff);
+	}
 }
