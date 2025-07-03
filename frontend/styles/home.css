@@ -95,7 +95,6 @@ section a::after {
 
 .currency-name {
 	margin-left: 2em;
-	color: var(--color-4);
 }
 
 @media (min-width: 425px) {
@@ -130,6 +129,10 @@ section a::after {
 		--currencies-border-gradient-1: #666489;
 		--currencies-border-gradient-2: #312f54;
 	}
+
+	.currency-name {
+		color: var(--color-4);
+	}
 }
 
 @media (prefers-color-scheme: light) {
@@ -139,9 +142,13 @@ section a::after {
 
 		--currencies-border-gradient-1: #666489;
 		--currencies-border-gradient-2: #312f54;
+	}
 
-		.currencies {
-			box-shadow: 10px 10px 20px -10px black;
-		}
+	.currencies {
+		box-shadow: 10px 10px 20px -10px black;
+	}
+
+	.currency-name {
+		color: var(--color-3);
 	}
 }
