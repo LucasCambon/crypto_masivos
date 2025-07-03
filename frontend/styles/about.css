@@ -127,6 +127,10 @@ q {
 	.developer {
 		box-shadow: 10px 10px 20px -10px black;
 	}
+
+	.group-name {
+		color: var(--color-3);
+	}
 }
 
 @media (min-width: 425px) {
