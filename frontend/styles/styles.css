@@ -1,0 +1,101 @@
+@import 'header.css';
+
+:root {
+	font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, system-ui,
+		sans-serif;
+
+	--color-1: #1f1f1f;
+	--color-2-dark: #8a6c38;
+	--color-2-light: #ecc887;
+	--color-3: #525252;
+	--color-4: #aaaaaa;
+
+	--INF: 999px;
+
+	color: var(--color-fg);
+	background-color: var(--color-bg);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-user-drag: none;
+}
+
+* ::selection {
+	background-color: var(--color-fg);
+	color: var(--color-bg);
+}
+
+button {
+	background-color: var(--color-bg);
+	color: var(--color-fg);
+	border: 0;
+	cursor: pointer;
+}
+
+a {
+	color: inherit;
+}
+
+.highlight {
+	color: var(--color-2);
+}
+
+.primary {
+	background-color: var(--color-2);
+	color: var(--color-bg);
+	text-wrap: nowrap;
+}
+
+.primary:hover {
+	color: var(--color-bg);
+}
+
+.secondary {
+	color: var(--color-3);
+	text-wrap: nowrap;
+}
+
+.secondary:hover {
+	color: var(--color-fg);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--color-bg: #242247;
+		--color-fg: #f5f5fa;
+
+		--color-2: var(--color-2-light);
+	}
+
+	.primary:hover {
+		background-color: var(--color-2-dark);
+	}
+
+	.secondary {
+		color: var(--color-4);
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--color-bg: #f5f5fa;
+		--color-fg: #242247;
+
+		--color-2: var(--color-2-dark);
+	}
+
+	.primary:hover {
+		background-color: var(--color-2-light);
+	}
+}
+
+@media (min-width: 1440px) {
+	body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+}
