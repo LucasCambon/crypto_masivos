@@ -1,0 +1,137 @@
+:root {
+	--section-max-width: 1024px;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-grow: 1;
+	margin-top: 16px;
+}
+
+.currencies {
+	background: linear-gradient(
+			to bottom right,
+			var(--currencies-gradient-1),
+			var(--currencies-gradient-2)
+		),
+		linear-gradient(
+			to bottom right,
+			var(--currencies-border-gradient-1),
+			var(--currencies-border-gradient-2)
+		);
+
+	background-clip: padding-box, border-box;
+	background-origin: padding-box, border-box;
+	border: 2px solid transparent;
+
+	width: min(100%, var(--section-max-width));
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 16px 32px;
+}
+
+.currencies a {
+	margin-top: auto;
+	border-radius: var(--INF);
+}
+
+.currency * {
+	user-select: none;
+}
+
+.currency {
+	display: flex;
+	gap: 8px;
+	width: 100%;
+	justify-content: space-between;
+
+	padding: 8px;
+}
+
+.currency:hover {
+	background-color: #666489;
+	cursor: pointer;
+}
+
+.currency-symbol {
+	font-weight: bold;
+}
+
+.currency-name {
+	margin-left: 2em;
+}
+
+@media (min-width: 425px) {
+	.currencies {
+		border-radius: 16px;
+	}
+
+	.about h2 {
+		font-size: 3em;
+		margin-left: 1em;
+		transform: translateX(0);
+	}
+
+	.about p {
+		text-align: left;
+	}
+
+	.about a {
+		align-self: flex-start;
+	}
+}
+
+@media (min-width: 768px) {
+	main {
+		padding: 32px 128px;
+	}
+}
+
+@media (min-width: 1440px) {
+	.currencies {
+		width: var(--section-max-width);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--currencies-gradient-1: #343257;
+		--currencies-gradient-2: #1e1c41;
+
+		--currencies-border-gradient-1: #666489;
+		--currencies-border-gradient-2: #312f54;
+	}
+
+	.currency-name {
+		color: var(--color-4);
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	:root {
+		--currencies-gradient-1: var(--color-bg);
+		--currencies-gradient-2: var(--color-bg);
+
+		--currencies-border-gradient-1: #666489;
+		--currencies-border-gradient-2: #312f54;
+	}
+
+	.currencies {
+		box-shadow: 10px 10px 20px -10px black;
+	}
+
+	.currency-name {
+		color: var(--color-3);
+	}
+}
