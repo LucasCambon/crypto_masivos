@@ -1,37 +1,32 @@
 function createCurrency(currency) {
 	const newCurrency = document.createElement('div');
-
-	const container = document.createElement('div');
-
-	const currencySymbol = document.createElement('span');
-	const currencyName = document.createElement('span');
-	const currencyUSDValue = document.createElement('span');
-
-	currencySymbol.innerHTML = currency.symbol;
-	currencyName.innerHTML = currency.name;
-	currencyUSDValue.innerHTML = '$' + currency.usd_value;
-
 	newCurrency.classList.add('currency');
 
+	const infoContainer = document.createElement('div');
+	infoContainer.classList.add('currency-info');
+
+	const currencySymbol = document.createElement('span');
 	currencySymbol.classList.add('currency-symbol');
+	currencySymbol.innerHTML = currency.symbol;
+
+	const currencyName = document.createElement('span');
 	currencyName.classList.add('currency-name');
+	currencyName.innerHTML = currency.name;
+
+	infoContainer.appendChild(currencySymbol);
+	infoContainer.appendChild(currencyName);
+
+	const valueContainer = document.createElement('div');
+	valueContainer.classList.add('currency-value');
+
+	const currencyUSDValue = document.createElement('span');
 	currencyUSDValue.classList.add('currency-usd-value');
+	currencyUSDValue.innerHTML = '$' + currency.usd_value;
 
-	container.appendChild(currencySymbol);
-	container.appendChild(currencyName);
+	valueContainer.appendChild(currencyUSDValue);
 
-	newCurrency.appendChild(container);
-	newCurrency.appendChild(currencyUSDValue);
-
-	/*
-		<div class="currency">
-			<div>
-				<span class="currency-symbol">${currency.symbol}</span>
-				<span class="currency-name">${currency.name}</span>
-			</div>
-			<span class="currency-usd-value">${currency.usd_value}</span>
-		</div>
-	*/
+	newCurrency.appendChild(infoContainer);
+	newCurrency.appendChild(valueContainer);
 
 	return newCurrency;
 }

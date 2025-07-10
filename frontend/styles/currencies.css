@@ -59,6 +59,18 @@ main {
 	padding: 8px;
 }
 
+.currency-info {
+	display: flex;
+	align-items: center;
+	gap: 2em;
+}
+
+.currency-value {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+}
+
 .currency:hover {
 	background-color: #666489;
 	cursor: pointer;
@@ -68,8 +80,9 @@ main {
 	font-weight: bold;
 }
 
-.currency-name {
-	margin-left: 2em;
+.currency-btn {
+	padding: 0.5em 1em;
+	border-radius: 4px;
 }
 
 @media (min-width: 425px) {
