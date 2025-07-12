@@ -1,6 +1,6 @@
 const express = require("express");
-
 const app = express();
+const userRoutes = require("./routes/users");
 const PORT = process.env.PORT || 3000;
 
 // Middlewares
@@ -17,6 +17,7 @@ app.get("/health", (req, res) => {
     });
 });
 
+app.use("/api/v1/users", userRoutes);
 
 // 404 Handler (Middleware at bottom to act as a catch-all)
 
