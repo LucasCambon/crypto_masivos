@@ -39,7 +39,57 @@ function createUser(req, res) {
     });
 }
 
+function updateUser(req, res) {
+  const { id, nombre, email, password } = req.body;
+
+  const index = users.findIndex(usr => usr.id === id);
+  if (index === -1) return res.status(404).json({ status: "error", message: "user not found."});
+
+
+  if (nombre) users[index].nombre = nombre;
+  if (email) users[index].email = email;
+  if (password) users[index].password = password;
+
+  fs.writeFileSync(
+    path.join(__dirname, "../mockData/users.json"),
+    JSON.stringify(users, null, 2)
+  );
+
+  const { password: _, ...userUpdatedData } = users[index];
+
+  res.status(200).json({
+    status: "ok",
+    message: "User updated correctly",
+    data: userUpdatedData
+  });
+
+}
+
+function deleteUser(req, res) {
+  const { id } = req.body;
+
+  const index = users.findIndex(u => u.id === id);
+  if (index === -1) return res.status(404).json({ status: "error", message: "user not found."});
+
+  const deletedUser = users.splice(index, 1)[0];
+
+  fs.writeFileSync(
+    path.join(__dirname, "../mockData/users.json"),
+    JSON.stringify(users, null, 2)
+  );
+
+  const { password: _, ...deletedUserData } = deletedUser;
+
+  res.status(200).json({
+    status: "ok",
+    message: "User deleted correctly.",
+    data: deletedUserData
+  });
+}
+
 module.exports = {
     getUsers,
-    createUser
+    createUser,
+    updateUser,
+    deleteUser
 };
