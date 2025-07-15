@@ -1,6 +1,6 @@
 # crypto_masivos
 
-## Database Setup
+## Local database Setup
 
 This project uses **PostgreSQL** as its database management system.
 
@@ -30,3 +30,20 @@ This will create all the necessary tables and insert some example data.
 > **Note:**  
 > The commands `CREATE DATABASE IF NOT EXISTS ...;` and `USE ...;` are not supported in PostgreSQL.  
 > Use the terminal commands above to create and select the database.
+
+## 🐳 Running the project with Docker
+
+You can run the full application using **Docker Compose**. By the moment it's just the backend but the idea is the same, run the whole app with just one command.
+
+### 1. Prerequisites
+
+- [Docker](https://www.docker.com/products/docker-desktop/) installed
+- [Docker Compose](https://docs.docker.com/compose/) (usually included with Docker Desktop)
+
+### 2. Build and start the services
+
+In the root directory of the project (where `docker-compose.yml` is located), run:
+
+```bash
+docker-compose up --build
+```
