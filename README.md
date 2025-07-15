@@ -1,6 +1,6 @@
 # crypto_masivos
 
-## Database Setup
+## Local database Setup
 
 This project uses **PostgreSQL** as its database management system.
 
