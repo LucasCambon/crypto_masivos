@@ -16,4 +16,7 @@ services:
       dockerfile: Dockerfile
     image: crypto_masivos_backend:latest
     ports:
-      - "3000:3000"      
+      - "3000:3000"
+
+volumes:
+  db_data:
