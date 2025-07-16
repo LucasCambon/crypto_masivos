@@ -10,6 +10,7 @@ async function getUsers(req, res) {
             count: queryResult.rowCount,
         });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ status: "error", message: "Error obtaining all users" });
     }
     
@@ -36,6 +37,7 @@ async function createUser(req, res) {
             data: result.rows[0],
         });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ status: "error", message: "Error creating user." });
     }
 }
@@ -71,6 +73,7 @@ async function updateUser(req, res) {
             data: updated.rows[0],
         });
     } catch (error) {
+        console.log(error)
         res.status(500).json({ status: "error", message: "Error updating user." });
     }
 }
@@ -93,6 +96,7 @@ async function deleteUser(req, res) {
       data: result.rows[0],
     });
   } catch (error) {
+    console.log(error)
     res.status(500).json({ status: "error", message: "Error deleting user." });
   }
 }
