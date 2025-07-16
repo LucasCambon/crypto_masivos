@@ -18,13 +18,13 @@ async function getUsers(req, res) {
 
 async function createUser(req, res) {
     const { username, email, password } = req.body;
-    if (!username || email || password) return res.status(400).json({ status: "error", message: "Incomplete required fields."});
+    if (!username || !email || !password) return res.status(400).json({ status: "error", message: "Incomplete required fields."});
     try {
 
         const exist = await pool.query("SELECT * FROM users WHERE username = $1 OR email = $2", [username, email]);
         if (exist.rows.length > 0) return res.status(409).json({ status: "error", message: "Username or email already in use."});
         
-        const hash = bcrypt.hashSync(password, 12);
+        const hash = await bcrypt.hash(password, 12);
         const result = await pool.query(
             `INSERT INTO users (username, email, password, role)
             VALUES ($1, $2, $3, $4)
