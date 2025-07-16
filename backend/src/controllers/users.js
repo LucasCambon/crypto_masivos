@@ -1,90 +1,100 @@
-const fs = require("fs");
-const path = require("path");
 const bcrypt = require("bcrypt");
-const users = require("../mockData/users.json");
+const pool = require("../db");
 
-function getUsers(req, res) {
-    res.status(200).json({
-        status: "ok",
-        data: users,
-        count: users.length
-    });
+async function getUsers(req, res) {
+    try {
+        const queryResult = await pool.query(`SELECT id, username, email, role, created_at FROM users`);
+        res.status(200).json({
+            status: "ok",
+            data: queryResult.rows,
+            count: queryResult.rowCount,
+        });
+    } catch (error) {
+        res.status(500).json({ status: "error", message: "Error obtaining all users" });
+    }
+    
 }
 
-function createUser(req, res) {
+async function createUser(req, res) {
     const { username, email, password } = req.body;
-    if (!username, email, password) return res.status(400).json({ status: "error", message: "Incomplete required fields."});
-    const exist = users.find(user => user.username === username || user.email === email);
-    if (exist) return res.status(409).json({ status: "error", message: "Username or email already in use."});
-    const hash = bcrypt.hashSync(password, 12);
-    const newUser = {
-        id: users.length + 1,
-        username,
-        password: hash,
-        email,
-        role: "user", // Default value
-        created_at: new Date().toISOString()
-    };
-    users.push(newUser);
-    fs.writeFileSync(
-        path.join(__dirname, "../mockData/users.json"),
-        JSON.stringify(users, null, 2)
-    );
-    const { password: _, ...newUserData } = newUser;
-    res.status(201).json({
-        status: "ok",
-        message: "New user created correctly.",
-        data: newUserData,
-        newCount: users.length
-    });
+    if (!username || email || password) return res.status(400).json({ status: "error", message: "Incomplete required fields."});
+    try {
+
+        const exist = await pool.query("SELECT * FROM users WHERE username = $1 OR email = $2", [username, email]);
+        if (exist.rows.length > 0) return res.status(409).json({ status: "error", message: "Username or email already in use."});
+        
+        const hash = bcrypt.hashSync(password, 12);
+        const result = await pool.query(
+            `INSERT INTO users (username, email, password, role)
+            VALUES ($1, $2, $3, $4)
+            RETURNING id, username, email, role, created_at`,
+            [username, email, hash, "user"]
+        );
+        res.status(201).json({
+            status: "ok",
+            message: "New user created correctly.",
+            data: result.rows[0],
+        });
+    } catch (error) {
+        res.status(500).json({ status: "error", message: "Error creating user." });
+    }
 }
 
-function updateUser(req, res) {
-  const { id, nombre, email, password } = req.body;
+async function updateUser(req, res) {
+    const { id, username, email, password } = req.body;
 
-  const index = users.findIndex(usr => usr.id === id);
-  if (index === -1) return res.status(404).json({ status: "error", message: "user not found."});
+    if (!id) return res.status(400).json({status: "error", message: "ID required."});
 
+    try {
+        const user = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
+        if (user.rows.length === 0) return res.status(404).json({ status: "error", message: "User not found."});
+        const actual = user.rows[0];
+        const hash = password ? await bcrypt.hash(password, 10) : actual.password;
 
-  if (nombre) users[index].nombre = nombre;
-  if (email) users[index].email = email;
-  if (password) users[index].password = password;
-
-  fs.writeFileSync(
-    path.join(__dirname, "../mockData/users.json"),
-    JSON.stringify(users, null, 2)
-  );
-
-  const { password: _, ...userUpdatedData } = users[index];
-
-  res.status(200).json({
-    status: "ok",
-    message: "User updated correctly",
-    data: userUpdatedData
-  });
-
+        const updated = await pool.query(
+            `UPDATE users SET 
+                username = $1,
+                email = $2,
+                password = $3
+            WHERE id = $4
+            RETURNING id, username, email, role, created_at`,
+            [
+                username || actual.username,
+                email || actual.email,
+                hash,
+                id,
+            ]
+        );
+        res.status(200).json({
+            status: "ok",
+            message: "User updated correctly",
+            data: updated.rows[0],
+        });
+    } catch (error) {
+        res.status(500).json({ status: "error", message: "Error updating user." });
+    }
 }
 
-function deleteUser(req, res) {
+async function deleteUser(req, res) {
   const { id } = req.body;
 
-  const index = users.findIndex(u => u.id === id);
-  if (index === -1) return res.status(404).json({ status: "error", message: "user not found."});
+  if (!id) return res.status(400).json({status: "error", message: "ID required."});
+  try {
+    const result = await pool.query(
+      "DELETE FROM users WHERE id = $1 RETURNING id, username, email, role, created_at",
+      [id]
+    );
 
-  const deletedUser = users.splice(index, 1)[0];
+    if (result.rows.length === 0) return res.status(404).json({ status: "error", message: "User not found."});
 
-  fs.writeFileSync(
-    path.join(__dirname, "../mockData/users.json"),
-    JSON.stringify(users, null, 2)
-  );
-
-  const { password: _, ...deletedUserData } = deletedUser;
-
-  res.status(200).json({
-    status: "ok",
-    message: "User deleted correctly.",
-    data: deletedUserData
-  });
+    res.status(200).json({
+      status: "ok",
+      message: "User deleted correctly.",
+      data: result.rows[0],
+    });
+  } catch (error) {
+    res.status(500).json({ status: "error", message: "Error deleting user." });
+  }
 }
 
 module.exports = {
