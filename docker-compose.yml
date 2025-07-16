@@ -1,11 +1,16 @@
+
+x-db-environment: &db-env
+  POSTGRES_DB: ${POSTGRES_DB}
+  POSTGRES_USER: ${POSTGRES_USER}
+  POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  POSTGRES_HOST: ${POSTGRES_HOST}
+  POSTGRES_PORT: ${POSTGRES_PORT}
 services:
   db:
     container_name: crypto-masivos-db
     image: postgres:latest
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      <<: *db-env
     ports:
       - "5432:5432"
     volumes:
@@ -15,6 +20,8 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     image: crypto_masivos_backend:latest
+    environment:
+      <<: *db-env
     ports:
       - "3000:3000"
     depends_on:
