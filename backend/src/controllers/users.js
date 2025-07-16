@@ -51,7 +51,7 @@ async function updateUser(req, res) {
         const user = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
         if (user.rows.length === 0) return res.status(404).json({ status: "error", message: "User not found."});
         const actual = user.rows[0];
-        const hash = password ? await bcrypt.hash(password, 10) : actual.password;
+        const hash = password ? await bcrypt.hash(password, 12) : actual.password;
 
         const updated = await pool.query(
             `UPDATE users SET 
