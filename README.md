@@ -1,4 +1,8 @@
-# crypto_masivos
+# Crypto Masivos
+
+## About
+
+_Crypto Masivos_ is a simple cryptocurrency exchange platform that allows users to manage wallets and trade different cryptocurrencies. The app provides a backend API, a frontend interface, and uses PostgreSQL for data storage.
 
 ## Local database Setup
 
