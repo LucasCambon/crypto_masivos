@@ -33,7 +33,7 @@ This will create all the necessary tables and insert some example data.
 
 ## 🐳 Running the project with Docker
 
-You can run the full application using **Docker Compose**. By the moment it's just the backend but the idea is the same, run the whole app with just one command.
+You can run the full application using **Docker Compose**.
 
 ### 1. Prerequisites
 
@@ -46,4 +46,12 @@ In the root directory of the project (where `docker-compose.yml` is located), ru
 
 ```bash
 docker-compose up --build
+```
+
+And you should see all the services with created and running status. Also, you can se the real time logs to be sure that the app is running correctly
+
+Tip: You can use the _-d_ flag to run it on background mode so you can keep using the same terminal session. In case you want to see the background logs, just run the following command for the service you want to see (backend, frontend or db):
+
+```bash
+docker-compose logs <service>
 ```
