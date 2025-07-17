@@ -43,6 +43,7 @@ You can run the full application using **Docker Compose**.
 
 - [Docker](https://www.docker.com/products/docker-desktop/) installed
 - [Docker Compose](https://docs.docker.com/compose/) (usually included with Docker Desktop)
+- Configure the `.env` file. Use the example file as a template and fill in the fields with any values you like
 
 ### 2. Build and start the services
 
