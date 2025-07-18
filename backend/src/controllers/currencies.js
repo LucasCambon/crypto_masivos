@@ -71,8 +71,25 @@ async function updateCurrency(req, res) {
   }
 }
 
+async function deleteCurrency(req, res) {
+  const { id } = req.body;
+  if (!id) return res.status(400).json({ status: "error", message: "ID is required" });
+
+  try {
+    const result = await pool.query("DELETE FROM currencies WHERE id = $1 RETURNING *", [id]);
+    if (result.rows.length === 0)
+      return res.status(404).json({ status: "error", message: "Currency not found" });
+
+    res.status(200).json({ status: "ok", message: "Currency deleted", data: result.rows[0] });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: "error", message: "Error deleting currency" });
+  }
+}
+
 module.exports = {
     getCurrencies,
     createCurrency,
     updateCurrency,
+    deleteCurrency,
 };
