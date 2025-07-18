@@ -85,6 +85,71 @@ main {
 	border-radius: 4px;
 }
 
+.currency:hover:has(.dialog:hover) {
+	background-color: initial;
+}
+
+.conversor {
+	background-color: #666489;
+	border-radius: 8px;
+	padding: 1.5em 2em;
+	min-width: 300px;
+}
+
+.conversor-title {
+	margin-bottom: 1.5em;
+	text-align: center;
+}
+
+.conversor,
+.conversor form {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+
+.conversor input,
+.conversor select {
+	user-select: all;
+	padding: 0.5em;
+	border: 1px solid #444;
+	background-color: #f5f5f5;
+	color: #333;
+	height: 100%;
+}
+
+.conversor input {
+	border-right-width: 0.5px;
+	border-radius: 6px 0 0 6px;
+}
+
+.conversor select {
+	border-left-width: 0.5px;
+	border-radius: 0 6px 6px 0;
+}
+
+.conversor-input-group {
+	display: flex;
+	width: 100%;
+	align-items: center;
+}
+
+.swap-btn {
+	background-color: var(--color-primary);
+	color: white;
+	border: none;
+	width: 40px;
+	height: 40px;
+	font-size: 1.2em;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: transform 0.2s ease;
+}
+
 @media (min-width: 425px) {
 	.currencies {
 		border-radius: 16px;
