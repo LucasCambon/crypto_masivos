@@ -240,8 +240,6 @@ function addButtons() {
 				newDialog.remove();
 			});
 
-			document.addEventListener('keydown', escKeyHandler);
-
 			newDialog.appendChild(closeBtn);
 
 			const newConversor = createConversor(currency);
