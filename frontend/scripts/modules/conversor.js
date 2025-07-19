@@ -1,17 +1,12 @@
+import { updateConversion } from './converter.js';
+
 let allCurrencies = [];
 
-function loadCurrencies() {
-	fetch('scripts/example-data/currencies.json')
-		.then((response) => response.json())
-		.then((data) => {
-			allCurrencies = data;
-		})
-		.catch((error) => console.error('Failed to load currencies:', error));
+export function setCurrencies(currencies) {
+	allCurrencies = currencies;
 }
 
-document.addEventListener('DOMContentLoaded', loadCurrencies);
-
-function createConversor(selectedCurrency) {
+export function createConversor(selectedCurrency) {
 	const title = document.createElement('h2');
 	title.classList.add('conversor-title');
 	title.textContent = 'Conversor';
@@ -150,107 +145,3 @@ function createConversor(selectedCurrency) {
 
 	return newConversor;
 }
-
-function calculateConversion(amount, fromValue, toValue) {
-	if (fromValue === toValue) {
-		return amount;
-	}
-
-	let fromCurrency, toCurrency;
-
-	if (fromValue !== 'USD') {
-		try {
-			fromCurrency = JSON.parse(fromValue);
-		} catch (e) {
-			console.error('Error parsing fromValue:', e);
-			return 0;
-		}
-	}
-
-	if (toValue !== 'USD') {
-		try {
-			toCurrency = JSON.parse(toValue);
-		} catch (e) {
-			console.error('Error parsing toValue:', e);
-			return 0;
-		}
-	}
-
-	// USD to crypto
-	if (fromValue === 'USD' && toValue !== 'USD') {
-		return (amount / toCurrency.usd_value).toFixed(6);
-	}
-
-	// Crypto to USD
-	if (fromValue !== 'USD' && toValue === 'USD') {
-		return (amount * fromCurrency.usd_value).toFixed(2);
-	}
-
-	// Crypto to crypto
-	if (fromValue !== 'USD' && toValue !== 'USD') {
-		const usdAmount = amount * fromCurrency.usd_value;
-		return (usdAmount / toCurrency.usd_value).toFixed(6);
-	}
-
-	return 0;
-}
-
-function updateConversion(fromInput, toInput, fromSelect, toSelect) {
-	const amount = parseFloat(fromInput.value) || 0;
-	const fromValue = fromSelect.value;
-	const toValue = toSelect.value;
-
-	toInput.value = calculateConversion(amount, fromValue, toValue);
-}
-
-function addButtons() {
-	document.querySelectorAll('.currency').forEach((currencyDiv) => {
-		const symbolElement = currencyDiv.querySelector('.currency-symbol');
-		const nameElement = currencyDiv.querySelector('.currency-name');
-		const valueElement = currencyDiv.querySelector('.currency-usd-value');
-
-		if (!symbolElement || !nameElement || !valueElement) return;
-
-		const symbol = symbolElement.textContent;
-		const name = nameElement.textContent;
-		const usdValueText = valueElement.textContent;
-		const usdValue = parseFloat(usdValueText.replace(/[^0-9.]/g, ''));
-
-		const currency = {
-			symbol: symbol,
-			name: name,
-			usd_value: usdValue,
-		};
-
-		const valueContainer = currencyDiv.querySelector('.currency-value');
-		if (!valueContainer) return;
-
-		const button = document.createElement('button');
-		button.classList.add('primary', 'currency-btn');
-		button.textContent = 'Convertir';
-
-		button.addEventListener('click', () => {
-			const newDialog = document.createElement('section');
-			newDialog.classList.add('dialog');
-
-			const closeBtn = document.createElement('button');
-			closeBtn.classList.add('close-btn');
-			closeBtn.textContent = 'X';
-			closeBtn.addEventListener('click', () => {
-				newDialog.remove();
-			});
-
-			newDialog.appendChild(closeBtn);
-
-			const newConversor = createConversor(currency);
-			newDialog.appendChild(newConversor);
-
-			document.body.appendChild(newDialog);
-		});
-
-		valueContainer.appendChild(button);
-	});
-}
-
-const observer = new MutationObserver(addButtons);
-observer.observe(document.getElementById('currencies'), { childList: true });
