@@ -1,3 +1,5 @@
+@import 'icons.css';
+
 :root {
 	--section-max-width: 1024px;
 }
@@ -146,18 +148,19 @@ main {
 	align-items: center;
 }
 
-.swap-btn {
-	background-color: var(--color-primary);
-	color: white;
-	border: none;
-	width: 40px;
-	height: 40px;
-	font-size: 1.2em;
+.swap-icon {
+	--size: 32px;
+}
+
+.close-icon {
+	--size: 24px;
+}
+
+.swap-icon,
+.close-icon {
 	cursor: pointer;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	transition: transform 0.2s ease;
+	width: var(--size);
+	height: var(--size);
 }
 
 @media (min-width: 425px) {

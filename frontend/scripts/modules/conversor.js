@@ -18,18 +18,18 @@ export function createConversor(selectedCurrency, onClose) {
 	title.classList.add('conversor-title');
 	title.textContent = 'Conversor';
 
-	// Close button
-	const closeBtn = document.createElement('button');
-	closeBtn.classList.add('close-btn');
-	closeBtn.textContent = 'X';
-	closeBtn.addEventListener('click', () => {
+	// Close icon
+	const closeIcon = document.createElement('span');
+	closeIcon.classList.add('close-icon');
+
+	closeIcon.addEventListener('click', () => {
 		if (typeof onClose === 'function') {
 			onClose();
 		}
 	});
 
 	headerContainer.appendChild(title);
-	headerContainer.appendChild(closeBtn);
+	headerContainer.appendChild(closeIcon);
 
 	const newForm = document.createElement('form');
 	newForm.addEventListener('submit', (e) => e.preventDefault());
@@ -104,12 +104,9 @@ export function createConversor(selectedCurrency, onClose) {
 	toContainer.appendChild(toInput);
 	toContainer.appendChild(toCurrencySelect);
 
-	// Swap button
-	const swapButton = document.createElement('button');
-	swapButton.type = 'button';
-	swapButton.classList.add('swap-btn');
-	swapButton.textContent = '↔️';
-	swapButton.title = 'Swap currencies';
+	// Swap icon
+	const swapIcon = document.createElement('span');
+	swapIcon.classList.add('swap-icon');
 
 	updateConversion(fromInput, toInput, fromCurrencySelect, toCurrencySelect);
 
@@ -140,7 +137,7 @@ export function createConversor(selectedCurrency, onClose) {
 		)
 	);
 
-	swapButton.addEventListener('click', () => {
+	swapIcon.addEventListener('click', () => {
 		const tempFromValue = fromCurrencySelect.value;
 
 		fromCurrencySelect.value = toCurrencySelect.value;
@@ -156,7 +153,7 @@ export function createConversor(selectedCurrency, onClose) {
 
 	newConversor.appendChild(headerContainer);
 	newForm.appendChild(fromContainer);
-	newForm.appendChild(swapButton);
+	newForm.appendChild(swapIcon);
 	newForm.appendChild(toContainer);
 	newConversor.appendChild(newForm);
 

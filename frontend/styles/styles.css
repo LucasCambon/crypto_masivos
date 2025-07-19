@@ -76,19 +76,6 @@ a {
 	z-index: 1;
 }
 
-.close-btn {
-	--size: 32px;
-	width: var(--size);
-	height: var(--size);
-	background-color: var(--color-3);
-	border: none;
-	border-radius: 50%;
-	padding: 4px 8px;
-	cursor: pointer;
-	user-select: none;
-	font-size: calc(var(--size) / 2);
-}
-
 @media (prefers-color-scheme: dark) {
 	:root {
 		--color-bg: #242247;
