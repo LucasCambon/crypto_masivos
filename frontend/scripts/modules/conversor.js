@@ -6,16 +6,33 @@ export function setCurrencies(currencies) {
 	allCurrencies = currencies;
 }
 
-export function createConversor(selectedCurrency) {
+export function createConversor(selectedCurrency, onClose) {
+	const newConversor = document.createElement('div');
+	newConversor.classList.add('conversor');
+
+	// Header container for title and close button
+	const headerContainer = document.createElement('div');
+	headerContainer.classList.add('conversor-header');
+
 	const title = document.createElement('h2');
 	title.classList.add('conversor-title');
 	title.textContent = 'Conversor';
 
+	// Close button
+	const closeBtn = document.createElement('button');
+	closeBtn.classList.add('close-btn');
+	closeBtn.textContent = 'X';
+	closeBtn.addEventListener('click', () => {
+		if (typeof onClose === 'function') {
+			onClose();
+		}
+	});
+
+	headerContainer.appendChild(title);
+	headerContainer.appendChild(closeBtn);
+
 	const newForm = document.createElement('form');
 	newForm.addEventListener('submit', (e) => e.preventDefault());
-
-	const newConversor = document.createElement('div');
-	newConversor.classList.add('conversor');
 
 	// From
 	const fromContainer = document.createElement('div');
@@ -137,7 +154,7 @@ export function createConversor(selectedCurrency) {
 		);
 	});
 
-	newConversor.appendChild(title);
+	newConversor.appendChild(headerContainer);
 	newForm.appendChild(fromContainer);
 	newForm.appendChild(swapButton);
 	newForm.appendChild(toContainer);

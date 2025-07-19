@@ -4,16 +4,9 @@ export function showConverterDialog(currency) {
 	const newDialog = document.createElement('section');
 	newDialog.classList.add('dialog');
 
-	const closeBtn = document.createElement('button');
-	closeBtn.classList.add('close-btn');
-	closeBtn.textContent = 'X';
-	closeBtn.addEventListener('click', () => {
+	const newConversor = createConversor(currency, () => {
 		newDialog.remove();
 	});
-
-	newDialog.appendChild(closeBtn);
-
-	const newConversor = createConversor(currency);
 	newDialog.appendChild(newConversor);
 
 	document.body.appendChild(newDialog);
