@@ -58,6 +58,7 @@ main {
 }
 
 .currency-symbol {
+	color: var(--color-accent);
 	font-weight: bold;
 }
 
