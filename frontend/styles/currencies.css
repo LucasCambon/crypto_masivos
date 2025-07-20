@@ -57,11 +57,6 @@ main {
 	align-items: center;
 }
 
-.currency:hover {
-	background-color: var(--color-indigo-400);
-	cursor: pointer;
-}
-
 .currency-symbol {
 	font-weight: bold;
 }
@@ -76,8 +71,6 @@ main {
 }
 
 .conversor {
-	background-color: var(--color-indigo-600);
-	border: 2px solid var(--color-gold-300);
 	border-radius: 8px;
 	padding: 1.5em 2em;
 	min-width: 300px;
@@ -111,9 +104,6 @@ main {
 .conversor select {
 	user-select: all;
 	padding: 0.5em;
-	border: 1px solid var(--color-indigo-300);
-	background-color: var(--color-indigo-500);
-	color: var(--color-fg);
 	height: 100%;
 }
 
@@ -181,12 +171,41 @@ main {
 }
 
 @media (prefers-color-scheme: dark) {
+	.conversor {
+		background-color: var(--color-indigo-600);
+		border: 2px solid var(--color-gold-300);
+	}
+
+	.conversor input,
+	.conversor select {
+		border: 1px solid var(--color-indigo-300);
+		background-color: var(--color-indigo-500);
+		color: var(--color-fg);
+	}
+
 	.currency-name {
 		color: var(--color-4);
+	}
+
+	.currency:hover {
+		background-color: var(--color-indigo-400);
+		cursor: pointer;
 	}
 }
 
 @media (prefers-color-scheme: light) {
+	.conversor {
+		background-color: var(--color-gray-200);
+		border: 2px solid var(--color-gold-500);
+	}
+
+	.conversor input,
+	.conversor select {
+		border: 1px solid var(--color-indigo-300);
+		background-color: var(--color-gray-200);
+		color: var(--color-fg);
+	}
+
 	.currency-name {
 		color: var(--color-3);
 	}
