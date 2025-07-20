@@ -89,6 +89,7 @@ main {
 	margin: 0;
 	text-align: center;
 	flex-grow: 1;
+	user-select: none;
 }
 
 .conversor,
