@@ -13,7 +13,6 @@ async function getCurrencies(req, res) {
 async function createCurrency(req, res) {
   const { name, usd_value, symbol, type, volatility, liquidity } = req.body;
 
-  // Validate that the required fields are present.
   if (!name || !usd_value || !symbol || !liquidity) {
     return res.status(400).json({ status: "error", message: "Missing required fields" });
   }
@@ -27,8 +26,8 @@ async function createCurrency(req, res) {
         name,
         usd_value,
         symbol,
-        type || null,        // If type is undefined, it is saved as null
-        volatility || null,  // If volatility is undefined, it is saved as null
+        type || null,
+        volatility || null,
         liquidity
       ]
     );
