@@ -15,10 +15,6 @@
 	.linkedin-icon {
 		--svg: url(https://icongr.am/simple/linkedin.svg?color=242247);
 	}
-
-	.instagram-icon {
-		--svg: url(https://icongr.am/simple/instagram.svg?color=242247);
-	}
 }
 
 @media (prefers-color-scheme: dark) {
@@ -28,9 +24,5 @@
 
 	.linkedin-icon {
 		--svg: url(https://icongr.am/simple/linkedin.svg?color=ffffff);
-	}
-
-	.instagram-icon {
-		--svg: url(https://icongr.am/simple/instagram.svg?color=ffffff);
 	}
 }
