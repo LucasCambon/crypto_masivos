@@ -13,7 +13,8 @@ async function getCurrencies(req, res) {
 async function createCurrency(req, res) {
   const { name, usd_value, symbol, type, volatility, liquidity } = req.body;
 
-  if (!name || !usd_value || !symbol) {
+  // Validate that the required fields are present.
+  if (!name || usd_value === undefined || !symbol || liquidity === undefined) {
     return res.status(400).json({ status: "error", message: "Missing required fields" });
   }
 
@@ -22,9 +23,22 @@ async function createCurrency(req, res) {
       `INSERT INTO currencies (name, usd_value, symbol, type, volatility, liquidity)
        VALUES ($1, $2, $3, $4, $5, $6)
        RETURNING *`,
-      [name, usd_value, symbol, type, volatility, liquidity || 0]
+      [
+        name,
+        usd_value,
+        symbol,
+        type ?? null,        // If type is undefined, it is saved as null
+        volatility ?? null,  // If volatility is undefined, it is saved as null
+        liquidity
+      ]
     );
-    res.status(201).json({ status: "ok", message: "Currency created", data: result.rows[0] });
+
+    res.status(201).json({
+      status: "ok",
+      message: "Currency created",
+      data: result.rows[0]
+    });
+
   } catch (error) {
     console.log(error);
     res.status(500).json({ status: "error", message: "Error creating currency" });
