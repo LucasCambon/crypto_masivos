@@ -43,7 +43,8 @@ async function createUser(req, res) {
 }
 
 async function updateUser(req, res) {
-    const { id, username, email, password } = req.body;
+    const { username, email, password } = req.body;
+    const id = req.user.id
     try {
         const user = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
         if (user.rows.length === 0) return res.status(404).json({ status: "error", message: "User not found."});
@@ -76,7 +77,7 @@ async function updateUser(req, res) {
 }
 
 async function deleteUser(req, res) {
-  const { id } = req.body;
+  const id = req.user.id
   try {
     const result = await pool.query(
       "DELETE FROM users WHERE id = $1 RETURNING id, username, email, role, created_at",
