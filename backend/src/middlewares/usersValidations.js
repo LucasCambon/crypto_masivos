@@ -53,17 +53,21 @@ const updateUserValidator = [
     ),
 ];
 
-
-
 const loginValidation = [
   body("email")
     .notEmpty().withMessage("Email is required."),
   body("password")
-    .notEmpty().withMessage("Password is required.")
+    .notEmpty().withMessage("Password is required."),
+];
+
+const assignAdminValidator = [
+  body("id")
+    .notEmpty().withMessage("User ID is required."),
 ];
 
 module.exports = {
   createUserValidator,
   updateUserValidator,
-  loginValidation
+  loginValidation,
+  assignAdminValidator,
 };
