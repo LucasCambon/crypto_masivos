@@ -18,7 +18,6 @@ async function getUsers(req, res) {
 
 async function createUser(req, res) {
     const { username, email, password } = req.body;
-    if (!username || !email || !password) return res.status(400).json({ status: "error", message: "Incomplete required fields."});
     try {
 
         const exist = await pool.query("SELECT * FROM users WHERE username = $1 OR email = $2", [username, email]);
@@ -44,9 +43,6 @@ async function createUser(req, res) {
 
 async function updateUser(req, res) {
     const { id, username, email, password } = req.body;
-
-    if (!id) return res.status(400).json({status: "error", message: "ID required."});
-
     try {
         const user = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
         if (user.rows.length === 0) return res.status(404).json({ status: "error", message: "User not found."});
@@ -80,8 +76,6 @@ async function updateUser(req, res) {
 
 async function deleteUser(req, res) {
   const { id } = req.body;
-
-  if (!id) return res.status(400).json({status: "error", message: "ID required."});
   try {
     const result = await pool.query(
       "DELETE FROM users WHERE id = $1 RETURNING id, username, email, role, created_at",
