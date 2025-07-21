@@ -16,10 +16,6 @@
 		--svg: url(https://icongr.am/simple/linkedin.svg?color=242247);
 	}
 
-	.instagram-icon {
-		--svg: url(https://icongr.am/simple/instagram.svg?color=242247);
-	}
-
 	.close-icon {
 		--svg: url(https://icongr.am/material/close.svg?color=242247);
 	}
@@ -36,10 +32,6 @@
 
 	.linkedin-icon {
 		--svg: url(https://icongr.am/simple/linkedin.svg?color=ffffff);
-	}
-
-	.instagram-icon {
-		--svg: url(https://icongr.am/simple/instagram.svg?color=ffffff);
 	}
 
 	.close-icon {

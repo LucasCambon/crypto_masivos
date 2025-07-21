@@ -1,16 +1,11 @@
 @import 'header.css';
+@import 'colors.css';
 
 :root {
 	font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, system-ui,
 		sans-serif;
 
-	--color-1: #1f1f1f;
-	--color-2-dark: #8a6c38;
-	--color-2-light: #ecc887;
-	--color-3: #525252;
-	--color-4: #aaaaaa;
-
-	--INF: 999px;
+	--INF: 999px; /* Infinite constant value */
 
 	color: var(--color-fg);
 	background-color: var(--color-bg);
@@ -40,26 +35,34 @@ a {
 }
 
 .highlight {
-	color: var(--color-2);
+	color: var(--color-accent);
 }
 
-.primary {
-	background-color: var(--color-2);
-	color: var(--color-bg);
-	text-wrap: nowrap;
-}
-
-.primary:hover {
-	color: var(--color-bg);
-}
-
+.primary,
 .secondary {
-	color: var(--color-3);
 	text-wrap: nowrap;
 }
 
-.secondary:hover {
-	color: var(--color-fg);
+.card {
+	background: linear-gradient(
+			to bottom right,
+			var(--card-gradient-from),
+			var(--card-gradient-to)
+		),
+		linear-gradient(
+			to bottom right,
+			var(--card-border-gradient-from),
+			var(--card-border-gradient-to)
+		);
+	background-clip: padding-box, border-box;
+	background-origin: padding-box, border-box;
+	border: 2px solid transparent;
+	border-radius: 16px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	padding: 16px;
 }
 
 .dialog {
@@ -77,32 +80,44 @@ a {
 }
 
 @media (prefers-color-scheme: dark) {
-	:root {
-		--color-bg: #242247;
-		--color-fg: #f5f5fa;
-
-		--color-2: var(--color-2-light);
+	.primary {
+		background-color: var(--color-gold-400);
+		color: var(--color-bg);
 	}
 
 	.primary:hover {
-		background-color: var(--color-2-dark);
+		background-color: var(--color-gold-300);
 	}
 
 	.secondary {
-		color: var(--color-4);
+		color: var(--color-gray-300);
+	}
+
+	.secondary:hover {
+		color: var(--color-gray-100);
 	}
 }
 
 @media (prefers-color-scheme: light) {
-	:root {
-		--color-bg: #f5f5fa;
-		--color-fg: #242247;
-
-		--color-2: var(--color-2-dark);
+	.primary {
+		background-color: var(--color-gold-600);
+		color: var(--color-bg);
 	}
 
 	.primary:hover {
-		background-color: var(--color-2-light);
+		background-color: var(--color-gold-400);
+	}
+
+	.secondary {
+		color: var(--color-gray-800);
+	}
+
+	.secondary:hover {
+		color: var(--color-gray-600);
+	}
+
+	.card {
+		box-shadow: 10px 10px 20px -10px var(--color-gray-800);
 	}
 }
 

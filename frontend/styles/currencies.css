@@ -1,4 +1,5 @@
 @import 'icons.css';
+@import 'colors.css';
 
 :root {
 	--section-max-width: 1024px;
@@ -20,27 +21,10 @@ main {
 }
 
 .currencies {
-	background: linear-gradient(
-			to bottom right,
-			var(--currencies-gradient-1),
-			var(--currencies-gradient-2)
-		),
-		linear-gradient(
-			to bottom right,
-			var(--currencies-border-gradient-1),
-			var(--currencies-border-gradient-2)
-		);
-
-	background-clip: padding-box, border-box;
-	background-origin: padding-box, border-box;
-	border: 2px solid transparent;
-
 	width: min(100%, var(--section-max-width));
 	height: 100%;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
 	padding: 16px 32px;
+	gap: 0;
 }
 
 .currencies a {
@@ -73,12 +57,8 @@ main {
 	align-items: center;
 }
 
-.currency:hover {
-	background-color: #666489;
-	cursor: pointer;
-}
-
 .currency-symbol {
+	color: var(--color-accent);
 	font-weight: bold;
 }
 
@@ -92,7 +72,6 @@ main {
 }
 
 .conversor {
-	background-color: #666489;
 	border-radius: 8px;
 	padding: 1.5em 2em;
 	min-width: 300px;
@@ -111,6 +90,7 @@ main {
 	margin: 0;
 	text-align: center;
 	flex-grow: 1;
+	user-select: none;
 }
 
 .conversor,
@@ -126,9 +106,6 @@ main {
 .conversor select {
 	user-select: all;
 	padding: 0.5em;
-	border: 1px solid #444;
-	background-color: #f5f5f5;
-	color: #333;
 	height: 100%;
 }
 
@@ -196,30 +173,39 @@ main {
 }
 
 @media (prefers-color-scheme: dark) {
-	:root {
-		--currencies-gradient-1: #343257;
-		--currencies-gradient-2: #1e1c41;
+	.conversor {
+		background-color: var(--color-indigo-600);
+		border: 2px solid var(--color-gold-300);
+	}
 
-		--currencies-border-gradient-1: #666489;
-		--currencies-border-gradient-2: #312f54;
+	.conversor input,
+	.conversor select {
+		border: 1px solid var(--color-indigo-300);
+		background-color: var(--color-indigo-500);
+		color: var(--color-fg);
 	}
 
 	.currency-name {
 		color: var(--color-4);
 	}
+
+	.currency:hover {
+		background-color: var(--color-indigo-400);
+		cursor: pointer;
+	}
 }
 
 @media (prefers-color-scheme: light) {
-	:root {
-		--currencies-gradient-1: var(--color-bg);
-		--currencies-gradient-2: var(--color-bg);
-
-		--currencies-border-gradient-1: #666489;
-		--currencies-border-gradient-2: #312f54;
+	.conversor {
+		background-color: var(--color-gray-200);
+		border: 2px solid var(--color-gold-500);
 	}
 
-	.currencies {
-		box-shadow: 10px 10px 20px -10px black;
+	.conversor input,
+	.conversor select {
+		border: 1px solid var(--color-indigo-300);
+		background-color: var(--color-gray-200);
+		color: var(--color-fg);
 	}
 
 	.currency-name {
