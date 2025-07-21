@@ -59,8 +59,17 @@ const deleteUserValidator = [
   body("id").notEmpty().withMessage("User ID is required."),
 ];
 
+
+const loginValidation = [
+  body("email")
+    .notEmpty().withMessage("Email is required."),
+  body("password")
+    .notEmpty().withMessage("Password is required.")
+];
+
 module.exports = {
   createUserValidator,
   updateUserValidator,
   deleteUserValidator,
+  loginValidation
 };

@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const pool = require("../db");
 
 async function getUsers(req, res) {
@@ -95,9 +96,47 @@ async function deleteUser(req, res) {
   }
 }
 
+async function login(req, res) {
+
+    try {
+        const userResult = await pool.query("SELECT * FROM users WHERE email = $1", [req.body.email]);
+
+        if (userResult.rows.length === 0) {
+            return res.status(401).json({ status: "error", message: "Invalid email or password." }); // Avoid giving hints on what is wrong, email or password.
+        }
+
+        const user = userResult.rows[0];
+
+        const passwordMatch = await bcrypt.compare(req.body.password, user.password);
+        if (!passwordMatch) {
+            return res.status(401).json({ status: "error", message: "Invalid email or password." }); // Same as above, not giving hints.
+        }
+
+        const token = jwt.sign(
+            { id: user.id, email: user.email, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
+        const { password, ...userData } = user;
+        res.setHeader("Authorization", `Bearer ${token}`);
+        res.status(200).json({
+            status: "ok",
+            message: "Login successful.",
+            token: token,
+            data: userData,
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ status: "error", message: "Login failed." });
+    }
+}
+
 module.exports = {
     getUsers,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    login,
 };
