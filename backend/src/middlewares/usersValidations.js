@@ -27,8 +27,6 @@ const createUserValidator = [
 
 
 const updateUserValidator = [
-  body("id")
-    .notEmpty().withMessage("User ID is required."),
 
   body("username")
     .optional({ checkFalsy: true })
@@ -55,12 +53,21 @@ const updateUserValidator = [
     ),
 ];
 
-const deleteUserValidator = [
-  body("id").notEmpty().withMessage("User ID is required."),
+const loginValidation = [
+  body("email")
+    .notEmpty().withMessage("Email is required."),
+  body("password")
+    .notEmpty().withMessage("Password is required."),
+];
+
+const assignAdminValidator = [
+  body("id")
+    .notEmpty().withMessage("User ID is required."),
 ];
 
 module.exports = {
   createUserValidator,
   updateUserValidator,
-  deleteUserValidator,
+  loginValidation,
+  assignAdminValidator,
 };
