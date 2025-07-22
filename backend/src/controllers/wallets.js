@@ -37,7 +37,50 @@ async function createWallet(req, res) {
   }
 }
 
+async function updateWallet(req, res) {
+  const { id, user_id, address, alias, balance, last_activity } = req.body;
+
+  if (!id) {
+    return res.status(400).json({ status: "error", message: "Wallet ID is required" });
+  }
+
+  try {
+    const result = await pool.query("SELECT * FROM wallets WHERE id = $1", [id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ status: "error", message: "Wallet not found" });
+    }
+
+    const current = result.rows[0];
+
+    const updated = await pool.query(
+      `UPDATE wallets SET
+        user_id = $1,
+        address = $2,
+        alias = $3,
+        balance = $4,
+        last_activity = $5
+      WHERE id = $6
+      RETURNING *`,
+      [
+        user_id || current.user_id,
+        address || current.address,
+        alias || current.alias,
+        balance || current.balance,
+        last_activity || current.last_activity,
+        id
+      ]
+    );
+
+    res.status(200).json({ status: "ok", message: "Wallet updated", data: updated.rows[0] });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: "error", message: "Error updating wallet" });
+  }
+}
+
 module.exports = {
     getWallets,
-    createWallet
+    createWallet,
+    updateWallet
 }
