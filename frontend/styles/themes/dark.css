@@ -19,5 +19,10 @@
 
 		--btn-secondary-bg: var(--color-gray-300);
 		--btn-secondary-hover-bg: var(--color-gray-100);
+
+		/* Pages colors */
+		--currency-name-color: var(--color-gray-200);
+		--currency-usd-value-color: var(--currency-name-color);
+		--currency-symbol-color: var(--color-accent);
 	}
 }
