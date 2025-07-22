@@ -13,7 +13,9 @@ main {
 }
 
 .developers-container {
-	display: flex;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
+
 	align-items: center;
 	justify-content: space-around;
 	gap: 32px;
@@ -96,6 +98,10 @@ q {
 		margin-left: 50px;
 		text-align: left;
 	}
+
+	.developers-container {
+		grid-template-columns: repeat(2, 1fr);
+	}
 }
 
 @media (min-width: 768px) {
@@ -107,5 +113,11 @@ q {
 		margin-top: 8px;
 		width: 400px;
 		margin-left: min(25vw, 325px);
+	}
+}
+
+@media (min-width: 1280px) {
+	.developers-container {
+		grid-template-columns: repeat(4, 1fr);
 	}
 }
