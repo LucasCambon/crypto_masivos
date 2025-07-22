@@ -60,7 +60,7 @@ const loginValidation = [
     .notEmpty().withMessage("Password is required."),
 ];
 
-const assignAdminValidator = [
+const enableAdminValidation = [
   body("id")
     .notEmpty().withMessage("User ID is required."),
 ];
@@ -69,5 +69,5 @@ module.exports = {
   createUserValidator,
   updateUserValidator,
   loginValidation,
-  assignAdminValidator,
+  enableAdminValidation,
 };
