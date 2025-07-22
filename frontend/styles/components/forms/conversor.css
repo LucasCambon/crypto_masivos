@@ -1,0 +1,71 @@
+.conversor {
+	background-color: var(--conversor-bg);
+	border: var(--conversor-border);
+	border-radius: 8px;
+	padding: 1.5em 2em;
+	min-width: 300px;
+	position: relative;
+}
+
+.conversor-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 1.5em;
+}
+
+.conversor-title {
+	margin: 0;
+	text-align: center;
+	flex-grow: 1;
+	user-select: none;
+}
+
+.conversor,
+.conversor form {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+
+.conversor input,
+.conversor select {
+	user-select: all;
+	padding: 0.5em;
+	height: 100%;
+	border: var(--conversor-input-border);
+	background-color: var(--conversor-input-bg);
+	color: var(--color-fg);
+}
+
+.conversor input {
+	border-right-width: 0.5px;
+	border-radius: 6px 0 0 6px;
+}
+
+.conversor select {
+	border-left-width: 0.5px;
+	border-radius: 0 6px 6px 0;
+}
+
+.conversor-input-group {
+	display: flex;
+	width: 100%;
+	align-items: center;
+}
+
+.swap-icon {
+	--icon-size: 32px;
+}
+
+.close-icon {
+	--icon-size: 24px;
+}
+
+.swap-icon,
+.close-icon {
+	cursor: pointer;
+}

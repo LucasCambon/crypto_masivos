@@ -1,0 +1,40 @@
+@media (prefers-color-scheme: light) {
+	:root {
+		/* Base colors */
+		--color-bg: var(--color-gray-100);
+		--color-fg: var(--color-indigo-600);
+
+		--color-accent: var(--color-gold-600);
+
+		/* Component colors */
+		--card-gradient-from: var(--color-bg);
+		--card-gradient-to: var(--color-bg);
+
+		--card-border-gradient-from: var(--color-indigo-400);
+		--card-border-gradient-to: var(--color-indigo-500);
+
+		--card-shadow: 10px 10px 20px -10px var(--color-gray-800);
+
+		--conversor-bg: var(--color-gray-200);
+		--conversor-border: 2px solid var(--color-gold-500);
+		--conversor-input-bg: var(--color-gray-200);
+		--conversor-input-border: 1px solid var(--color-indigo-300);
+
+		/* Utilities colors */
+		--btn-primary-bg: var(--color-gold-600);
+		--btn-primary-hover-bg: var(--color-gold-400);
+
+		--btn-secondary-bg: var(--color-gray-800);
+		--btn-secondary-hover-bg: var(--color-gray-600);
+
+		/* Pages colors */
+		--currency-name-color: var(--color-gray-800);
+		--currency-usd-value-color: var(--currency-name-color);
+		--currency-symbol-color: var(--color-accent);
+
+		--group-name-color: var(--color-gray-700);
+		--developer-img-border: 2px solid var(--color-gold-600);
+		--developer-hr-color: var(--color-gold-800);
+		--developer-contact-link-color: var(--color-gray-500);
+	}
+}
