@@ -98,10 +98,6 @@ q {
 		margin-left: 50px;
 		text-align: left;
 	}
-
-	.developers-container {
-		grid-template-columns: repeat(2, 1fr);
-	}
 }
 
 @media (min-width: 768px) {
@@ -113,6 +109,10 @@ q {
 		margin-top: 8px;
 		width: 400px;
 		margin-left: min(25vw, 325px);
+	}
+
+	.developers-container {
+		grid-template-columns: repeat(2, 1fr);
 	}
 }
 
