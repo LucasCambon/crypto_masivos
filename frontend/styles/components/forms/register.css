@@ -1,0 +1,53 @@
+.register {
+	background-color: var(--register-bg);
+	border: var(--register-border);
+	border-radius: 8px;
+	padding: 1.5em 2em;
+	min-width: 300px;
+	position: relative;
+}
+
+.register-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 8px;
+}
+
+.register-title {
+	margin: 0;
+	text-align: center;
+	flex-grow: 1;
+	user-select: none;
+}
+
+.register,
+.register form {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+
+.register input {
+	border-radius: 6px;
+	user-select: all;
+	padding: 0.5em;
+	height: 100%;
+	border: var(--register-input-border);
+	background-color: var(--register-input-bg);
+	color: var(--color-fg);
+}
+
+.register-input-group {
+	display: flex;
+	width: 100%;
+	align-items: center;
+}
+
+.register button {
+	border-radius: var(--INF);
+	padding: 0.5em 1em;
+}

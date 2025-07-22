@@ -3,10 +3,10 @@ export function createLogin(onClose) {
 	newLogin.classList.add('login');
 
 	const headerContainer = document.createElement('div');
-	headerContainer.classList.add('dialog-header');
+	headerContainer.classList.add('login-header');
 
 	const title = document.createElement('h2');
-	title.classList.add('dialog-title');
+	title.classList.add('login-title');
 	title.textContent = 'Login';
 
 	const closeIcon = document.createElement('span');
@@ -24,28 +24,30 @@ export function createLogin(onClose) {
 	newLogin.appendChild(headerContainer);
 
 	const newForm = document.createElement('form');
-	newForm.addEventListener('submit', (e) => {
+	newForm.addEventListener('submit', async (e) => {
 		e.preventDefault();
-		const email = e.target.email.value;
-		const password = e.target.password.value;
-
 		try {
-			const response = fetch('/api/v1/users/login', {
+			const response = await fetch('/api/v1/users/login', {
 				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ email, password }),
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					email: e.target.email.value,
+					password: e.target.password.value,
+				}),
 			});
 
+			const data = await response.json();
+
 			if (!response.ok) {
-				throw new Error('Error logging in');
+				console.error('Server returned an error:', data);
+				throw new Error(data.message || 'Error logging in');
 			}
 
-			const data = response.json();
-			console.log(data);
+			localStorage.setItem('authToken', data.token);
+
+			onClose();
 		} catch (error) {
-			console.error(error);
+			console.error('Request failed:', error.message);
 		}
 	});
 	newLogin.appendChild(newForm);
@@ -55,6 +57,7 @@ export function createLogin(onClose) {
 	emailInput.name = 'email';
 	emailInput.required = true;
 	emailInput.placeholder = 'Correo electrónico';
+	emailInput.autocomplete = 'email';
 	newForm.appendChild(emailInput);
 
 	const passwordInput = document.createElement('input');
@@ -62,9 +65,11 @@ export function createLogin(onClose) {
 	passwordInput.name = 'password';
 	passwordInput.required = true;
 	passwordInput.placeholder = 'Contraseña';
+	passwordInput.autocomplete = 'current-password';
 	newForm.appendChild(passwordInput);
 
 	const submitButton = document.createElement('button');
+	submitButton.classList.add('primary');
 	submitButton.type = 'submit';
 	submitButton.textContent = 'Iniciar sesión';
 	newForm.appendChild(submitButton);

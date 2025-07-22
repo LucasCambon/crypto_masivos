@@ -13,6 +13,8 @@
 @import 'components/buttons.css';
 @import 'components/dialog.css';
 @import 'components/forms/conversor.css';
+@import 'components/forms/login.css';
+@import 'components/forms/register.css';
 
 /* Layout */
 @import 'layout/header.css';
