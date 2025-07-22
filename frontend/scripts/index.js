@@ -8,7 +8,7 @@ async function loadCurrencies() {
 
 		if (!currencyList) return;
 
-		data.forEach((currency) => {
+		data.slice(0, 7).data.forEach((currency) => {
 			currencyList.insertBefore(
 				createCurrency(currency),
 				currencyList.firstChild
