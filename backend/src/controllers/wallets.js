@@ -10,6 +10,35 @@ async function getWallets(req, res) {
   }
 }
 
+async function getWalletById(req, res) {
+  const { id } = req.body;
+
+  if (!id) {
+    return res.status(400).json({ status: "error", message: "Wallet ID is required" });
+  }
+
+  try {
+    const result = await pool.query(
+      `
+      SELECT w.*, u.username
+      FROM wallets w
+      JOIN users u ON w.user_id = u.id
+      WHERE w.id = $1
+      `,
+      [id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ status: "error", message: "Wallet not found" });
+    }
+
+    res.status(200).json({ status: "ok", data: result.rows[0] });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ status: "error", message: "Error retrieving wallet" });
+  }
+}
+
 async function createWallet(req, res) {
   const { user_id, address, alias, balance, last_activity } = req.body;
 
@@ -99,6 +128,7 @@ async function deleteWallet(req, res) {
 
 module.exports = {
     getWallets,
+    getWalletById,
     createWallet,
     updateWallet,
     deleteWallet
