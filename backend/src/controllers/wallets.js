@@ -79,8 +79,27 @@ async function updateWallet(req, res) {
   }
 }
 
+async function deleteWallet(req, res) {
+  const { id } = req.body;
+  if (!id) return res.status(400).json({ status: "error", message: "Wallet ID is required" });
+
+  try {
+    const result = await pool.query("DELETE FROM wallets WHERE id = $1 RETURNING *", [id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ status: "error", message: "Wallet not found" });
+    }
+
+    res.status(200).json({ status: "ok", message: "Wallet deleted", data: result.rows[0] });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ status: "error", message: "Error deleting wallet" });
+  }
+}
+
 module.exports = {
     getWallets,
     createWallet,
-    updateWallet
+    updateWallet,
+    deleteWallet
 }
