@@ -1,13 +1,35 @@
 const pool = require("../db");
 
 async function getCurrencies(req, res) {
-    try {
-      const result = await pool.query(`SELECT * FROM currencies`);
-      return res.status(200).json({ status: "ok", data: result.rows, count: result.rowCount });
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ status: "error", message: "Error getting currencies" });
+  try {
+    const result = await pool.query(`SELECT * FROM currencies`);
+    return res.status(200).json({ status: "ok", data: result.rows, count: result.rowCount });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ status: "error", message: "Error getting currencies" });
+  }
+}
+
+async function getCurrency(req, res) {
+  const { id } = req.params;
+
+  if (!id || isNaN(id)) {
+    return res.status(400).json({ status: "error", message: "Invalid or missing currency ID." });
+  }
+
+  try {
+    const result = await pool.query("SELECT * FROM currencies WHERE id = $1", [id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ status: "error", message: "Currency not found." });
     }
+
+    return res.status(200).json({ status: "ok", data: result.rows[0] });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ status: "error", message: "Error fetching currency." });
+  }
 }
 
 async function createCurrency(req, res) {
@@ -106,6 +128,7 @@ async function deleteCurrency(req, res) {
 
 module.exports = {
   getCurrencies,
+  getCurrency,
   createCurrency,
   updateCurrency,
   deleteCurrency,
