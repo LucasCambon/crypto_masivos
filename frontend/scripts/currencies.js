@@ -2,6 +2,7 @@ import { fetchCurrencies } from './modules/api.js';
 import { createCurrency } from './modules/currency-ui.js';
 import { setCurrencies } from './modules/conversor.js';
 import { addCurrencyButtons } from './modules/currency-buttons.js';
+import { addLoginRegisterEventHandlers } from './modules/event-handlers.js';
 
 async function loadCurrencies() {
 	try {
@@ -29,4 +30,7 @@ async function loadCurrencies() {
 	}
 }
 
-document.addEventListener('DOMContentLoaded', loadCurrencies);
+document.addEventListener('DOMContentLoaded', () => {
+	loadCurrencies();
+	addLoginRegisterEventHandlers();
+});
