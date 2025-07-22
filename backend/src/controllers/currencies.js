@@ -2,20 +2,16 @@ const pool = require("../db");
 
 async function getCurrencies(req, res) {
     try {
-        const result = await pool.query(`SELECT * FROM currencies`);
-        res.status(200).json({ status: "ok", data: result.rows, count: result.rowCount });
+      const result = await pool.query(`SELECT * FROM currencies`);
+      return res.status(200).json({ status: "ok", data: result.rows, count: result.rowCount });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ status: "error", message: "Error getting currencies" });
+      console.log(error);
+      return res.status(500).json({ status: "error", message: "Error getting currencies" });
     }
 }
 
 async function createCurrency(req, res) {
   const { name, usd_value, symbol, type, volatility, liquidity } = req.body;
-
-  if (!name || !usd_value || !symbol || !liquidity) {
-    return res.status(400).json({ status: "error", message: "Missing required fields" });
-  }
 
   try {
     const result = await pool.query(
@@ -32,7 +28,7 @@ async function createCurrency(req, res) {
       ]
     );
 
-    res.status(201).json({
+    return res.status(201).json({
       status: "ok",
       message: "Currency created",
       data: result.rows[0]
@@ -40,16 +36,12 @@ async function createCurrency(req, res) {
 
   } catch (error) {
     console.log(error);
-    res.status(500).json({ status: "error", message: "Error creating currency" });
+    return res.status(500).json({ status: "error", message: "Error creating currency" });
   }
 }
 
 async function updateCurrency(req, res) {
   const { id, name, usd_value, symbol, type, volatility, liquidity } = req.body;
-
-  if (!id) {
-    return res.status(400).json({ status: "error", message: "Currency ID is required" });
-  }
 
   try {
 
@@ -85,7 +77,7 @@ async function updateCurrency(req, res) {
       ]
     );
 
-    res.status(200).json({
+    return res.status(200).json({
       status: "ok",
       message: "Currency updated",
       data: updateResult.rows[0]
@@ -93,29 +85,28 @@ async function updateCurrency(req, res) {
 
   } catch (error) {
     console.log(error);
-    res.status(500).json({ status: "error", message: "Error updating currency" });
+    return res.status(500).json({ status: "error", message: "Error updating currency" });
   }
 }
 
 async function deleteCurrency(req, res) {
   const { id } = req.body;
-  if (!id) return res.status(400).json({ status: "error", message: "ID is required" });
 
   try {
     const result = await pool.query("DELETE FROM currencies WHERE id = $1 RETURNING *", [id]);
     if (result.rows.length === 0)
       return res.status(404).json({ status: "error", message: "Currency not found" });
 
-    res.status(200).json({ status: "ok", message: "Currency deleted", data: result.rows[0] });
+    return res.status(200).json({ status: "ok", message: "Currency deleted", data: result.rows[0] });
   } catch (error) {
     console.log(error);
-    res.status(500).json({ status: "error", message: "Error deleting currency" });
+    return res.status(500).json({ status: "error", message: "Error deleting currency" });
   }
 }
 
 module.exports = {
-    getCurrencies,
-    createCurrency,
-    updateCurrency,
-    deleteCurrency,
+  getCurrencies,
+  createCurrency,
+  updateCurrency,
+  deleteCurrency,
 };
