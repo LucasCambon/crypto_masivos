@@ -1,6 +1,11 @@
+main {
+	align-self: center;
+	max-width: 1440px;
+}
+
 .group-name {
 	display: block;
-	color: var(--color-gray-500);
+	color: var(--group-name-color);
 	text-align: center;
 	font-style: italic;
 	margin-top: 2em;
@@ -27,7 +32,7 @@
 	width: 128px;
 	height: 128px;
 	object-fit: cover;
-	border: 2px solid var(--color-gold-400);
+	border: var(--developer-img-border);
 }
 
 .developer h2 {
@@ -35,7 +40,7 @@
 }
 
 .developer hr {
-	background-color: var(--color-gold-200);
+	background-color: var(--developer-hr-color);
 	height: 1px;
 	border-radius: 99px;
 	border: 0;
@@ -57,7 +62,7 @@
 }
 
 .developer ul li a {
-	text-decoration-color: var(--color-gray-600);
+	text-decoration-color: var(--developer-contact-link-color);
 }
 
 .quote {
@@ -81,21 +86,12 @@ q {
 	content: '— ';
 }
 
-@media (prefers-color-scheme: light) {
-	.group-name {
-		color: var(--color-gray-700);
-	}
-
-	.developer img {
-		border-color: var(--color-gold-600);
-	}
-
-	.developer hr {
-		background-color: var(--color-gold-800);
-	}
-}
-
 @media (min-width: 425px) {
+	.group-name,
+	.quote {
+		align-self: flex-start;
+	}
+
 	.group-name {
 		margin-left: 50px;
 		text-align: left;
@@ -108,8 +104,8 @@ q {
 	}
 
 	.quote {
-		margin-top: 32px;
-		width: 375px;
+		margin-top: 8px;
+		width: 400px;
 		margin-left: min(25vw, 325px);
 	}
 }

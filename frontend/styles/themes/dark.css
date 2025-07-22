@@ -30,5 +30,10 @@
 		--currency-usd-value-color: var(--currency-name-color);
 		--currency-symbol-color: var(--color-accent);
 		--currency-hover-bg: var(--color-indigo-400);
+
+		--group-name-color: var(--color-gray-500);
+		--developer-img-border: 2px solid var(--color-gold-400);
+		--developer-hr-color: var(--color-gold-200);
+		--developer-contact-link-color: var(--color-gray-600);
 	}
 }
