@@ -21,7 +21,6 @@ main {
 	gap: 32px;
 	width: fit-content;
 	margin: 16px auto;
-	flex-wrap: wrap;
 }
 
 .developer {
