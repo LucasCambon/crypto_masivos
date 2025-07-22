@@ -1,0 +1,25 @@
+@media (prefers-color-scheme: light) {
+	:root {
+		/* Base colors */
+		--color-bg: var(--color-gray-100);
+		--color-fg: var(--color-indigo-600);
+
+		--color-accent: var(--color-gold-600);
+
+		/* Component colors */
+		--card-gradient-from: var(--color-bg);
+		--card-gradient-to: var(--color-bg);
+
+		--card-border-gradient-from: var(--color-indigo-400);
+		--card-border-gradient-to: var(--color-indigo-500);
+
+		--card-shadow: 10px 10px 20px -10px var(--color-gray-800);
+
+		/* Utilities colors */
+		--btn-primary-bg: var(--color-gold-600);
+		--btn-primary-hover-bg: var(--color-gold-400);
+
+		--btn-secondary-bg: var(--color-gray-800);
+		--btn-secondary-hover-bg: var(--color-gray-600);
+	}
+}

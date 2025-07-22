@@ -1,15 +1,9 @@
-@import 'colors.css';
-
 :root {
 	--section-max-width: 400px;
 }
 
 main {
-	display: flex;
-	flex-direction: column;
 	gap: 96px;
-	justify-content: center;
-	align-items: center;
 	margin-top: 64px;
 }
 

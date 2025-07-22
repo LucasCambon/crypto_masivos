@@ -1,21 +1,8 @@
-@import 'icons.css';
-@import 'colors.css';
-
 :root {
 	--section-max-width: 1024px;
 }
 
-body {
-	display: flex;
-	flex-direction: column;
-	height: 100vh;
-}
-
 main {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 	flex-grow: 1;
 	margin-top: 16px;
 }

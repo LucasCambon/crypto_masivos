@@ -1,130 +1,22 @@
-@import 'header.css';
-@import 'colors.css';
+/* Base */
+@import 'base/variables.css';
+@import 'base/typography.css';
+@import 'base/normalize.css';
 
-:root {
-	font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, system-ui,
-		sans-serif;
+/* Utilities */
+@import 'utilities/icons.css';
+@import 'utilities/colors.css';
+@import 'utilities/utilities.css';
 
-	--INF: 999px; /* Infinite constant value */
+/* Components */
+@import 'components/card.css';
+@import 'components/buttons.css';
+@import 'components/dialog.css';
 
-	color: var(--color-fg);
-	background-color: var(--color-bg);
-}
+/* Layout */
+@import 'layout/header.css';
+@import 'layout/main.css';
 
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	-webkit-user-drag: none;
-}
-
-* ::selection {
-	background-color: var(--color-fg);
-	color: var(--color-bg);
-}
-
-button {
-	background-color: var(--color-bg);
-	color: var(--color-fg);
-	border: 0;
-	cursor: pointer;
-}
-
-a {
-	color: inherit;
-}
-
-.highlight {
-	color: var(--color-accent);
-}
-
-.primary,
-.secondary {
-	text-wrap: nowrap;
-}
-
-.card {
-	background: linear-gradient(
-			to bottom right,
-			var(--card-gradient-from),
-			var(--card-gradient-to)
-		),
-		linear-gradient(
-			to bottom right,
-			var(--card-border-gradient-from),
-			var(--card-border-gradient-to)
-		);
-	background-clip: padding-box, border-box;
-	background-origin: padding-box, border-box;
-	border: 2px solid transparent;
-	border-radius: 16px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 16px;
-	padding: 16px;
-}
-
-.dialog {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.9);
-	z-index: 1;
-}
-
-@media (prefers-color-scheme: dark) {
-	.primary {
-		background-color: var(--color-gold-400);
-		color: var(--color-bg);
-	}
-
-	.primary:hover {
-		background-color: var(--color-gold-300);
-	}
-
-	.secondary {
-		color: var(--color-gray-300);
-	}
-
-	.secondary:hover {
-		color: var(--color-gray-100);
-	}
-}
-
-@media (prefers-color-scheme: light) {
-	.primary {
-		background-color: var(--color-gold-600);
-		color: var(--color-bg);
-	}
-
-	.primary:hover {
-		background-color: var(--color-gold-400);
-	}
-
-	.secondary {
-		color: var(--color-gray-800);
-	}
-
-	.secondary:hover {
-		color: var(--color-gray-600);
-	}
-
-	.card {
-		box-shadow: 10px 10px 20px -10px var(--color-gray-800);
-	}
-}
-
-@media (min-width: 1440px) {
-	body {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-}
+/* Themes */
+@import 'themes/light.css';
+@import 'themes/dark.css';

@@ -1,0 +1,22 @@
+.card {
+	background: linear-gradient(
+			to bottom right,
+			var(--card-gradient-from),
+			var(--card-gradient-to)
+		),
+		linear-gradient(
+			to bottom right,
+			var(--card-border-gradient-from),
+			var(--card-border-gradient-to)
+		);
+	background-clip: padding-box, border-box;
+	background-origin: padding-box, border-box;
+	border: 2px solid transparent;
+	border-radius: 16px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 16px;
+	padding: 16px;
+	box-shadow: var(--card-shadow);
+}
