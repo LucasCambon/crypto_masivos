@@ -1,25 +1,7 @@
 .login {
 	background-color: var(--login-bg);
 	border: var(--login-border);
-	border-radius: 8px;
-	padding: 1.5em 2em;
 	min-width: 300px;
-	position: relative;
-}
-
-.login-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-	margin-bottom: 8px;
-}
-
-.login-title {
-	margin: 0;
-	text-align: center;
-	flex-grow: 1;
-	user-select: none;
 }
 
 .login,

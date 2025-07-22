@@ -3,10 +3,10 @@ export function createLogin(onClose) {
 	newLogin.classList.add('login');
 
 	const headerContainer = document.createElement('div');
-	headerContainer.classList.add('login-header');
+	headerContainer.classList.add('dialog-header');
 
 	const title = document.createElement('h2');
-	title.classList.add('login-title');
+	title.classList.add('dialog-title');
 	title.textContent = 'Login';
 
 	const closeIcon = document.createElement('span');

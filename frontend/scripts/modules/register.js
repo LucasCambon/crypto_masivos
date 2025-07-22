@@ -3,10 +3,10 @@ export function createRegister(onClose) {
 	newRegister.classList.add('register');
 
 	const headerContainer = document.createElement('div');
-	headerContainer.classList.add('register-header');
+	headerContainer.classList.add('dialog-header');
 
 	const title = document.createElement('h2');
-	title.classList.add('register-title');
+	title.classList.add('dialog-title');
 	title.textContent = 'Registrarse';
 
 	const closeIcon = document.createElement('span');

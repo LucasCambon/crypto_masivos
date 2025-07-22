@@ -1,25 +1,7 @@
 .conversor {
 	background-color: var(--conversor-bg);
 	border: var(--conversor-border);
-	border-radius: 8px;
-	padding: 1.5em 2em;
 	min-width: 300px;
-	position: relative;
-}
-
-.conversor-header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-	margin-bottom: 1.5em;
-}
-
-.conversor-title {
-	margin: 0;
-	text-align: center;
-	flex-grow: 1;
-	user-select: none;
 }
 
 .conversor,
@@ -59,13 +41,5 @@
 
 .swap-icon {
 	--icon-size: 32px;
-}
-
-.close-icon {
-	--icon-size: 24px;
-}
-
-.swap-icon,
-.close-icon {
 	cursor: pointer;
 }
