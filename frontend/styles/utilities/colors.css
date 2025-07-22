@@ -28,4 +28,14 @@
 	--color-gold-700: hsl(40, 44%, 34%);
 	--color-gold-800: hsl(40, 39%, 24%);
 	--color-gold-900: hsl(40, 35%, 14%);
+
+	--color-red-100: hsl(0, 80%, 90%);
+	--color-red-200: hsl(0, 74%, 80%);
+	--color-red-300: hsl(0, 68%, 70%);
+	--color-red-400: hsl(0, 62%, 60%);
+	--color-red-500: hsl(0, 56%, 50%);
+	--color-red-600: hsl(0, 50%, 40%);
+	--color-red-700: hsl(0, 44%, 30%);
+	--color-red-800: hsl(0, 39%, 20%);
+	--color-red-900: hsl(0, 35%, 10%);
 }

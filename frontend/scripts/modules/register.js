@@ -41,10 +41,18 @@ export function createRegister(onClose) {
 
 			if (!response.ok) {
 				console.error('Server returned an error:', data);
+
+				if (data.errors) {
+					errorSpan.textContent = data.errors[0].message;
+				} else {
+					errorSpan.textContent = data.message;
+				}
+
 				throw new Error(data.message || 'Error creating user');
 			}
 
-			console.log('User created:', data);
+			localStorage.setItem('authToken', data.token);
+			onClose();
 		} catch (error) {
 			console.error('Request failed:', error.message);
 		}
@@ -80,6 +88,10 @@ export function createRegister(onClose) {
 	submitButton.textContent = 'Registrarse';
 	submitButton.classList.add('primary');
 	newForm.appendChild(submitButton);
+
+	const errorSpan = document.createElement('span');
+	errorSpan.classList.add('error');
+	newForm.appendChild(errorSpan);
 
 	return newRegister;
 }

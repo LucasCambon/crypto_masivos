@@ -40,6 +40,13 @@ export function createLogin(onClose) {
 
 			if (!response.ok) {
 				console.error('Server returned an error:', data);
+
+				if (data.errors) {
+					errorSpan.textContent = data.errors[0].message;
+				} else {
+					errorSpan.textContent = data.message;
+				}
+
 				throw new Error(data.message || 'Error logging in');
 			}
 
@@ -73,6 +80,10 @@ export function createLogin(onClose) {
 	submitButton.type = 'submit';
 	submitButton.textContent = 'Iniciar sesión';
 	newForm.appendChild(submitButton);
+
+	const errorSpan = document.createElement('span');
+	errorSpan.classList.add('error');
+	newForm.appendChild(errorSpan);
 
 	return newLogin;
 }
