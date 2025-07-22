@@ -1,0 +1,21 @@
+.primary {
+	background-color: var(--btn-primary-bg);
+	color: var(--color-bg);
+}
+
+.primary:hover {
+	background-color: var(--btn-primary-hover-bg);
+}
+
+.secondary {
+	color: var(--btn-secondary-bg);
+}
+
+.secondary:hover {
+	color: var(--btn-secondary-hover-bg);
+}
+
+.primary,
+.secondary {
+	text-wrap: nowrap;
+}
