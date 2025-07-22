@@ -22,6 +22,7 @@ services:
     image: crypto_masivos_backend:latest
     environment:
       <<: *db-env
+      CORS_ORIGIN: ${CORS_ORIGIN}
     ports:
       - "3000:3000"
     depends_on:
