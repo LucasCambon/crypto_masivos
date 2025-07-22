@@ -1,7 +1,6 @@
 :root {
 	color: var(--color-fg);
 	background-color: var(--color-bg);
-	--section-width: min(100%, 400px);
 }
 
 * {

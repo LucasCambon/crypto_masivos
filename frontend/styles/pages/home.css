@@ -1,3 +1,7 @@
+:root {
+	--section-width: min(100%, 400px);
+}
+
 main {
 	gap: 96px;
 	margin-top: 64px;
