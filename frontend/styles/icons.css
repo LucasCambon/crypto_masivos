@@ -16,8 +16,12 @@
 		--svg: url(https://icongr.am/simple/linkedin.svg?color=242247);
 	}
 
-	.instagram-icon {
-		--svg: url(https://icongr.am/simple/instagram.svg?color=242247);
+	.close-icon {
+		--svg: url(https://icongr.am/material/close.svg?color=242247);
+	}
+
+	.swap-icon {
+		--svg: url(https://icongr.am/material/swap-vertical.svg?color=242247);
 	}
 }
 
@@ -30,7 +34,11 @@
 		--svg: url(https://icongr.am/simple/linkedin.svg?color=ffffff);
 	}
 
-	.instagram-icon {
-		--svg: url(https://icongr.am/simple/instagram.svg?color=ffffff);
+	.close-icon {
+		--svg: url(https://icongr.am/material/close.svg?color=ffffff);
+	}
+
+	.swap-icon {
+		--svg: url(https://icongr.am/material/swap-vertical.svg?color=ffffff);
 	}
 }

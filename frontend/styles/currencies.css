@@ -1,0 +1,214 @@
+@import 'icons.css';
+@import 'colors.css';
+
+:root {
+	--section-max-width: 1024px;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+
+main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-grow: 1;
+	margin-top: 16px;
+}
+
+.currencies {
+	width: min(100%, var(--section-max-width));
+	height: 100%;
+	padding: 16px 32px;
+	gap: 0;
+}
+
+.currencies a {
+	margin-top: auto;
+	border-radius: var(--INF);
+}
+
+.currency * {
+	user-select: none;
+}
+
+.currency {
+	display: flex;
+	gap: 8px;
+	width: 100%;
+	justify-content: space-between;
+
+	padding: 8px;
+}
+
+.currency-info {
+	display: flex;
+	align-items: center;
+	gap: 2em;
+}
+
+.currency-value {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+}
+
+.currency-symbol {
+	color: var(--color-accent);
+	font-weight: bold;
+}
+
+.currency-btn {
+	padding: 0.5em 1em;
+	border-radius: 4px;
+}
+
+.currency:hover:has(.dialog:hover) {
+	background-color: initial;
+}
+
+.conversor {
+	border-radius: 8px;
+	padding: 1.5em 2em;
+	min-width: 300px;
+	position: relative;
+}
+
+.conversor-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 1.5em;
+}
+
+.conversor-title {
+	margin: 0;
+	text-align: center;
+	flex-grow: 1;
+	user-select: none;
+}
+
+.conversor,
+.conversor form {
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+
+.conversor input,
+.conversor select {
+	user-select: all;
+	padding: 0.5em;
+	height: 100%;
+}
+
+.conversor input {
+	border-right-width: 0.5px;
+	border-radius: 6px 0 0 6px;
+}
+
+.conversor select {
+	border-left-width: 0.5px;
+	border-radius: 0 6px 6px 0;
+}
+
+.conversor-input-group {
+	display: flex;
+	width: 100%;
+	align-items: center;
+}
+
+.swap-icon {
+	--size: 32px;
+}
+
+.close-icon {
+	--size: 24px;
+}
+
+.swap-icon,
+.close-icon {
+	cursor: pointer;
+	width: var(--size);
+	height: var(--size);
+}
+
+@media (min-width: 425px) {
+	.currencies {
+		border-radius: 16px;
+	}
+
+	.about h2 {
+		font-size: 3em;
+		margin-left: 1em;
+		transform: translateX(0);
+	}
+
+	.about p {
+		text-align: left;
+	}
+
+	.about a {
+		align-self: flex-start;
+	}
+}
+
+@media (min-width: 768px) {
+	main {
+		padding: 32px 128px;
+	}
+}
+
+@media (min-width: 1440px) {
+	.currencies {
+		width: var(--section-max-width);
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+	.conversor {
+		background-color: var(--color-indigo-600);
+		border: 2px solid var(--color-gold-300);
+	}
+
+	.conversor input,
+	.conversor select {
+		border: 1px solid var(--color-indigo-300);
+		background-color: var(--color-indigo-500);
+		color: var(--color-fg);
+	}
+
+	.currency-name {
+		color: var(--color-4);
+	}
+
+	.currency:hover {
+		background-color: var(--color-indigo-400);
+		cursor: pointer;
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	.conversor {
+		background-color: var(--color-gray-200);
+		border: 2px solid var(--color-gold-500);
+	}
+
+	.conversor input,
+	.conversor select {
+		border: 1px solid var(--color-indigo-300);
+		background-color: var(--color-gray-200);
+		color: var(--color-fg);
+	}
+
+	.currency-name {
+		color: var(--color-3);
+	}
+}
