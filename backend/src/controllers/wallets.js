@@ -11,10 +11,10 @@ async function getWallets(req, res) {
 }
 
 async function getWalletById(req, res) {
-  const { id } = req.body;
+  const { id } = req.params;
 
-  if (!id) {
-    return res.status(400).json({ status: "error", message: "Wallet ID is required" });
+  if (!id || isNaN(id)) {
+    return res.status(400).json({ status: "error", message: "Invalid or missing wallet ID" });
   }
 
   try {
@@ -40,10 +40,10 @@ async function getWalletById(req, res) {
 }
 
 const getWalletsByUserId = async (req, res) => {
-  const { user_id } = req.body;
+  const { user_id } = req.params;
 
-  if (!user_id) {
-    return res.status(400).json({ status: "error", message: "User ID is required" });
+  if (!user_id || isNaN(user_id)) {
+    return res.status(400).json({ status: "error", message: "Invalid or missing user ID" });
   }
 
   try {
@@ -72,36 +72,45 @@ const getWalletsByUserId = async (req, res) => {
   }
 };
 
-
 async function createWallet(req, res) {
-  const { user_id, address, alias, balance, last_activity } = req.body;
+  const { user_id, address, alias, balance, currency_id } = req.body;
 
-  if (!user_id || !address) {
+  if (!user_id || !address || !currency_id) {
     return res.status(400).json({ status: "error", message: "Missing required fields" });
   }
 
   try {
+    const last_activity = new Date();
+
     const result = await pool.query(
       `INSERT INTO wallets (user_id, address, alias, balance, last_activity)
        VALUES ($1, $2, $3, $4, $5)
        RETURNING *`,
-      [user_id, address, alias || null, balance, last_activity || null]
+      [user_id, address, alias || null, balance || 0, last_activity]
+    );
+
+    const newWallet = result.rows[0];
+
+    await pool.query(
+      `INSERT INTO wallet_currencies (wallet_id, currency_id)
+       VALUES ($1, $2)`,
+      [newWallet.id, currency_id]
     );
 
     res.status(201).json({
       status: "ok",
-      message: "Wallet created",
-      data: result.rows[0]
+      message: "Wallet created and linked to currency",
+      data: newWallet
     });
 
   } catch (error) {
-    console.log(error);
+    console.error("Error creating wallet:", error);
     res.status(500).json({ status: "error", message: "Error creating wallet" });
   }
 }
 
 async function updateWallet(req, res) {
-  const { id, user_id, address, alias, balance, last_activity } = req.body;
+  const { id, user_id, alias, balance } = req.body;
 
   if (!id) {
     return res.status(400).json({ status: "error", message: "Wallet ID is required" });
@@ -114,30 +123,33 @@ async function updateWallet(req, res) {
     }
 
     const current = result.rows[0];
+    const last_activity = new Date();
 
     const updated = await pool.query(
       `UPDATE wallets SET
         user_id = $1,
-        address = $2,
-        alias = $3,
-        balance = $4,
-        last_activity = $5
-      WHERE id = $6
-      RETURNING *`,
+        alias = $2,
+        balance = $3,
+        last_activity = $4
+       WHERE id = $5
+       RETURNING *`,
       [
         user_id || current.user_id,
-        address || current.address,
         alias || current.alias,
         balance || current.balance,
-        last_activity || current.last_activity,
+        last_activity,
         id
       ]
     );
 
-    res.status(200).json({ status: "ok", message: "Wallet updated", data: updated.rows[0] });
+    res.status(200).json({
+      status: "ok",
+      message: "Wallet updated",
+      data: updated.rows[0]
+    });
 
   } catch (error) {
-    console.log(error);
+    console.error("Error updating wallet:", error);
     res.status(500).json({ status: "error", message: "Error updating wallet" });
   }
 }
