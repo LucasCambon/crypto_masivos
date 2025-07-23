@@ -1,25 +1,28 @@
+version: "3.8"
+
 services:
   frontend:
-    ports:
-      - "443:443"
     volumes:
       - ./frontend/nginx.prod.conf:/etc/nginx/conf.d/default.conf
-      - nginx-certs:/etc/letsencrypt
+      - certbot-etc:/etc/letsencrypt
+      - certbot-www:/usr/share/nginx/html
+    ports:
+      - "80:80"
+      - "443:443"
 
   certbot:
     image: certbot/certbot
     volumes:
-      - nginx-certs:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - ./frontend:/var/www/html
-    command: >-
-      certonly --webroot
-      --webroot-path=/var/www/html
-      --email lcambon@fi.uba.ar  
+      - certbot-etc:/etc/letsencrypt
+      - certbot-www:/usr/share/nginx/html
+    entrypoint: ""
+    command: >
+      certonly --webroot --webroot-path=/usr/share/nginx/html
+      --email tu_email@dominio.com
       --agree-tos
       --no-eff-email
       -d crypto-masivos.lat
 
 volumes:
-  nginx-certs:
-  certbot-var:
+  certbot-etc:
+  certbot-www:
