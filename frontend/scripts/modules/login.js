@@ -51,13 +51,16 @@ export function createLogin(onClose) {
 				throw new Error(data.message || 'Error logging in');
 			}
 
-			localStorage.setItem('authToken', data.token);
-			localStorage.setItem('authAdmin', data.admin);
+			// Store the token from the response
+			localStorage.setItem('token', data.token);
 
-			if (localStorage.getItem('authToken')) {
-				window.location.href = 'portfolio.html';
-			} else if (localStorage.getItem('authAdmin')) {
+			// Check user role and redirect accordingly
+			const isAdmin = data.data && data.data.role === 'admin';
+
+			if (isAdmin) {
 				window.location.href = 'dashboard.html';
+			} else {
+				window.location.href = 'portfolio.html';
 			}
 		} catch (error) {
 			console.error('Request failed:', error.message);

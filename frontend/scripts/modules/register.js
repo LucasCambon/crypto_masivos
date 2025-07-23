@@ -52,8 +52,12 @@ export function createRegister(onClose) {
 				throw new Error(data.message || 'Error creating user');
 			}
 
-			localStorage.setItem('authToken', data.token);
-			onClose();
+			const authHeader = response.headers.get('Authorization');
+			const token = authHeader ? authHeader.split(' ')[1] : null;
+
+			if (token) {
+				localStorage.setItem('token', token);
+			}
 		} catch (error) {
 			console.error('Request failed:', error.message);
 		}
