@@ -139,3 +139,22 @@ export async function updateUserRole(userId) {
 		};
 	}
 }
+
+export function logoutUser() {
+	try {
+		localStorage.removeItem('token');
+
+		window.location.href = '/index.html';
+
+		return {
+			success: true,
+			message: 'Logged out successfully',
+		};
+	} catch (error) {
+		console.error('Error during logout:', error);
+		return {
+			success: false,
+			error: error.message,
+		};
+	}
+}
