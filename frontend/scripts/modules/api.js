@@ -140,6 +140,41 @@ export async function updateUserRole(userId) {
 	}
 }
 
+export async function fetchUserProfile() {
+	try {
+		const token = localStorage.getItem('token');
+		if (!token) {
+			throw new Error('No authentication token found');
+		}
+
+		const response = await fetch('/api/v1/users/profile', {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		if (!response.ok) {
+			const errorData = await response.json();
+			throw new Error(
+				errorData.message || 'Failed to fetch user profile'
+			);
+		}
+
+		const result = await response.json();
+		return {
+			success: true,
+			data: result.data,
+			user: result.data,
+		};
+	} catch (error) {
+		console.error('Failed to fetch user profile:', error);
+		return {
+			success: false,
+			error: error.message,
+		};
+	}
+}
+
 export function logoutUser() {
 	try {
 		localStorage.removeItem('token');
