@@ -110,6 +110,11 @@
 	cursor: pointer;
 }
 
+.active-btn,
+.active-btn:hover {
+	background-color: var(--btn-dashboard-active-bg) !important;
+}
+
 @media (min-width: 992px) {
 	.content {
 		padding: 32px 0 0 48px;

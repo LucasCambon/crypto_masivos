@@ -5,6 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
 	const usersBtn = document.getElementById('users-btn');
 	const currenciesBtn = document.getElementById('currencies-btn');
 
-	usersBtn.addEventListener('click', showUsers);
-	currenciesBtn.addEventListener('click', showCurrencies);
+	usersBtn.addEventListener('click', () => {
+		usersBtn.classList.add('active-btn');
+		currenciesBtn.classList.remove('active-btn');
+		showUsers();
+	});
+	currenciesBtn.addEventListener('click', () => {
+		currenciesBtn.classList.add('active-btn');
+		usersBtn.classList.remove('active-btn');
+		showCurrencies();
+	});
 });
