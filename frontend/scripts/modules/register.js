@@ -24,6 +24,7 @@ export function createRegister(onClose) {
 	newRegister.appendChild(headerContainer);
 
 	const newForm = document.createElement('form');
+	newForm.id = 'register-form';
 	newForm.addEventListener('submit', async (e) => {
 		e.preventDefault();
 		try {
@@ -59,7 +60,14 @@ export function createRegister(onClose) {
 	});
 	newRegister.appendChild(newForm);
 
+	// Username Input
+	const usernameLabel = document.createElement('label');
+	usernameLabel.htmlFor = 'register-username';
+	usernameLabel.textContent = 'Nombre de usuario';
+	newForm.appendChild(usernameLabel);
+
 	const usernameInput = document.createElement('input');
+	usernameInput.id = 'register-username';
 	usernameInput.type = 'text';
 	usernameInput.name = 'username';
 	usernameInput.required = true;
@@ -67,7 +75,14 @@ export function createRegister(onClose) {
 	usernameInput.placeholder = 'Nombre de usuario';
 	newForm.appendChild(usernameInput);
 
+	// Email Input
+	const emailLabel = document.createElement('label');
+	emailLabel.htmlFor = 'register-email';
+	emailLabel.textContent = 'Correo electrónico';
+	newForm.appendChild(emailLabel);
+
 	const emailInput = document.createElement('input');
+	emailInput.id = 'register-email';
 	emailInput.type = 'email';
 	emailInput.name = 'email';
 	emailInput.required = true;
@@ -75,7 +90,14 @@ export function createRegister(onClose) {
 	emailInput.placeholder = 'Correo electrónico';
 	newForm.appendChild(emailInput);
 
+	// Password Input
+	const passwordLabel = document.createElement('label');
+	passwordLabel.htmlFor = 'register-password';
+	passwordLabel.textContent = 'Contraseña';
+	newForm.appendChild(passwordLabel);
+
 	const passwordInput = document.createElement('input');
+	passwordInput.id = 'register-password';
 	passwordInput.type = 'password';
 	passwordInput.name = 'password';
 	passwordInput.required = true;

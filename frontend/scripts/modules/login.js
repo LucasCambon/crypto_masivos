@@ -24,6 +24,7 @@ export function createLogin(onClose) {
 	newLogin.appendChild(headerContainer);
 
 	const newForm = document.createElement('form');
+	newForm.id = 'login-form';
 	newForm.addEventListener('submit', async (e) => {
 		e.preventDefault();
 		try {
@@ -59,7 +60,14 @@ export function createLogin(onClose) {
 	});
 	newLogin.appendChild(newForm);
 
+	// Email Input
+	const emailLabel = document.createElement('label');
+	emailLabel.htmlFor = 'login-email';
+	emailLabel.textContent = 'Correo electrónico';
+	newForm.appendChild(emailLabel);
+
 	const emailInput = document.createElement('input');
+	emailInput.id = 'login-email';
 	emailInput.type = 'email';
 	emailInput.name = 'email';
 	emailInput.required = true;
@@ -67,7 +75,14 @@ export function createLogin(onClose) {
 	emailInput.autocomplete = 'email';
 	newForm.appendChild(emailInput);
 
+	// Password Input
+	const passwordLabel = document.createElement('label');
+	passwordLabel.htmlFor = 'login-password';
+	passwordLabel.textContent = 'Contraseña';
+	newForm.appendChild(passwordLabel);
+
 	const passwordInput = document.createElement('input');
+	passwordInput.id = 'login-password';
 	passwordInput.type = 'password';
 	passwordInput.name = 'password';
 	passwordInput.required = true;

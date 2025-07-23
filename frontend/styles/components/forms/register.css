@@ -1,13 +1,11 @@
 .register {
 	background-color: var(--register-bg);
 	border: var(--register-border);
-	min-width: 300px;
+	width: 350px;
 }
 
 .register,
-.register form {
-	justify-content: center;
-	align-items: center;
+#register-form {
 	display: flex;
 	flex-direction: column;
 	gap: 1em;
@@ -30,6 +28,7 @@
 }
 
 .register button {
+	margin-top: 8px;
 	border-radius: var(--INF);
 	padding: 0.5em 1em;
 }

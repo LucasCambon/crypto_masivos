@@ -1,13 +1,11 @@
 .login {
 	background-color: var(--login-bg);
 	border: var(--login-border);
-	min-width: 300px;
+	width: 350px;
 }
 
 .login,
-.login form {
-	justify-content: center;
-	align-items: center;
+#login-form {
 	display: flex;
 	flex-direction: column;
 	gap: 8px;
@@ -30,6 +28,7 @@
 }
 
 .login button {
+	margin-top: 8px;
 	border-radius: var(--INF);
 	padding: 0.5em 1em;
 }
