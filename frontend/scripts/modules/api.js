@@ -102,7 +102,7 @@ export async function registerUser(username, email, password) {
 	}
 }
 
-export async function updateUserRole(userId) {
+export async function updateUserRole(userId, role) {
 	try {
 		const token = localStorage.getItem('token');
 		if (!token) {
@@ -117,6 +117,7 @@ export async function updateUserRole(userId) {
 			},
 			body: JSON.stringify({
 				id: userId,
+				role: role,
 			}),
 		});
 

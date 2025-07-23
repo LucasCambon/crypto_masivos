@@ -71,7 +71,7 @@ export async function showUsers() {
 			if (newRole === originalRole) return;
 
 			try {
-				const result = await updateUserRole(userId);
+				const result = await updateUserRole(userId, newRole);
 
 				if (!result.success) {
 					throw new Error(result.error);
