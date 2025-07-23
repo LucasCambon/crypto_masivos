@@ -4,6 +4,7 @@ const app = express();
 
 const userRoutes = require("./routes/users");
 const currencyRoutes = require("./routes/currencies");
+const walletRoutes = require("./routes/wallets");
 
 const PORT = process.env.PORT || 3000;
 
@@ -27,6 +28,8 @@ app.use("/api/v1/users", userRoutes);
 
 app.use("/api/v1/currencies", currencyRoutes);
 
+app.use("/api/v1/wallets", walletRoutes);
+
 // 404 Handler (Middleware at bottom to act as a catch-all)
 
 app.use((req, res, next) => {
@@ -38,4 +41,3 @@ app.use((req, res, next) => {
 app.listen(PORT, () => {
     console.log(`Server running on port: ${PORT}`)
 });
-
