@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
+const swaggerUI = require("swagger-ui-express");
 const app = express();
 
+const swaggerSpec = require("../swagger");
 const userRoutes = require("./routes/users");
 const currencyRoutes = require("./routes/currencies");
 const walletRoutes = require("./routes/wallets");
@@ -23,6 +25,7 @@ app.get("/health", (req, res) => {
         timestamp: new Date().toISOString()
     });
 });
+app.use("/api/v1/docs", swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 
 app.use("/api/v1/users", userRoutes);
 
