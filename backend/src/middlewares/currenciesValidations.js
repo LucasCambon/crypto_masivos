@@ -54,7 +54,8 @@ const updateCurrencyValidator = [
 
 const deleteCurrencyValidator = [
   body("id")
-    .notEmpty().withMessage("Currency ID is required."),
+    .notEmpty().withMessage("Currency ID is required.")
+    .isInt().withMessage("Currency ID must be an integer."),
 ];
 
 module.exports = {
