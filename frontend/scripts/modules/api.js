@@ -11,7 +11,12 @@ export async function fetchCurrencies() {
 
 export async function fetchUsers() {
 	try {
-		const response = await fetch('/api/v1/users/list');
+		const token = localStorage.getItem('token');
+		const response = await fetch('/api/v1/users/list', {
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		});
 		const result = await response.json();
 		return result.data;
 	} catch (error) {

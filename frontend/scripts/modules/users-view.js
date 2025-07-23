@@ -23,7 +23,6 @@ export async function showUsers() {
 	content.appendChild(grid);
 
 	const data = await fetchUsers();
-	console.log(data);
 
 	if (data.length === 0) {
 		grid.innerHTML += `<span class="grid-row-text error">No se pudieron cargar los usuarios.</span>`;
