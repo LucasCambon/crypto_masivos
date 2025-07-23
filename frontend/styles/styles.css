@@ -15,6 +15,8 @@
 @import 'components/forms/conversor.css';
 @import 'components/forms/login.css';
 @import 'components/forms/register.css';
+@import 'components/forms/create-currency.css';
+@import 'components/forms/edit-currency.css';
 @import 'components/info/delete-currency.css';
 
 /* Layout */

@@ -1,5 +1,5 @@
 import { fetchCurrencies } from './api.js';
-import { showDeleteCurrencyDialog } from './dialog.js';
+import { showDeleteCurrencyDialog, showEditCurrencyDialog } from './dialog.js';
 
 export async function showCurrencies() {
 	const content = document.querySelector('.content');
@@ -78,6 +78,16 @@ export async function showCurrencies() {
 
 		const editIcon = document.createElement('span');
 		editIcon.className = 'edit-icon';
+		editIcon.title = 'Editar criptomoneda';
+		editIcon.style.cursor = 'pointer';
+
+		// Add click event listener to show edit dialog
+		editIcon.addEventListener('click', () => {
+			showEditCurrencyDialog(currency, () => {
+				// Refresh the currencies list after successful update
+				showCurrencies();
+			});
+		});
 
 		actionsSpan.appendChild(deleteIcon);
 		actionsSpan.appendChild(editIcon);
