@@ -52,8 +52,13 @@ export function createLogin(onClose) {
 			}
 
 			localStorage.setItem('authToken', data.token);
+			localStorage.setItem('authAdmin', data.admin);
 
-			onClose();
+			if (localStorage.getItem('authToken')) {
+				window.location.href = 'portfolio.html';
+			} else if (localStorage.getItem('authAdmin')) {
+				window.location.href = 'dashboard.html';
+			}
 		} catch (error) {
 			console.error('Request failed:', error.message);
 		}
