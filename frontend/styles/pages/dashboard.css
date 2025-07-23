@@ -1,0 +1,144 @@
+body {
+	display: none; /* changes in dashboard.js */
+}
+
+.main-title {
+	font-size: 2.5rem;
+	position: absolute;
+	left: 50%;
+	top: 0;
+	transform: translateX(-50%);
+}
+
+.content {
+	width: 100%;
+	height: fit-content;
+	align-items: flex-start;
+	overflow-y: auto;
+	align-items: center;
+}
+
+.content-container .btn-container {
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	padding-top: 64px;
+}
+
+.content-container {
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	padding: 24px;
+}
+
+#users-btn,
+#currencies-btn {
+	border: var(--btn-dashboard-border);
+	font-weight: bold;
+	width: 100%;
+	padding: 1em 3em;
+	border-radius: 5px;
+	background-color: var(--btn-dashboard-bg);
+	color: var(--btn-dashboard-fg);
+}
+
+#users-btn:hover,
+#currencies-btn:hover {
+	background-color: var(--btn-dashboard-hover-bg);
+}
+
+.users-grid {
+	grid-template-columns: repeat(5, auto);
+}
+
+.currencies-grid {
+	grid-template-columns: repeat(6, auto);
+}
+
+.users-grid,
+.currencies-grid {
+	display: grid;
+	gap: 24px;
+	width: fit-content;
+}
+
+.users-grid *,
+.currencies-grid * {
+	text-wrap: nowrap;
+}
+
+.title-container {
+	margin-bottom: 2rem;
+	width: 500px;
+}
+
+.create-icon {
+	background-color: var(--color-fg);
+	padding: 4px;
+	border-radius: 4px;
+	margin-left: auto;
+}
+
+.grid-row-select {
+	background-color: transparent;
+	color: var(--color-fg);
+	border: 1px solid var(--color-accent);
+	border-radius: var(--INF);
+	padding: 0.5em;
+}
+
+.grid-row-select option {
+	background-color: var(--color-bg);
+	color: var(--color-fg);
+}
+
+.grid-header-title,
+.grid-row-text {
+	display: flex;
+	align-items: center;
+}
+
+.grid-header-title {
+	font-weight: bold;
+	margin-bottom: -16px;
+}
+
+.actions {
+	justify-content: space-around;
+}
+
+.create-icon:hover,
+.delete-icon:hover,
+.edit-icon:hover {
+	cursor: pointer;
+}
+
+.active-btn,
+.active-btn:hover {
+	background-color: var(--btn-dashboard-active-bg) !important;
+}
+
+@media (min-width: 992px) {
+	.content {
+		padding: 32px 0 0 48px;
+		align-items: flex-start;
+	}
+
+	.content-container {
+		flex-direction: row;
+	}
+
+	.vertical-separator {
+		width: 1px;
+		background-color: var(--color-fg);
+		height: 75vh;
+		align-self: center;
+	}
+}
+
+@media (min-width: 1024px) {
+	.grid {
+		gap: 32px;
+	}
+}
