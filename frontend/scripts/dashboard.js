@@ -1,6 +1,7 @@
 import { showUsers } from './modules/users-view.js';
 import { showCurrencies } from './modules/currency-view.js';
 import { logoutUser, fetchUserProfile } from './modules/api.js';
+import { showCreateCurrencyDialog } from './modules/dialog.js';
 
 async function checkAdminAccess() {
 	try {
@@ -54,6 +55,16 @@ document.addEventListener('DOMContentLoaded', async () => {
 		currenciesBtn.classList.add('active-btn');
 		usersBtn.classList.remove('active-btn');
 		showCurrencies();
+	});
+
+	// Add event listener for create-icon (will be available after showCurrencies is called)
+	document.addEventListener('click', (e) => {
+		if (e.target.classList.contains('create-icon')) {
+			showCreateCurrencyDialog(() => {
+				// Refresh currencies list after successful creation
+				showCurrencies();
+			});
+		}
 	});
 
 	logoutBtn.addEventListener('click', logoutUser);

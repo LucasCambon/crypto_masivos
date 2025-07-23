@@ -1,0 +1,34 @@
+.create-currency {
+	background-color: var(--create-currency-bg);
+	border: var(--create-currency-border);
+	width: 350px;
+}
+
+.create-currency,
+#create-currency-form {
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
+}
+
+.create-currency input {
+	border-radius: 6px;
+	user-select: all;
+	padding: 0.5em;
+	height: 100%;
+	border: var(--create-currency-input-border);
+	background-color: var(--create-currency-input-bg);
+	color: var(--color-fg);
+}
+
+.create-currency-input-group {
+	display: flex;
+	width: 100%;
+	align-items: center;
+}
+
+.create-currency button {
+	margin-top: 8px;
+	border-radius: var(--INF);
+	padding: 0.5em 1em;
+}
