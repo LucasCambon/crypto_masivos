@@ -1,4 +1,4 @@
-import { fetchUsers } from './api.js'; // o donde hayas guardado la función
+import { fetchUsers, updateUserRole } from './api.js';
 
 export async function showUsers() {
 	const content = document.querySelector('.content');
@@ -24,7 +24,12 @@ export async function showUsers() {
 
 	const data = await fetchUsers();
 
-	if (data.length === 0) {
+	if (data.error) {
+		grid.innerHTML = `<span class="grid-row-text error">${data.error}</span>`;
+		return;
+	}
+
+	if (!data || data.length === 0) {
 		grid.innerHTML += `<span class="grid-row-text error">No se pudieron cargar los usuarios.</span>`;
 		return;
 	}
@@ -47,6 +52,7 @@ export async function showUsers() {
 		const select = document.createElement('select');
 		select.className = 'grid-row-select';
 		select.name = 'role';
+		select.dataset.userId = user.id;
 
 		const roles = [user.role, user.role === 'user' ? 'admin' : 'user'];
 		roles.forEach((role) => {
@@ -55,6 +61,27 @@ export async function showUsers() {
 			option.textContent = role;
 			if (role === user.role) option.selected = true;
 			select.appendChild(option);
+		});
+
+		select.addEventListener('change', async (event) => {
+			const userId = event.target.dataset.userId;
+			const newRole = event.target.value;
+			const originalRole = user.role;
+
+			if (newRole === originalRole) return;
+
+			try {
+				const result = await updateUserRole(userId);
+
+				if (!result.success) {
+					throw new Error(result.error);
+				}
+
+				user.role = newRole;
+			} catch (error) {
+				console.error('Failed to update user role:', error);
+				select.value = originalRole;
+			}
 		});
 
 		grid.appendChild(select);
