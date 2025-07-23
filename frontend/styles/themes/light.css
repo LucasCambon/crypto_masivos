@@ -15,20 +15,10 @@
 
 		--card-shadow: 10px 10px 20px -10px var(--color-gray-800);
 
-		--conversor-bg: var(--color-gray-200);
-		--conversor-border: 2px solid var(--color-gold-500);
-		--conversor-input-bg: var(--color-gray-200);
-		--conversor-input-border: 1px solid var(--color-indigo-300);
-
-		--login-bg: var(--color-gray-200);
-		--login-border: 2px solid var(--color-gold-500);
-		--login-input-bg: var(--color-gray-200);
-		--login-input-border: 1px solid var(--color-indigo-300);
-
-		--register-bg: var(--color-gray-200);
-		--register-border: 2px solid var(--color-gold-500);
-		--register-input-bg: var(--color-gray-200);
-		--register-input-border: 1px solid var(--color-indigo-300);
+		--dialog-bg: var(--color-gray-200);
+		--dialog-border: 2px solid var(--color-gold-500);
+		--dialog-input-bg: var(--color-gray-200);
+		--dialog-input-border: 1px solid var(--color-indigo-300);
 
 		/* Utilities colors */
 		--btn-primary-bg: var(--color-gold-600);

@@ -1,34 +1,4 @@
 .register {
-	background-color: var(--register-bg);
-	border: var(--register-border);
-	width: 350px;
-}
-
-.register,
-#register-form {
-	display: flex;
-	flex-direction: column;
-	gap: 1em;
-}
-
-.register input {
-	border-radius: 6px;
-	user-select: all;
-	padding: 0.5em;
-	height: 100%;
-	border: var(--register-input-border);
-	background-color: var(--register-input-bg);
-	color: var(--color-fg);
-}
-
-.register-input-group {
-	display: flex;
-	width: 100%;
-	align-items: center;
-}
-
-.register button {
-	margin-top: 8px;
-	border-radius: var(--INF);
-	padding: 0.5em 1em;
+	border: var(--dialog-border);
+	min-width: 350px;
 }

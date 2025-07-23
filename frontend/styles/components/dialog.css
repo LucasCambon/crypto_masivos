@@ -12,7 +12,8 @@
 	z-index: var(--INF);
 }
 
-.dialog > div {
+.dialog > * {
+	background-color: var(--dialog-bg);
 	border-radius: 8px;
 	padding: 1.5em 2em;
 	position: relative;
@@ -38,4 +39,29 @@
 	--icon-size: 24px;
 	cursor: pointer;
 	margin-left: auto;
+}
+
+.dialog,
+.dialog form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	gap: 1em;
+}
+
+.dialog input,
+.dialog select {
+	padding: 0.5em;
+	height: 100%;
+	background-color: var(--dialog-input-bg);
+	color: var(--color-fg);
+	border: var(--dialog-input-border);
+	border-radius: 6px;
+	user-select: all;
+}
+
+.dialog button {
+	margin-top: 8px;
+	border-radius: var(--INF);
+	padding: 0.5em 1em;
 }
