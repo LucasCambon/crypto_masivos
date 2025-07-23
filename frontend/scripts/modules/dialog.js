@@ -1,6 +1,7 @@
 import { createConversor } from './conversor.js';
 import { createLogin } from './login.js';
 import { createRegister } from './register.js';
+import { createDeleteCurrencyDialog } from './delete-currency.js';
 
 export function showConverterDialog(currency) {
 	const newDialog = document.createElement('section');
@@ -35,5 +36,21 @@ export function showRegisterDialog() {
 	});
 	newDialog.appendChild(newRegister);
 
+	document.body.appendChild(newDialog);
+}
+
+export function showDeleteCurrencyDialog(currency, onSuccess) {
+	const newDialog = document.createElement('section');
+	newDialog.classList.add('dialog');
+
+	const newDeleteCurrency = createDeleteCurrencyDialog(currency, () => {
+		newDialog.remove();
+
+		if (typeof onSuccess === 'function') {
+			onSuccess(currency);
+		}
+	});
+
+	newDialog.appendChild(newDeleteCurrency);
 	document.body.appendChild(newDialog);
 }
