@@ -2,7 +2,7 @@
  * @swagger
  * tags:
  *   name: Users
- *   description: User CRUD and authentication
+ *   description: User CRUD and authentication endpoints
  */
 
 /**

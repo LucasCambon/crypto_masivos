@@ -8,6 +8,18 @@ const options = {
       version: "1.0.0",
       description: "Crypto Masivos API Docs",
     },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT"
+        }
+      }
+    },
+    security: [
+      { bearerAuth: [] }
+    ],
     servers: [
       {
         url: "/",
