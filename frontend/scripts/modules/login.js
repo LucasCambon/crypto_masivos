@@ -1,3 +1,5 @@
+import { loginUser } from './api.js';
+
 export function createLogin(onClose) {
 	const newLogin = document.createElement('div');
 	newLogin.classList.add('login');
@@ -27,35 +29,24 @@ export function createLogin(onClose) {
 	newForm.id = 'login-form';
 	newForm.addEventListener('submit', async (e) => {
 		e.preventDefault();
+
+		const email = e.target.email.value;
+		const password = e.target.password.value;
+
 		try {
-			const response = await fetch('/api/v1/users/login', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					email: e.target.email.value,
-					password: e.target.password.value,
-				}),
-			});
+			const result = await loginUser(email, password);
 
-			const data = await response.json();
-
-			if (!response.ok) {
-				console.error('Server returned an error:', data);
-
-				if (data.errors) {
-					errorSpan.textContent = data.errors[0].message;
-				} else {
-					errorSpan.textContent = data.message;
-				}
-
-				throw new Error(data.message || 'Error logging in');
+			if (!result.success) {
+				console.error('Login failed:', result.error);
+				errorSpan.textContent = result.error;
+				return;
 			}
 
 			// Store the token from the response
-			localStorage.setItem('token', data.token);
+			localStorage.setItem('token', result.token);
 
 			// Check user role and redirect accordingly
-			const isAdmin = data.data && data.data.role === 'admin';
+			const isAdmin = result.user && result.user.role === 'admin';
 
 			if (isAdmin) {
 				window.location.href = 'dashboard.html';
@@ -64,6 +55,7 @@ export function createLogin(onClose) {
 			}
 		} catch (error) {
 			console.error('Request failed:', error.message);
+			errorSpan.textContent = 'Error inesperado durante el login';
 		}
 	});
 	newLogin.appendChild(newForm);

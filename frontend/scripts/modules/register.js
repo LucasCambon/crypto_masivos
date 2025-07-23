@@ -1,3 +1,5 @@
+import { registerUser } from './api.js';
+
 export function createRegister(onClose) {
 	const newRegister = document.createElement('div');
 	newRegister.classList.add('register');
@@ -27,39 +29,28 @@ export function createRegister(onClose) {
 	newForm.id = 'register-form';
 	newForm.addEventListener('submit', async (e) => {
 		e.preventDefault();
+
+		const username = e.target.username.value;
+		const email = e.target.email.value;
+		const password = e.target.password.value;
+
 		try {
-			const response = await fetch('/api/v1/users/create', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					username: e.target.username.value,
-					email: e.target.email.value,
-					password: e.target.password.value,
-				}),
-			});
+			const result = await registerUser(username, email, password);
 
-			const data = await response.json();
-
-			if (!response.ok) {
-				console.error('Server returned an error:', data);
-
-				if (data.errors) {
-					errorSpan.textContent = data.errors[0].message;
-				} else {
-					errorSpan.textContent = data.message;
-				}
-
-				throw new Error(data.message || 'Error creating user');
+			if (!result.success) {
+				console.error('Registration failed:', result.error);
+				errorSpan.textContent = result.error;
+				return;
 			}
 
-			const authHeader = response.headers.get('Authorization');
-			const token = authHeader ? authHeader.split(' ')[1] : null;
-
-			if (token) {
-				localStorage.setItem('token', token);
+			if (result.token) {
+				localStorage.setItem('token', result.token);
 			}
+
+			onClose();
 		} catch (error) {
 			console.error('Request failed:', error.message);
+			errorSpan.textContent = 'Error inesperado durante el registro';
 		}
 	});
 	newRegister.appendChild(newForm);
