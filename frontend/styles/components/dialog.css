@@ -11,3 +11,30 @@
 	background-color: rgba(0, 0, 0, 0.9);
 	z-index: var(--INF);
 }
+
+.dialog > div {
+	border-radius: 8px;
+	padding: 1.5em 2em;
+	position: relative;
+}
+
+.dialog-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	margin-bottom: 8px;
+}
+
+.dialog-title {
+	margin: 0;
+	text-align: center;
+	flex-grow: 1;
+	user-select: none;
+}
+
+.close-icon {
+	--icon-size: 24px;
+	cursor: pointer;
+	margin-left: auto;
+}

@@ -6,7 +6,7 @@ async function getCurrencies(req, res) {
     return res.status(200).json({ status: "ok", data: result.rows, count: result.rowCount });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ status: "error", message: "Error getting currencies" });
+    return res.status(500).json({ status: "error", message: "Error getting currencies." });
   }
 }
 
@@ -52,13 +52,13 @@ async function createCurrency(req, res) {
 
     return res.status(201).json({
       status: "ok",
-      message: "Currency created",
+      message: "Currency created correctly.",
       data: result.rows[0]
     });
 
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ status: "error", message: "Error creating currency" });
+    return res.status(500).json({ status: "error", message: "Error creating currency." });
   }
 }
 
@@ -69,7 +69,7 @@ async function updateCurrency(req, res) {
 
     const existing = await pool.query('SELECT * FROM currencies WHERE id = $1', [id]);
     if (existing.rows.length === 0) {
-      return res.status(404).json({ status: "error", message: "Currency not found" });
+      return res.status(404).json({ status: "error", message: "Currency not found." });
     }
 
     const actual = existing.rows[0];
@@ -101,13 +101,13 @@ async function updateCurrency(req, res) {
 
     return res.status(200).json({
       status: "ok",
-      message: "Currency updated",
+      message: "Currency updated correctly.",
       data: updateResult.rows[0]
     });
 
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ status: "error", message: "Error updating currency" });
+    return res.status(500).json({ status: "error", message: "Error updating currency." });
   }
 }
 
@@ -119,10 +119,10 @@ async function deleteCurrency(req, res) {
     if (result.rows.length === 0)
       return res.status(404).json({ status: "error", message: "Currency not found" });
 
-    return res.status(200).json({ status: "ok", message: "Currency deleted", data: result.rows[0] });
+    return res.status(200).json({ status: "ok", message: "Currency deleted correctly.", data: result.rows[0] });
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ status: "error", message: "Error deleting currency" });
+    return res.status(500).json({ status: "error", message: "Error deleting currency." });
   }
 }
 

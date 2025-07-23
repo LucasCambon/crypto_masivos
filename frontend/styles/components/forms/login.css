@@ -1,0 +1,34 @@
+.login {
+	background-color: var(--login-bg);
+	border: var(--login-border);
+	width: 350px;
+}
+
+.login,
+#login-form {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.login input {
+	border-radius: 6px;
+	user-select: all;
+	padding: 0.5em;
+	height: 100%;
+	border: var(--login-input-border);
+	background-color: var(--login-input-bg);
+	color: var(--color-fg);
+}
+
+.login-input-group {
+	display: flex;
+	width: 100%;
+	align-items: center;
+}
+
+.login button {
+	margin-top: 8px;
+	border-radius: var(--INF);
+	padding: 0.5em 1em;
+}
