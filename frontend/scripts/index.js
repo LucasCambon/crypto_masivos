@@ -1,5 +1,6 @@
 import { fetchCurrencies } from './modules/api.js';
 import { createCurrency } from './modules/currency-ui.js';
+import { addLoginRegisterEventHandlers } from './modules/event-handlers.js';
 
 async function loadCurrencies() {
 	try {
@@ -8,7 +9,7 @@ async function loadCurrencies() {
 
 		if (!currencyList) return;
 
-		data.slice(0, 7).data.forEach((currency) => {
+		data.slice(0, 7).forEach((currency) => {
 			currencyList.insertBefore(
 				createCurrency(currency),
 				currencyList.firstChild
@@ -19,4 +20,7 @@ async function loadCurrencies() {
 	}
 }
 
-document.addEventListener('DOMContentLoaded', loadCurrencies);
+document.addEventListener('DOMContentLoaded', () => {
+	loadCurrencies();
+	addLoginRegisterEventHandlers();
+});

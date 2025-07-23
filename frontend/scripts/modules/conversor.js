@@ -12,10 +12,10 @@ export function createConversor(selectedCurrency, onClose) {
 
 	// Header container for title and close button
 	const headerContainer = document.createElement('div');
-	headerContainer.classList.add('conversor-header');
+	headerContainer.classList.add('dialog-header');
 
 	const title = document.createElement('h2');
-	title.classList.add('conversor-title');
+	title.classList.add('dialog-title');
 	title.textContent = 'Conversor';
 
 	// Close icon
