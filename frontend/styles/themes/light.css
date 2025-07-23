@@ -46,11 +46,5 @@
 		--developer-img-border: 2px solid var(--color-gold-600);
 		--developer-hr-color: var(--color-gold-800);
 		--developer-contact-link-color: var(--color-gray-500);
-
-		--btn-dashboard-bg: var(--color-indigo-100);
-		--btn-dashboard-fg: var(--color-indigo-600);
-		--btn-dashboard-hover-bg: var(--color-indigo-200);
-		--btn-dashboard-active-bg: var(--color-indigo-300);
-		--btn-dashboard-border: 1px solid var(--color-fg);
 	}
 }

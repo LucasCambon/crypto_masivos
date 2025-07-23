@@ -14,10 +14,6 @@ nav {
 	gap: 8px;
 }
 
-nav .btn-container {
-	margin-left: auto;
-}
-
 .site-logo {
 	font-size: 2rem;
 	font-weight: bold;
