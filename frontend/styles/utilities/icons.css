@@ -26,6 +26,14 @@
 	.swap-icon {
 		--svg: url(https://icongr.am/material/swap-vertical.svg?color=242247);
 	}
+
+	.edit-icon {
+		--svg: url(https://icongr.am/material/pencil.svg?color=#44cc44);
+	}
+
+	.delete-icon {
+		--svg: url(https://icongr.am/material/delete.svg?color=cc4444);
+	}
 }
 
 @media (prefers-color-scheme: dark) {
@@ -43,5 +51,13 @@
 
 	.swap-icon {
 		--svg: url(https://icongr.am/material/swap-vertical.svg?color=ffffff);
+	}
+
+	.edit-icon {
+		--svg: url(https://icongr.am/material/pencil.svg?color=33aa33);
+	}
+
+	.delete-icon {
+		--svg: url(https://icongr.am/material/delete.svg?color=cc4444);
 	}
 }
