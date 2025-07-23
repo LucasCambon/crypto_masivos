@@ -61,6 +61,8 @@
  *     responses:
  *       201:
  *         description: New user created correctly.
+ *       400:
+ *         description: Validation error.
  *       409:
  *         description: Username or email already in use.
  *       500:
@@ -90,6 +92,8 @@
  *     responses:
  *       200:
  *         description: Login successful.
+ *       400:
+ *         description: Validation error.
  *       401:
  *         description: Invalid email or password.
  *       500:
@@ -120,6 +124,8 @@
  *     responses:
  *       200:
  *         description: User updated correctly.
+ *       400:
+ *         description: Validation error.
  *       404:
  *         description: User not found.
  *       500:
@@ -130,7 +136,7 @@
  * @swagger
  * /api/v1/users/update/admin:
  *   put:
- *     summary: Assign admin role to a user
+ *     summary: Manage user roles
  *     tags: [Users]
  *     security:
  *       - bearerAuth: []
@@ -142,12 +148,20 @@
  *             type: object
  *             required:
  *               - id
+ *               - role
  *             properties:
  *               id:
  *                 type: integer
+ *                 description: User ID
+ *               role:
+ *                 type: string
+ *                 enum: [admin, user]
+ *                 description: Role to be assigned
  *     responses:
  *       200:
- *         description: Admin role assigned to user.
+ *         description: Role updated correctly.
+ *       400:
+ *         description: Validation error.
  *       404:
  *         description: User not found.
  *       500:
