@@ -3,6 +3,7 @@ FROM nginx:alpine
 # Copy static files to Nginx HTML directory
 COPY . /usr/share/nginx/html
 
+# TODO: delete this lines
 # Copy custom nginx.conf
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
