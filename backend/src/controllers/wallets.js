@@ -73,7 +73,7 @@ const getWalletsByUserId = async (req, res) => {
 };
 
 async function createWallet(req, res) {
-  const { user_id, address, alias, balance, currency_id } = req.body;
+  const { user_id, address, alias, currency_id } = req.body;
 
   if (!user_id || !address || !currency_id) {
     return res.status(400).json({ status: "error", message: "Missing required fields" });
@@ -86,7 +86,7 @@ async function createWallet(req, res) {
       `INSERT INTO wallets (user_id, address, alias, balance, last_activity)
        VALUES ($1, $2, $3, $4, $5)
        RETURNING *`,
-      [user_id, address, alias || null, balance || 0, last_activity]
+      [user_id, address, alias || null, 0, last_activity]
     );
 
     const newWallet = result.rows[0];
@@ -110,7 +110,7 @@ async function createWallet(req, res) {
 }
 
 async function updateWallet(req, res) {
-  const { id, user_id, alias, balance } = req.body;
+  const { id, balance } = req.body;
 
   if (!id) {
     return res.status(400).json({ status: "error", message: "Wallet ID is required" });
@@ -127,15 +127,11 @@ async function updateWallet(req, res) {
 
     const updated = await pool.query(
       `UPDATE wallets SET
-        user_id = $1,
-        alias = $2,
-        balance = $3,
-        last_activity = $4
-       WHERE id = $5
+        balance = $1,
+        last_activity = $2
+       WHERE id = $3
        RETURNING *`,
       [
-        user_id || current.user_id,
-        alias || current.alias,
         balance || current.balance,
         last_activity,
         id
