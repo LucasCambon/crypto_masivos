@@ -37,8 +37,8 @@ CREATE TABLE IF NOT EXISTS wallet_currencies (
 -- Data insertion
 INSERT INTO users (username, password, email, role)
 VALUES
-  ('tomas', 'hashedpassword1', 'tomas@example.com', 'user'),
-  ('lucas', 'hashedpassword2', 'lucas@example.com', 'admin');
+  ('tomas', '$2a$12$1K9feUN63myUiCZlCw4Ayu3KCTFSlp91t5tPijTtMgKaZbSw3qx1e', 'tomas@example.com', 'user'),
+  ('lucas', '$2a$12$JiYST1EqtEtHYDEk/3XwLe1U3JaKCZnGZSftCyrrrWG/EDXqvGuIq', 'lucas@example.com', 'admin');
 
 INSERT INTO currencies (name, usd_value, symbol, type, volatility, liquidity)
 VALUES
