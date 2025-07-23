@@ -1,4 +1,5 @@
 import { fetchCurrencies } from './api.js';
+import { showDeleteCurrencyDialog } from './dialog.js';
 
 export async function showCurrencies() {
 	const content = document.querySelector('.content');
@@ -68,6 +69,12 @@ export async function showCurrencies() {
 
 		const deleteIcon = document.createElement('span');
 		deleteIcon.className = 'delete-icon';
+
+		deleteIcon.addEventListener('click', () => {
+			showDeleteCurrencyDialog(currency, () => {
+				showCurrencies();
+			});
+		});
 
 		const editIcon = document.createElement('span');
 		editIcon.className = 'edit-icon';

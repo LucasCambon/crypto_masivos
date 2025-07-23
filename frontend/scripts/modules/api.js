@@ -175,6 +175,44 @@ export async function fetchUserProfile() {
 	}
 }
 
+export async function deleteCurrency(currencyId) {
+	try {
+		const token = localStorage.getItem('token');
+		if (!token) {
+			throw new Error('No authentication token found');
+		}
+
+		const response = await fetch('/api/v1/currencies/delete', {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify({
+				id: currencyId,
+			}),
+		});
+
+		if (!response.ok) {
+			const errorData = await response.json();
+			throw new Error(errorData.message || 'Failed to delete currency');
+		}
+
+		const data = await response.json();
+		return {
+			success: true,
+			data,
+			currency: data.data,
+		};
+	} catch (error) {
+		console.error('Failed to delete currency:', error);
+		return {
+			success: false,
+			error: error.message,
+		};
+	}
+}
+
 export function logoutUser() {
 	try {
 		localStorage.removeItem('token');
