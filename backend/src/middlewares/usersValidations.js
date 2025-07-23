@@ -60,14 +60,20 @@ const loginValidation = [
     .notEmpty().withMessage("Password is required."),
 ];
 
-const enableAdminValidation = [
+
+const roleManagementValidation = [
   body("id")
-    .notEmpty().withMessage("User ID is required."),
+    .notEmpty().withMessage("User ID is required.")
+    .isInt({ min: 1 }).withMessage("User ID must be a positive integer."),
+  
+  body("role")
+    .notEmpty().withMessage("Role is required.")
+    .isIn(["admin", "user"]).withMessage("Role must be either 'admin' or 'user'."),
 ];
 
 module.exports = {
   createUserValidator,
   updateUserValidator,
   loginValidation,
-  enableAdminValidation,
+  roleManagementValidation,
 };

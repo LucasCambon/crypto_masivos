@@ -147,8 +147,8 @@ async function profile(req, res) {
     }
 }
 
-async function enableAdmin(req, res) {
-  const { id } = req.body;
+async function roleManagement(req, res) {
+  const { id, role } = req.body;
 
   try {
     const user = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
@@ -157,13 +157,13 @@ async function enableAdmin(req, res) {
     }
 
     const updated = await pool.query(
-      "UPDATE users SET role = 'admin' WHERE id = $1 RETURNING id, username, email, role, created_at",
-      [id]
+      "UPDATE users SET role = $1 WHERE id = $2 RETURNING id, username, email, role, created_at",
+      [role, id]
     );
 
     return res.status(200).json({
       status: "ok",
-      message: "Admin role assigned to user.",
+      message: `Role updated to ${role} correctly.`,
       data: updated.rows[0],
     });
 
@@ -180,5 +180,5 @@ module.exports = {
     deleteUser,
     login,
     profile,
-    enableAdmin,
+    roleManagement,
 };
