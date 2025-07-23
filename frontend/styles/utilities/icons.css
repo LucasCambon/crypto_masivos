@@ -27,6 +27,10 @@
 		--svg: url(https://icongr.am/material/swap-vertical.svg?color=242247);
 	}
 
+	.create-icon {
+		--svg: url(https://icongr.am/material/plus.svg?color=ffffff);
+	}
+
 	.edit-icon {
 		--svg: url(https://icongr.am/material/pencil.svg?color=#44cc44);
 	}
@@ -51,6 +55,10 @@
 
 	.swap-icon {
 		--svg: url(https://icongr.am/material/swap-vertical.svg?color=ffffff);
+	}
+
+	.create-icon {
+		--svg: url(https://icongr.am/material/plus.svg?color=242247);
 	}
 
 	.edit-icon {

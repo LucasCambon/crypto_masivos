@@ -4,9 +4,20 @@ export async function showCurrencies() {
 	const content = document.querySelector('.content');
 	content.innerHTML = '';
 
+	const titleContainer = document.createElement('div');
+	titleContainer.className = 'title-container';
+	titleContainer.style.display = 'flex';
+	titleContainer.style.justifyContent = 'space-between';
+	titleContainer.style.alignItems = 'center';
 	const title = document.createElement('h2');
 	title.className = 'content-title';
 	title.textContent = 'Lista de criptomonedas';
+
+	const createIcon = document.createElement('span');
+	createIcon.className = 'create-icon';
+
+	titleContainer.appendChild(title);
+	titleContainer.appendChild(createIcon);
 
 	const grid = document.createElement('div');
 	grid.className = 'currencies-grid';
@@ -26,7 +37,7 @@ export async function showCurrencies() {
 		grid.appendChild(span);
 	});
 
-	content.appendChild(title);
+	content.appendChild(titleContainer);
 	content.appendChild(grid);
 
 	const data = await fetchCurrencies();
