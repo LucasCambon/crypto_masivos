@@ -1,0 +1,27 @@
+:root {
+	color: var(--color-fg);
+	background-color: var(--color-bg);
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-user-drag: none;
+}
+
+* ::selection {
+	background-color: var(--color-fg);
+	color: var(--color-bg);
+}
+
+button {
+	background-color: var(--color-bg);
+	color: var(--color-fg);
+	border: 0;
+	cursor: pointer;
+}
+
+a {
+	color: inherit;
+}

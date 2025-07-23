@@ -1,6 +1,9 @@
 [class$='icon'] {
-	width: 1.25em;
-	height: 1.25em;
+	--icon-size: 1.25em;
+
+	width: var(--icon-size);
+	height: var(--icon-size);
+
 	display: inline-block;
 	background-image: var(--svg);
 	background-size: cover;
