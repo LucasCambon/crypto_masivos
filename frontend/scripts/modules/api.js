@@ -212,6 +212,42 @@ export async function createCurrency(currencyData) {
 	}
 }
 
+export async function updateCurrency(currencyData) {
+	try {
+		const token = localStorage.getItem('token');
+		if (!token) {
+			throw new Error('No authentication token found');
+		}
+
+		const response = await fetch('/api/v1/currencies/update', {
+			method: 'PUT',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${token}`,
+			},
+			body: JSON.stringify(currencyData),
+		});
+
+		if (!response.ok) {
+			const errorData = await response.json();
+			throw new Error(errorData.message || 'Failed to update currency');
+		}
+
+		const data = await response.json();
+		return {
+			success: true,
+			data,
+			currency: data.data,
+		};
+	} catch (error) {
+		console.error('Failed to update currency:', error);
+		return {
+			success: false,
+			error: error.message,
+		};
+	}
+}
+
 export async function deleteCurrency(currencyId) {
 	try {
 		const token = localStorage.getItem('token');

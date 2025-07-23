@@ -3,6 +3,7 @@ import { createLogin } from './login.js';
 import { createRegister } from './register.js';
 import { createDeleteCurrencyDialog } from './delete-currency.js';
 import { createCreateCurrency } from './create-currency.js';
+import { createEditCurrency } from './edit-currency.js';
 
 export function showConverterDialog(currency) {
 	const newDialog = document.createElement('section');
@@ -53,6 +54,22 @@ export function showCreateCurrencyDialog(onSuccess) {
 	});
 
 	newDialog.appendChild(newCreateCurrency);
+	document.body.appendChild(newDialog);
+}
+
+export function showEditCurrencyDialog(currency, onSuccess) {
+	const newDialog = document.createElement('section');
+	newDialog.classList.add('dialog');
+
+	const newEditCurrency = createEditCurrency(currency, (wasUpdated) => {
+		newDialog.remove();
+
+		if (wasUpdated && typeof onSuccess === 'function') {
+			onSuccess(currency);
+		}
+	});
+
+	newDialog.appendChild(newEditCurrency);
 	document.body.appendChild(newDialog);
 }
 
