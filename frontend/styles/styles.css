@@ -18,6 +18,9 @@
 @import 'components/forms/create-currency.css';
 @import 'components/forms/edit-currency.css';
 @import 'components/forms/edit-profile.css';
+@import 'components/forms/exchange.css';
+@import 'components/forms/withdraw.css';
+@import 'components/forms/add-funds.css';
 @import 'components/info/delete-currency.css';
 
 /* Layout */

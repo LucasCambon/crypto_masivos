@@ -2,7 +2,7 @@ import { fetchWallets, updateWallet } from '../../api/wallet-api.js';
 import { createElement, appendChildren } from '../../utils/dom-helpers.js';
 
 export function createExchangeDialog(onClose) {
-	const container = createElement('div', 'dialog-container');
+	const container = createElement('div', 'exchange');
 	const content = createElement('div', 'dialog-content');
 
 	const header = createElement('div', 'dialog-header');
@@ -78,7 +78,7 @@ export function createExchangeDialog(onClose) {
 	cancelBtn.type = 'button';
 	cancelBtn.addEventListener('click', onClose);
 
-	const exchangeBtn = createElement('button', 'submit-btn', 'Transfer');
+	const exchangeBtn = createElement('button', 'primary', 'Transfer');
 	exchangeBtn.type = 'submit';
 
 	appendChildren(buttonGroup, cancelBtn, exchangeBtn);

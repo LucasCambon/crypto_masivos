@@ -90,7 +90,7 @@ export function createAddFundsDialog(onClose) {
 	cancelBtn.type = 'button';
 	cancelBtn.addEventListener('click', onClose);
 
-	const addBtn = createElement('button', 'submit-btn', 'Add Funds');
+	const addBtn = createElement('button', 'primary', 'Add Funds');
 	addBtn.type = 'submit';
 
 	appendChildren(buttonGroup, cancelBtn, addBtn);
@@ -148,14 +148,14 @@ export function createAddFundsDialog(onClose) {
 		const action = actionSelect.value;
 
 		if (action === 'existing') {
-			existingWalletGroup.style.display = 'block';
+			existingWalletGroup.style.display = 'flex';
 			newWalletGroup.style.display = 'none';
 			walletSelect.required = true;
 			currencySelect.required = false;
 			aliasInput.required = false;
 		} else if (action === 'create') {
 			existingWalletGroup.style.display = 'none';
-			newWalletGroup.style.display = 'block';
+			newWalletGroup.style.display = 'flex';
 			walletSelect.required = false;
 			currencySelect.required = true;
 			aliasInput.required = true;

@@ -4,6 +4,10 @@
 	align-items: flex-start;
 }
 
+.total p:last-child {
+	font-size: 3em;
+}
+
 .action-btns {
 	display: flex;
 	margin: 24px;
@@ -29,6 +33,17 @@
 	min-height: 100px;
 }
 
-.total p:last-child {
-	font-size: 3em;
+.wallet-item {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.wallet-balance {
+	margin-left: auto;
+}
+
+.new-wallet-group,
+.existing-wallet-group {
+	gap: 1em;
 }

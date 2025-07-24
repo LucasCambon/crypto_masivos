@@ -2,7 +2,7 @@ import { fetchWallets, updateWallet } from '../../api/wallet-api.js';
 import { createElement, appendChildren } from '../../utils/dom-helpers.js';
 
 export function createWithdrawDialog(onClose) {
-	const container = createElement('div', 'dialog-container');
+	const container = createElement('div', 'withdraw');
 	const content = createElement('div', 'dialog-content');
 
 	const header = createElement('div', 'dialog-header');
@@ -47,7 +47,7 @@ export function createWithdrawDialog(onClose) {
 	cancelBtn.type = 'button';
 	cancelBtn.addEventListener('click', onClose);
 
-	const withdrawBtn = createElement('button', 'submit-btn', 'Withdraw');
+	const withdrawBtn = createElement('button', 'primary', 'Withdraw');
 	withdrawBtn.type = 'submit';
 
 	const error = createElement('span', 'error');

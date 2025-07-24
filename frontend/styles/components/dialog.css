@@ -50,6 +50,11 @@
 	gap: 1em;
 }
 
+.form-group {
+	display: flex;
+	flex-direction: column;
+}
+
 .dialog input,
 .dialog select {
 	padding: 0.5em;
