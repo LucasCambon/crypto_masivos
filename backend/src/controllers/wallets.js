@@ -158,7 +158,6 @@ async function deleteWallet(req, res) {
 module.exports = {
     getWallets,
     getWalletById,
-    getWalletsByUserId,
     createWallet,
     updateWallet,
     deleteWallet
