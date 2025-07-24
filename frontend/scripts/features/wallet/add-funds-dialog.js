@@ -186,63 +186,44 @@ export function createAddFundsDialog(onClose) {
 		}
 
 		try {
-			addBtn.disabled = true;
-			addBtn.textContent = 'Processing...';
-
 			if (action === 'existing') {
-				// Add to existing wallet
 				const walletId = walletSelect.value;
-				const selectedOption = walletSelect.selectedOptions[0];
-				const currentBalance = parseFloat(
-					selectedOption.dataset.balance
-				);
-				const newBalance = currentBalance + amount;
 
 				const result = await updateWallet({
 					id: walletId,
-					balance: newBalance,
+					balance: amount,
+					type: 'deposit',
 				});
 
 				if (result.success) {
 					onClose();
 				}
 			} else if (action === 'create') {
-				// Create new wallet with funds
 				const currencyId = parseInt(currencySelect.value);
 				const alias = aliasInput.value.trim();
 
-				// First create the wallet
 				const createResult = await createWallet({
 					user_id: 1, // This will be validated by backend auth middleware
 					address: `wallet_${Date.now()}_${Math.random()
 						.toString(36)
-						.substr(2, 9)}`, // Generate unique address
+						.slice(2, 11)}`,
 					alias: alias,
 					currency_id: currencyId,
 				});
 
 				if (createResult.success) {
-					// Then update the balance if amount > 0
-					if (amount > 0) {
-						const updateResult = await updateWallet({
+					if (amount >= 0) {
+						await updateWallet({
 							id: createResult.wallet.id,
 							balance: amount,
+							type: 'deposit',
 						});
-
-						if (updateResult.success) {
-							alert(
-								`Successfully created wallet with ${amount} funds`
-							);
-						}
 					}
 					onClose();
 				}
 			}
 		} catch (error) {
 			console.error('Add funds error:', error);
-		} finally {
-			addBtn.disabled = false;
-			addBtn.textContent = 'Add Funds';
 		}
 	});
 
