@@ -1,42 +1,34 @@
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 2rem;
-  background-color: transparent;
+.total {
+	min-width: 85%;
+	min-height: 100px;
+	align-items: flex-start;
 }
 
-.header-left {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+.action-btns {
+	display: flex;
+	margin: 24px;
+	gap: 24px;
 }
 
-.app-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: #fff;
-  margin: 0;
+.exchange-icon,
+.withdraw-icon,
+.add-founds-icon {
+	--icon-size: 32px;
 }
 
-.user-greeting {
-  font-size: 1rem;
-  color: #f0f0f0;
-  margin: 0;
+.action-btn {
+	--action-btn-size: 4em;
+	border-radius: 8px;
+	background-color: var(--btn-portfolio-action-bg);
+	width: var(--action-btn-size);
+	height: var(--action-btn-size);
 }
 
-.header-right {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
+.wallet-list {
+	min-width: 50%;
+	min-height: 100px;
 }
 
-.header-link {
-  color: #ddd;
-  text-decoration: none;
-  font-size: 0.9rem;
-}
-
-.header-link:hover {
-  text-decoration: underline;
+.total p:last-child {
+	font-size: 3em;
 }

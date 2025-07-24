@@ -24,43 +24,52 @@
 		<title>Crypto Masivos - Portfolio</title>
 	</head>
 	<body>
-		<header class="header">
-			<div class="header-left">
-				<h1 class="app-title">CryptoMasivos</h1>
-				<p class="user-greeting">Hola <b id="username">Usuario</b> 👋</p>
-			</div>
-			<div class="header-right">
-				<a style="cursor: pointer;" class="header-link edit-btn">Editar perfil</a>
-				<p style="cursor: pointer;" class="header-link logout-btn">Cerrar sesión</p>
-			</div>
+		<header>
+			<nav>
+				<a href="portfolio.html" class="site-logo">CryptoMasivos</a>
+
+				<div class="btn-container">
+					<button type="button" class="secondary" id="logout-btn">
+						Cerrar sesión
+					</button>
+				</div>
+			</nav>
+			<aside>
+				<p class="user-greeting">
+					Hola
+					<b id="username"></b>
+					👋
+				</p>
+				<button class="edit-profile-btn secondary">
+					Editar perfil
+				</button>
+			</aside>
 		</header>
 
-		<main class="portfolio-main" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90vh;">
-
+		<main>
 			<!-- Total card -->
-			<section class="total-card" style="width: 100%; max-width: 800px; background: linear-gradient(90deg, #e0e0e0 0%, #222 100%); border-radius: 20px; padding: 2rem 2.5rem; margin-bottom: 2.5rem; box-sizing: border-box;">
-				<p style="font-size: 1.3rem; margin: 0 0 0.5rem 0; color: #222;">Total</p>
-				<p style="font-size: 2.5rem; font-weight: bold; margin: 0; color: #222;"></p>
+			<section class="total card">
+				<p>Total</p>
+				<p></p>
 			</section>
 
 			<!-- Action buttons -->
-			<div class="actions-row" style="display: flex; gap: 2.5rem; margin-bottom: 2.5rem;">
-				<button class="action-btn" title="Transferir" style="width: 80px; height: 80px; border-radius: 16px; background: #333; display: flex; align-items: center; justify-content: center; border: none; box-shadow: 0 2px 8px #0002; font-size: 2rem; color: #fff;">
-					<span style="font-size: 2.2rem;">⇅</span>
+			<div class="action-btns">
+				<button class="action-btn" title="Transferir">
+					<span class="exchange-icon"></span>
 				</button>
-				<button class="action-btn" title="Retirar" style="width: 80px; height: 80px; border-radius: 16px; background: #333; display: flex; align-items: center; justify-content: center; border: none; box-shadow: 0 2px 8px #0002; font-size: 2rem; color: #fff;">
-					<span style="font-size: 2.2rem;">↓</span>
+				<button class="action-btn" title="Retirar">
+					<span class="withdraw-icon"></span>
 				</button>
-				<button class="action-btn" title="Depositar" style="width: 80px; height: 80px; border-radius: 16px; background: #333; display: flex; align-items: center; justify-content: center; border: none; box-shadow: 0 2px 8px #0002; font-size: 2rem; color: #fff;">
-					<span style="font-size: 2.2rem;">＋</span>
+				<button class="action-btn" title="Depositar">
+					<span class="add-founds-icon"></span>
 				</button>
 			</div>
 
 			<!-- List of cryptocurrencies -->
-			<section class="wallet-list" style="width: 100%; max-width: 600px; background: #2a2a2a; border-radius: 20px; padding: 2rem 2.5rem; box-sizing: border-box;"></section>
+			<section class="wallet-list card"></section>
 		</main>
 
-		<script type="module" src="scripts/currencies.js"></script>
 		<script type="module" src="scripts/pages/portfolio.js"></script>
 	</body>
 </html>

@@ -4,6 +4,7 @@ import { createRegister } from '../features/auth/register-form.js';
 import { createDeleteCurrencyDialog } from '../features/currency/delete-currency-dialog.js';
 import { createCreateCurrency } from '../features/currency/create-currency-form.js';
 import { createEditCurrency } from '../features/currency/edit-currency-form.js';
+import { createEditProfileDialog } from '../features/user/edit-user-profile.js';
 import { createElement } from '../utils/dom-helpers.js';
 
 function createDialog(content) {
@@ -57,6 +58,17 @@ export function showDeleteCurrencyDialog(currency, onSuccess) {
 			dialog.remove();
 			if (typeof onSuccess === 'function') {
 				onSuccess(currency);
+			}
+		})
+	);
+}
+
+export function showEditProfileDialog(user, onSuccess) {
+	const dialog = createDialog(
+		createEditProfileDialog(user, (wasUpdated) => {
+			dialog.remove();
+			if (wasUpdated && typeof onSuccess === 'function') {
+				onSuccess();
 			}
 		})
 	);
