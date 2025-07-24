@@ -46,3 +46,7 @@
 .existing-wallet-group {
 	gap: 1em;
 }
+
+.delete-wallet-icon:hover {
+	cursor: pointer;
+}

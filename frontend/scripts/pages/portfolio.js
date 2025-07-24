@@ -1,4 +1,4 @@
-import { fetchWallets } from '../api/wallet-api.js';
+import { fetchWallets, deleteWallet } from '../api/wallet-api.js';
 import { logoutUser } from '../api/auth-api.js';
 import { fetchUserProfile } from '../api/user-api.js';
 import { requireAuth } from '../utils/auth-helpers.js';
@@ -49,13 +49,26 @@ function createWalletItem(wallet) {
 		'wallet-symbol',
 		wallet.currency_symbol || 'UNKNOWN'
 	);
+
 	const walletBalance = createElement(
 		'span',
 		'wallet-balance',
 		`${wallet.balance || 0}`
 	);
 
-	appendChildren(rightGroup, walletSymbol, walletBalance);
+	const deleteWalletButton = createElement('span', 'delete-wallet-icon');
+	deleteWalletButton.addEventListener('click', async () => {
+		try {
+			await deleteWallet(wallet.id);
+			const updatedWallets = await fetchWallets();
+			renderWalletList(updatedWallets);
+			renderTotal(updatedWallets);
+		} catch (error) {
+			console.error('Failed to delete wallet:', error);
+		}
+	});
+
+	appendChildren(rightGroup, walletSymbol, walletBalance, deleteWalletButton);
 
 	appendChildren(walletItem, walletName, rightGroup);
 	return walletItem;
