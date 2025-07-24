@@ -2,7 +2,7 @@ import { apiRequest } from '../utils/api-helpers.js';
 
 export async function getWallet() {
   try {
-    const response = await apiRequest('/api/wallets/list', {
+    const response = await apiRequest('/api/v1/wallets/list', {
       method: 'GET',
       requireAuth: true,
     });

@@ -24,16 +24,18 @@
 		<title>Crypto Masivos - Portfolio</title>
 	</head>
 	<body>
-		<header>
-			<nav style="display: flex; justify-content: flex-end; align-items: center; padding: 1rem;">
-				<button type="button" class="edit-profile-btn" style="margin-right: 1.5rem; background: none; border: none; color: #ccc; cursor: pointer;">Editar perfil</button>
-				<button type="button" class="logout-btn">Cerrar sesión</button>
-			</nav>
+		<header class="header">
+			<div class="header-left">
+				<h1 class="app-title">CryptoMasivos</h1>
+				<p class="user-greeting">Hola <b id="username">Usuario</b> 👋</p>
+			</div>
+			<div class="header-right">
+				<a href="/profile.html" class="header-link">Editar perfil</a>
+				<a href="/logout.html" class="header-link">Cerrar sesión</a>
+			</div>
 		</header>
 
 		<main class="portfolio-main" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 90vh;">
-			<a href="index.html" class="main-title" style="align-self: flex-start; font-size: 2.5rem; margin-bottom: 0.5rem; text-decoration: none; color: inherit; cursor: pointer;">CryptoMasivos</a>
-			<p style="align-self: flex-start; font-size: 1.25rem; margin-bottom: 2rem;">Hola <b></b> 👋</p>
 
 			<!-- Total card -->
 			<section class="total-card" style="width: 100%; max-width: 800px; background: linear-gradient(90deg, #e0e0e0 0%, #222 100%); border-radius: 20px; padding: 2rem 2.5rem; margin-bottom: 2.5rem; box-sizing: border-box;">
