@@ -60,8 +60,8 @@ async function getWalletById(req, res) {
 }
 
 async function createWallet(req, res) {
-  const { user_id, address, alias, currency_id } = req.body;
-
+  const { address, alias, currency_id } = req.body;
+  const user_id = req.user.id;
   if (!user_id || !address || !currency_id) {
     return res.status(400).json({ status: "error", message: "Missing required fields" });
   }
@@ -98,13 +98,13 @@ async function createWallet(req, res) {
 
 async function updateWallet(req, res) {
   const { id, balance } = req.body;
-
+  const user_id = req.user.id;
   if (!id) {
     return res.status(400).json({ status: "error", message: "Wallet ID is required" });
   }
 
   try {
-    const result = await pool.query("SELECT * FROM wallets WHERE id = $1", [id]);
+    const result = await pool.query("SELECT * FROM wallets WHERE id = $1 AND user_id = $2", [id, user_id]);
     if (result.rows.length === 0) {
       return res.status(404).json({ status: "error", message: "Wallet not found" });
     }
@@ -139,10 +139,11 @@ async function updateWallet(req, res) {
 
 async function deleteWallet(req, res) {
   const { id } = req.body;
+  const user_id = req.user.id;
   if (!id) return res.status(400).json({ status: "error", message: "Wallet ID is required" });
 
   try {
-    const result = await pool.query("DELETE FROM wallets WHERE id = $1 RETURNING *", [id]);
+    const result = await pool.query("DELETE FROM wallets WHERE id = $1 AND user_id = $2 RETURNING *", [id, user_id]);
     if (result.rows.length === 0) {
       return res.status(404).json({ status: "error", message: "Wallet not found" });
     }
