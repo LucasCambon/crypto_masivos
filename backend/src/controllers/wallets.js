@@ -118,49 +118,58 @@ async function createWallet(req, res) {
 }
 
 async function updateWallet(req, res) {
-	const { id, balance } = req.body;
-	const user_id = req.user.id;
-	if (!id) {
-		return res
-			.status(400)
-			.json({ status: 'error', message: 'Wallet ID is required' });
-	}
+  const { id, balance, type } = req.body;
+  const user_id = req.user.id;
+  if (!id) {
+    return res.status(400).json({ status: "error", message: "Wallet ID is required" });
+  }
 
-	try {
-		const result = await pool.query(
-			'SELECT * FROM wallets WHERE id = $1 AND user_id = $2',
-			[id, user_id]
-		);
-		if (result.rows.length === 0) {
-			return res
-				.status(404)
-				.json({ status: 'error', message: 'Wallet not found' });
-		}
+  try {
+    const result = await pool.query("SELECT * FROM wallets WHERE id = $1 AND user_id = $2", [id, user_id]);
+    if (result.rows.length === 0) {
+      return res.status(404).json({ status: "error", message: "Wallet not found" });
+    }
 
-		const current = result.rows[0];
-		const last_activity = new Date();
+    const wallet = result.rows[0];
+    let newBalance;
 
-		const updated = await pool.query(
-			`UPDATE wallets SET
+    if (type === "deposit") {
+      newBalance = wallet.balance + Number(amount);
+    } else if (type === "withdraw") {
+      if (Number(amount) > wallet.balance) {
+        return res.status(400).json({
+          status: "error",
+          message: "Insufficient balance for withdrawal",
+        });
+      }
+      newBalance = wallet.balance - Number(amount);
+    }
+
+    const last_activity = new Date();
+
+    const updated = await pool.query(
+      `UPDATE wallets SET
         balance = $1,
         last_activity = $2
        WHERE id = $3
        RETURNING *`,
-			[balance || current.balance, last_activity, id]
-		);
+      [
+        newBalance,
+        last_activity,
+        id
+      ]
+    );
 
-		res.status(200).json({
-			status: 'ok',
-			message: 'Wallet updated',
-			data: updated.rows[0],
-		});
-	} catch (error) {
-		console.error('Error updating wallet:', error);
-		res.status(500).json({
-			status: 'error',
-			message: 'Error updating wallet',
-		});
-	}
+    res.status(200).json({
+      status: "ok",
+      message: "Wallet updated",
+      data: updated.rows[0]
+    });
+
+  } catch (error) {
+    console.error("Error updating wallet:", error);
+    res.status(500).json({ status: "error", message: "Error updating wallet" });
+  }
 }
 
 async function deleteWallet(req, res) {

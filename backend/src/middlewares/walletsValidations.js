@@ -24,6 +24,10 @@ const updateWalletValidator = [
   body("balance")
     .optional()
     .isFloat({ gte: 0 }).withMessage("Balance must be a number greater than or equal to 0."),
+  
+  body("type")
+    .notEmpty().withMessage("Transaction type is required.")
+    .isIn(["deposit", "withdraw"]).withMessage("Type must be 'deposit' or 'withdraw'."),
 ];
 
 const deleteWalletValidator = [
