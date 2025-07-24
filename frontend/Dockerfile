@@ -1,7 +1,7 @@
 FROM nginx:alpine
 
 # Copy static files to Nginx HTML directory
-COPY frontend /usr/share/nginx/html
+COPY . /usr/share/nginx/html
 
 
 EXPOSE 80
