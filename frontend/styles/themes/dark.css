@@ -20,16 +20,6 @@
 		--dialog-input-bg: var(--color-indigo-500);
 		--dialog-input-border: 1px solid var(--color-indigo-300);
 
-		--create-currency-bg: var(--color-indigo-600);
-		--create-currency-border: 2px solid var(--color-gold-300);
-		--create-currency-input-bg: var(--color-indigo-500);
-		--create-currency-input-border: 1px solid var(--color-indigo-300);
-
-		--edit-currency-bg: var(--color-indigo-600);
-		--edit-currency-border: 2px solid var(--color-gold-300);
-		--edit-currency-input-bg: var(--color-indigo-500);
-		--edit-currency-input-border: 1px solid var(--color-indigo-300);
-
 		/* Utilities colors */
 		--btn-primary-bg: var(--color-gold-400);
 		--btn-primary-hover-bg: var(--color-gold-300);

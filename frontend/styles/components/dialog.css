@@ -42,7 +42,8 @@
 }
 
 .dialog,
-.dialog form {
+.dialog form,
+.dialog-content {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
