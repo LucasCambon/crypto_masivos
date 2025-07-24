@@ -1,61 +1,28 @@
 import { deleteCurrency } from '../../api/currency-api.js';
+import { createElement, appendChildren } from '../../utils/dom-helpers.js';
+import { createDialogHeader } from '../../utils/form-helpers.js';
 
 export function createDeleteCurrencyDialog(currency, onClose) {
-	const newDialog = document.createElement('div');
-	newDialog.classList.add('delete-currency');
+	const container = createElement('div', 'delete-currency');
+	const header = createDialogHeader('Eliminar', onClose);
 
-	const headerContainer = document.createElement('div');
-	headerContainer.classList.add('dialog-header');
+	const content = createElement('div', 'dialog-content');
+	const message = createElement(
+		'span',
+		'confirmation-message',
+		`¿Desea eliminar ${currency.name}?`
+	);
 
-	const title = document.createElement('h2');
-	title.classList.add('dialog-title');
-	title.textContent = 'Eliminar';
+	const buttonsContainer = createElement('div', 'dialog-buttons');
 
-	const closeIcon = document.createElement('span');
-	closeIcon.classList.add('close-icon');
-
-	closeIcon.addEventListener('click', () => {
-		if (typeof onClose === 'function') {
-			onClose();
-		}
-	});
-
-	headerContainer.appendChild(title);
-	headerContainer.appendChild(closeIcon);
-
-	newDialog.appendChild(headerContainer);
-
-	// Content container
-	const contentContainer = document.createElement('div');
-	contentContainer.classList.add('dialog-content');
-
-	// Confirmation message
-	const confirmationMessage = document.createElement('span');
-	confirmationMessage.classList.add('confirmation-message');
-	confirmationMessage.textContent = `¿Desea eliminar ${currency.name}?`;
-
-	contentContainer.appendChild(confirmationMessage);
-
-	// Buttons container
-	const buttonsContainer = document.createElement('div');
-	buttonsContainer.classList.add('dialog-buttons');
-
-	// No button (secondary)
-	const noButton = document.createElement('button');
+	const noButton = createElement('button', 'secondary', 'No');
 	noButton.type = 'button';
-	noButton.classList.add('secondary');
-	noButton.textContent = 'No';
 	noButton.addEventListener('click', () => {
-		if (typeof onClose === 'function') {
-			onClose();
-		}
+		if (typeof onClose === 'function') onClose();
 	});
 
-	// Yes button (primary)
-	const yesButton = document.createElement('button');
+	const yesButton = createElement('button', 'primary', 'Sí');
 	yesButton.type = 'button';
-	yesButton.classList.add('primary');
-	yesButton.textContent = 'Sí';
 	yesButton.addEventListener('click', async () => {
 		try {
 			const result = await deleteCurrency(currency.id);
@@ -72,11 +39,9 @@ export function createDeleteCurrencyDialog(currency, onClose) {
 		}
 	});
 
-	buttonsContainer.appendChild(noButton);
-	buttonsContainer.appendChild(yesButton);
+	appendChildren(buttonsContainer, noButton, yesButton);
+	appendChildren(content, message, buttonsContainer);
+	appendChildren(container, header, content);
 
-	contentContainer.appendChild(buttonsContainer);
-	newDialog.appendChild(contentContainer);
-
-	return newDialog;
+	return container;
 }

@@ -1,4 +1,6 @@
 import { updateConversion } from './conversion-utils.js';
+import { createElement, appendChildren } from '../../utils/dom-helpers.js';
+import { createDialogHeader } from '../../utils/form-helpers.js';
 
 let allCurrencies = [];
 
@@ -6,156 +8,115 @@ export function setCurrencies(currencies) {
 	allCurrencies = currencies;
 }
 
-export function createConversor(selectedCurrency, onClose) {
-	const newConversor = document.createElement('div');
-	newConversor.classList.add('conversor');
-
-	// Header container for title and close button
-	const headerContainer = document.createElement('div');
-	headerContainer.classList.add('dialog-header');
-
-	const title = document.createElement('h2');
-	title.classList.add('dialog-title');
-	title.textContent = 'Conversor';
-
-	// Close icon
-	const closeIcon = document.createElement('span');
-	closeIcon.classList.add('close-icon');
-
-	closeIcon.addEventListener('click', () => {
-		if (typeof onClose === 'function') {
-			onClose();
-		}
-	});
-
-	headerContainer.appendChild(title);
-	headerContainer.appendChild(closeIcon);
-
-	const newForm = document.createElement('form');
-	newForm.addEventListener('submit', (e) => e.preventDefault());
-
-	// From
-	const fromContainer = document.createElement('div');
-	fromContainer.classList.add('conversor-input-group');
-
-	const fromCurrencySelect = document.createElement('select');
-	fromCurrencySelect.id = 'currency-from';
-	fromCurrencySelect.classList.add('currency-select');
+function createCurrencySelect(id, className, selectedCurrency = null) {
+	const select = createElement('select', className);
+	select.id = id;
 
 	// USD option
-	const usdOption = document.createElement('option');
+	const usdOption = createElement('option', '', 'USD');
 	usdOption.value = 'USD';
-	usdOption.textContent = 'USD';
-	usdOption.selected = true;
-	fromCurrencySelect.appendChild(usdOption);
+	usdOption.selected = !selectedCurrency;
+	select.appendChild(usdOption);
 
 	allCurrencies.forEach((currency) => {
-		const option = document.createElement('option');
+		const option = createElement(
+			'option',
+			'',
+			`${currency.symbol} (${currency.name})`
+		);
 		option.value = JSON.stringify(currency);
-		option.textContent = `${currency.symbol} (${currency.name})`;
-		fromCurrencySelect.appendChild(option);
-	});
-
-	const fromInput = document.createElement('input');
-	fromInput.type = 'number';
-	fromInput.name = 'from';
-	fromInput.min = '0';
-	fromInput.step = '0.01';
-	fromInput.value = '1';
-	fromInput.classList.add('currency-input');
-
-	fromContainer.appendChild(fromInput);
-	fromContainer.appendChild(fromCurrencySelect);
-
-	// To
-	const toContainer = document.createElement('div');
-	toContainer.classList.add('conversor-input-group');
-
-	const toCurrencySelect = document.createElement('select');
-	toCurrencySelect.id = 'currency-to';
-	toCurrencySelect.classList.add('currency-select');
-
-	// USD option
-	const usdOptionTo = document.createElement('option');
-	usdOptionTo.value = 'USD';
-	usdOptionTo.textContent = 'USD';
-	toCurrencySelect.appendChild(usdOptionTo);
-
-	allCurrencies.forEach((currency) => {
-		const option = document.createElement('option');
-		option.value = JSON.stringify(currency);
-		option.textContent = `${currency.symbol} (${currency.name})`;
 
 		if (selectedCurrency && currency.symbol === selectedCurrency.symbol) {
 			option.selected = true;
 		}
 
-		toCurrencySelect.appendChild(option);
+		select.appendChild(option);
 	});
 
-	const toInput = document.createElement('input');
-	toInput.type = 'number';
-	toInput.name = 'to';
-	toInput.min = '0';
-	toInput.step = '0.000001';
-	toInput.readOnly = true;
-	toInput.classList.add('currency-input');
+	return select;
+}
 
-	toContainer.appendChild(toInput);
-	toContainer.appendChild(toCurrencySelect);
+function createCurrencyInput(config) {
+	const input = createElement('input', 'currency-input');
+	Object.entries(config).forEach(([key, value]) => {
+		if (value !== undefined) input[key] = value;
+	});
+	return input;
+}
 
-	// Swap icon
-	const swapIcon = document.createElement('span');
-	swapIcon.classList.add('swap-icon');
+function createInputGroup(type, selectedCurrency = null) {
+	const container = createElement('div', 'conversor-input-group');
 
-	updateConversion(fromInput, toInput, fromCurrencySelect, toCurrencySelect);
+	const input = createCurrencyInput({
+		type: 'number',
+		name: type,
+		min: '0',
+		step: type === 'from' ? '0.01' : '0.000001',
+		value: type === 'from' ? '1' : '',
+		readOnly: type === 'to',
+	});
 
-	fromInput.addEventListener('input', () =>
-		updateConversion(
-			fromInput,
-			toInput,
-			fromCurrencySelect,
-			toCurrencySelect
-		)
+	const select = createCurrencySelect(
+		`currency-${type}`,
+		'currency-select',
+		type === 'to' ? selectedCurrency : null
 	);
 
-	fromCurrencySelect.addEventListener('change', () =>
-		updateConversion(
-			fromInput,
-			toInput,
-			fromCurrencySelect,
-			toCurrencySelect
-		)
-	);
+	appendChildren(container, input, select);
+	return { container, input, select };
+}
 
-	toCurrencySelect.addEventListener('change', () =>
-		updateConversion(
-			fromInput,
-			toInput,
-			fromCurrencySelect,
-			toCurrencySelect
-		)
-	);
+function setupConversionEvents(fromInput, toInput, fromSelect, toSelect) {
+	const updateFn = () =>
+		updateConversion(fromInput, toInput, fromSelect, toSelect);
+
+	fromInput.addEventListener('input', updateFn);
+	fromSelect.addEventListener('change', updateFn);
+	toSelect.addEventListener('change', updateFn);
+
+	// Initial conversion
+	updateFn();
+}
+
+function createSwapIcon(fromSelect, toSelect, fromInput, toInput) {
+	const swapIcon = createElement('span', 'swap-icon');
 
 	swapIcon.addEventListener('click', () => {
-		const tempFromValue = fromCurrencySelect.value;
+		const tempValue = fromSelect.value;
+		fromSelect.value = toSelect.value;
+		toSelect.value = tempValue;
 
-		fromCurrencySelect.value = toCurrencySelect.value;
-		toCurrencySelect.value = tempFromValue;
-
-		updateConversion(
-			fromInput,
-			toInput,
-			fromCurrencySelect,
-			toCurrencySelect
-		);
+		updateConversion(fromInput, toInput, fromSelect, toSelect);
 	});
 
-	newConversor.appendChild(headerContainer);
-	newForm.appendChild(fromContainer);
-	newForm.appendChild(swapIcon);
-	newForm.appendChild(toContainer);
-	newConversor.appendChild(newForm);
+	return swapIcon;
+}
 
-	return newConversor;
+export function createConversor(selectedCurrency, onClose) {
+	const container = createElement('div', 'conversor');
+	const header = createDialogHeader('Conversor', onClose);
+
+	const form = createElement('form');
+	form.addEventListener('submit', (e) => e.preventDefault());
+
+	const fromGroup = createInputGroup('from');
+	const toGroup = createInputGroup('to', selectedCurrency);
+	const swapIcon = createSwapIcon(
+		fromGroup.select,
+		toGroup.select,
+		fromGroup.input,
+		toGroup.input
+	);
+
+	setupConversionEvents(
+		fromGroup.input,
+		toGroup.input,
+		fromGroup.select,
+		toGroup.select
+	);
+
+	appendChildren(form, fromGroup.container, swapIcon, toGroup.container);
+	appendChildren(container, header, form);
+
+	return container;
 }

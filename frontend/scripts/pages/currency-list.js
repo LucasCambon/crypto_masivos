@@ -1,36 +1,30 @@
 import { fetchCurrencies } from '../api/currency-api.js';
-import { createCurrency } from '../features/currency/currency-card.js';
+import { renderCurrencies } from '../utils/currency-helpers.js';
 import { setCurrencies } from '../features/currency/currency-converter.js';
 import { addCurrencyButtons } from '../features/currency/convert-button.js';
 import { addLoginRegisterEventHandlers } from '../features/auth/auth-handlers.js';
 
-async function loadCurrencies() {
+async function loadAllCurrencies() {
 	try {
-		const data = await fetchCurrencies();
-		const currencyList = document.querySelector('.currencies');
-		if (!currencyList) return;
+		const currencies = await fetchCurrencies();
+		const container = document.querySelector('.currencies');
 
-		setCurrencies(data);
+		if (!container) return;
 
-		data.forEach((currency) => {
-			currencyList.insertBefore(
-				createCurrency(currency),
-				currencyList.firstChild
-			);
-		});
+		setCurrencies(currencies);
+		renderCurrencies(currencies, container, { insertPosition: 'prepend' });
 
 		addCurrencyButtons();
 
+		// Watch for dynamic currency additions
 		const observer = new MutationObserver(addCurrencyButtons);
-		observer.observe(document.getElementById('currencies'), {
-			childList: true,
-		});
+		observer.observe(container, { childList: true });
 	} catch (error) {
-		console.error('Failed to load data:', error);
+		console.error('Failed to load currencies:', error);
 	}
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	loadCurrencies();
+	loadAllCurrencies();
 	addLoginRegisterEventHandlers();
 });

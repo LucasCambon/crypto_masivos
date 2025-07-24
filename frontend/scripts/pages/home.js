@@ -1,26 +1,22 @@
 import { fetchCurrencies } from '../api/currency-api.js';
-import { createCurrency } from '../features/currency/currency-card.js';
+import { renderCurrencies } from '../utils/currency-helpers.js';
 import { addLoginRegisterEventHandlers } from '../features/auth/auth-handlers.js';
 
-async function loadCurrencies() {
+async function loadHomeCurrencies() {
 	try {
-		const data = await fetchCurrencies();
-		const currencyList = document.querySelector('.currencies');
+		const currencies = await fetchCurrencies();
+		const container = document.querySelector('.currencies');
 
-		if (!currencyList) return;
-
-		data.slice(0, 7).forEach((currency) => {
-			currencyList.insertBefore(
-				createCurrency(currency),
-				currencyList.firstChild
-			);
+		renderCurrencies(currencies, container, {
+			limit: 7,
+			insertPosition: 'prepend',
 		});
 	} catch (error) {
-		console.error('Failed to load data:', error);
+		console.error('Failed to load currencies:', error);
 	}
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	loadCurrencies();
+	loadHomeCurrencies();
 	addLoginRegisterEventHandlers();
 });

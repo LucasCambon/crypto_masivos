@@ -3,29 +3,27 @@ import {
 	showDeleteCurrencyDialog,
 	showEditCurrencyDialog,
 } from '../../components/dialog-manager.js';
+import { createElement, appendChildren } from '../../utils/dom-helpers.js';
 
-export async function showCurrencies() {
-	const content = document.querySelector('.content');
-	content.innerHTML = '';
+function createTitleContainer() {
+	const container = createElement('div', 'title-container');
+	container.style.display = 'flex';
+	container.style.justifyContent = 'space-between';
+	container.style.alignItems = 'center';
 
-	const titleContainer = document.createElement('div');
-	titleContainer.className = 'title-container';
-	titleContainer.style.display = 'flex';
-	titleContainer.style.justifyContent = 'space-between';
-	titleContainer.style.alignItems = 'center';
-	const title = document.createElement('h2');
-	title.className = 'content-title';
-	title.textContent = 'Lista de criptomonedas';
+	const title = createElement(
+		'h2',
+		'content-title',
+		'Lista de criptomonedas'
+	);
+	const createIcon = createElement('span', 'create-icon');
 
-	const createIcon = document.createElement('span');
-	createIcon.className = 'create-icon';
+	appendChildren(container, title, createIcon);
+	return container;
+}
 
-	titleContainer.appendChild(title);
-	titleContainer.appendChild(createIcon);
-
-	const grid = document.createElement('div');
-	grid.className = 'currencies-grid';
-
+function createCurrencyGrid() {
+	const grid = createElement('div', 'currencies-grid');
 	const headers = [
 		'ID',
 		'Nombre',
@@ -34,66 +32,72 @@ export async function showCurrencies() {
 		'Liquidez',
 		'Acciones',
 	];
+
 	headers.forEach((text) => {
-		const span = document.createElement('span');
-		span.className = 'grid-header-title';
-		span.textContent = text;
+		const headerSpan = createElement('span', 'grid-header-title', text);
+		grid.appendChild(headerSpan);
+	});
+
+	return grid;
+}
+
+function createActionButtons(currency, refreshCallback) {
+	const actionsSpan = createElement('span', 'grid-row-text actions');
+
+	const deleteIcon = createElement('span', 'delete-icon');
+	deleteIcon.addEventListener('click', () => {
+		showDeleteCurrencyDialog(currency, refreshCallback);
+	});
+
+	const editIcon = createElement('span', 'edit-icon');
+	editIcon.title = 'Editar criptomoneda';
+	editIcon.style.cursor = 'pointer';
+	editIcon.addEventListener('click', () => {
+		showEditCurrencyDialog(currency, refreshCallback);
+	});
+
+	appendChildren(actionsSpan, deleteIcon, editIcon);
+	return actionsSpan;
+}
+
+function renderCurrencyRow(currency, grid) {
+	const fields = [
+		currency.id,
+		currency.name,
+		currency.symbol,
+		currency.usd_value,
+		currency.liquidity,
+	];
+
+	fields.forEach((value) => {
+		const span = createElement('span', 'grid-row-text', value);
 		grid.appendChild(span);
 	});
 
-	content.appendChild(titleContainer);
-	content.appendChild(grid);
+	const actions = createActionButtons(currency, () => showCurrencies());
+	grid.appendChild(actions);
+}
+
+export async function showCurrencies() {
+	const content = document.querySelector('.content');
+	content.innerHTML = '';
+
+	const titleContainer = createTitleContainer();
+	const grid = createCurrencyGrid();
+
+	appendChildren(content, titleContainer, grid);
 
 	const data = await fetchCurrencies();
 
 	if (data.length === 0) {
-		grid.innerHTML += `<span class="grid-row-text error">No se pudieron cargar las monedas.</span>`;
+		const errorSpan = createElement(
+			'span',
+			'grid-row-text error',
+			'No se pudieron cargar las monedas.'
+		);
+		grid.appendChild(errorSpan);
 		return;
 	}
 
-	data.forEach((currency) => {
-		const fields = [
-			currency.id,
-			currency.name,
-			currency.symbol,
-			currency.usd_value,
-			currency.liquidity,
-		];
-
-		fields.forEach((value) => {
-			const span = document.createElement('span');
-			span.className = 'grid-row-text';
-			span.textContent = value;
-			grid.appendChild(span);
-		});
-
-		const actionsSpan = document.createElement('span');
-		actionsSpan.className = 'grid-row-text actions';
-
-		const deleteIcon = document.createElement('span');
-		deleteIcon.className = 'delete-icon';
-
-		deleteIcon.addEventListener('click', () => {
-			showDeleteCurrencyDialog(currency, () => {
-				showCurrencies();
-			});
-		});
-
-		const editIcon = document.createElement('span');
-		editIcon.className = 'edit-icon';
-		editIcon.title = 'Editar criptomoneda';
-		editIcon.style.cursor = 'pointer';
-
-		// Add click event listener to show edit dialog
-		editIcon.addEventListener('click', () => {
-			showEditCurrencyDialog(currency, () => {
-				// Refresh the currencies list after successful update
-				showCurrencies();
-			});
-		});
-
-		actionsSpan.appendChild(deleteIcon);
-		actionsSpan.appendChild(editIcon);
-		grid.appendChild(actionsSpan);
-	});
+	data.forEach((currency) => renderCurrencyRow(currency, grid));
 }

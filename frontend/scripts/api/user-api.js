@@ -1,26 +1,10 @@
-/**
- * User management API functions
- */
+import { apiRequest } from '../utils/api-helpers.js';
 
 export async function fetchUsers() {
 	try {
-		const token = localStorage.getItem('token');
-		if (!token) {
-			throw new Error('No authentication token found');
-		}
-
-		const response = await fetch('/api/v1/users/list', {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
+		const result = await apiRequest('/api/v1/users/list', {
+			requireAuth: true,
 		});
-
-		if (!response.ok) {
-			const errorData = await response.json();
-			throw new Error(errorData.message || 'Failed to load users');
-		}
-
-		const result = await response.json();
 		return result.data.sort((a, b) => a.id - b.id);
 	} catch (error) {
 		console.error('Failed to load users:', error);
@@ -30,29 +14,12 @@ export async function fetchUsers() {
 
 export async function updateUserRole(userId, role) {
 	try {
-		const token = localStorage.getItem('token');
-		if (!token) {
-			throw new Error('No authentication token found');
-		}
-
-		const response = await fetch('/api/v1/users/update/admin', {
+		const data = await apiRequest('/api/v1/users/update/admin', {
 			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				id: userId,
-				role: role,
-			}),
+			requireAuth: true,
+			body: JSON.stringify({ id: userId, role }),
 		});
 
-		if (!response.ok) {
-			const errorData = await response.json();
-			throw new Error(errorData.message || 'Failed to update user role');
-		}
-
-		const data = await response.json();
 		return {
 			success: true,
 			data,
@@ -69,25 +36,10 @@ export async function updateUserRole(userId, role) {
 
 export async function fetchUserProfile() {
 	try {
-		const token = localStorage.getItem('token');
-		if (!token) {
-			throw new Error('No authentication token found');
-		}
-
-		const response = await fetch('/api/v1/users/profile', {
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
+		const result = await apiRequest('/api/v1/users/profile', {
+			requireAuth: true,
 		});
 
-		if (!response.ok) {
-			const errorData = await response.json();
-			throw new Error(
-				errorData.message || 'Failed to fetch user profile'
-			);
-		}
-
-		const result = await response.json();
 		return {
 			success: true,
 			data: result.data,

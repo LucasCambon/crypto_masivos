@@ -1,114 +1,78 @@
 import { registerUser } from '../../api/auth-api.js';
+import { createElement, appendChildren } from '../../utils/dom-helpers.js';
+import {
+	createDialogHeader,
+	createFormWithFields,
+} from '../../utils/form-helpers.js';
+import { storeToken } from '../../utils/auth-helpers.js';
+import { handleApiError, clearError } from '../../utils/error-handler.js';
 
 export function createRegister(onClose) {
-	const newRegister = document.createElement('div');
-	newRegister.classList.add('register');
+	const container = createElement('div', 'register');
+	const header = createDialogHeader('Registrarse', onClose);
 
-	const headerContainer = document.createElement('div');
-	headerContainer.classList.add('dialog-header');
+	const fields = [
+		{
+			name: 'username',
+			id: 'register-username',
+			label: 'Nombre de usuario',
+			type: 'text',
+			placeholder: 'Nombre de usuario',
+			autocomplete: 'username',
+			required: true,
+		},
+		{
+			name: 'email',
+			id: 'register-email',
+			label: 'Correo electrónico',
+			type: 'email',
+			placeholder: 'Correo electrónico',
+			autocomplete: 'email',
+			required: true,
+		},
+		{
+			name: 'password',
+			id: 'register-password',
+			label: 'Contraseña',
+			type: 'password',
+			placeholder: 'Contraseña',
+			autocomplete: 'new-password',
+			required: true,
+		},
+	];
 
-	const title = document.createElement('h2');
-	title.classList.add('dialog-title');
-	title.textContent = 'Registrarse';
-
-	const closeIcon = document.createElement('span');
-	closeIcon.classList.add('close-icon');
-
-	closeIcon.addEventListener('click', () => {
-		if (typeof onClose === 'function') {
-			onClose();
-		}
-	});
-
-	headerContainer.appendChild(title);
-	headerContainer.appendChild(closeIcon);
-
-	newRegister.appendChild(headerContainer);
-
-	const newForm = document.createElement('form');
-	newForm.id = 'register-form';
-	newForm.addEventListener('submit', async (e) => {
+	const handleSubmit = async (e, fieldElements, errorDisplay) => {
 		e.preventDefault();
-
-		const username = e.target.username.value;
-		const email = e.target.email.value;
-		const password = e.target.password.value;
+		clearError(errorDisplay);
 
 		try {
-			const result = await registerUser(username, email, password);
+			const result = await registerUser(
+				fieldElements.username.value,
+				fieldElements.email.value,
+				fieldElements.password.value
+			);
 
 			if (!result.success) {
-				console.error('Registration failed:', result.error);
-				errorSpan.textContent = result.error;
-				return;
+				throw new Error(result.error);
 			}
 
 			if (result.token) {
-				localStorage.setItem('token', result.token);
+				storeToken(result.token);
 			}
 
 			onClose();
 		} catch (error) {
-			console.error('Request failed:', error.message);
-			errorSpan.textContent = 'Error inesperado durante el registro';
+			handleApiError(error, errorDisplay, 'Error durante el registro');
 		}
-	});
-	newRegister.appendChild(newForm);
+	};
 
-	// Username Input
-	const usernameLabel = document.createElement('label');
-	usernameLabel.htmlFor = 'register-username';
-	usernameLabel.textContent = 'Nombre de usuario';
-	newForm.appendChild(usernameLabel);
+	const { form } = createFormWithFields(
+		'register-form',
+		fields,
+		handleSubmit
+	);
+	form.querySelector('button').textContent = 'Registrarse';
 
-	const usernameInput = document.createElement('input');
-	usernameInput.id = 'register-username';
-	usernameInput.type = 'text';
-	usernameInput.name = 'username';
-	usernameInput.required = true;
-	usernameInput.autocomplete = 'username';
-	usernameInput.placeholder = 'Nombre de usuario';
-	newForm.appendChild(usernameInput);
-
-	// Email Input
-	const emailLabel = document.createElement('label');
-	emailLabel.htmlFor = 'register-email';
-	emailLabel.textContent = 'Correo electrónico';
-	newForm.appendChild(emailLabel);
-
-	const emailInput = document.createElement('input');
-	emailInput.id = 'register-email';
-	emailInput.type = 'email';
-	emailInput.name = 'email';
-	emailInput.required = true;
-	emailInput.autocomplete = 'email';
-	emailInput.placeholder = 'Correo electrónico';
-	newForm.appendChild(emailInput);
-
-	// Password Input
-	const passwordLabel = document.createElement('label');
-	passwordLabel.htmlFor = 'register-password';
-	passwordLabel.textContent = 'Contraseña';
-	newForm.appendChild(passwordLabel);
-
-	const passwordInput = document.createElement('input');
-	passwordInput.id = 'register-password';
-	passwordInput.type = 'password';
-	passwordInput.name = 'password';
-	passwordInput.required = true;
-	passwordInput.autocomplete = 'new-password';
-	passwordInput.placeholder = 'Contraseña';
-	newForm.appendChild(passwordInput);
-
-	const submitButton = document.createElement('button');
-	submitButton.type = 'submit';
-	submitButton.textContent = 'Registrarse';
-	submitButton.classList.add('primary');
-	newForm.appendChild(submitButton);
-
-	const errorSpan = document.createElement('span');
-	errorSpan.classList.add('error');
-	newForm.appendChild(errorSpan);
-
-	return newRegister;
+	appendChildren(container, header, form);
+	return container;
 }

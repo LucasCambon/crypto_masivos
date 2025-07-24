@@ -1,11 +1,8 @@
-/**
- * Currency API functions
- */
+import { apiRequest } from '../utils/api-helpers.js';
 
 export async function fetchCurrencies() {
 	try {
-		const response = await fetch('/api/v1/currencies/list');
-		const result = await response.json();
+		const result = await apiRequest('/api/v1/currencies/list');
 		return result.data.sort((a, b) => a.id - b.id);
 	} catch (error) {
 		console.error('Failed to load currencies:', error);
@@ -15,26 +12,12 @@ export async function fetchCurrencies() {
 
 export async function createCurrency(currencyData) {
 	try {
-		const token = localStorage.getItem('token');
-		if (!token) {
-			throw new Error('No authentication token found');
-		}
-
-		const response = await fetch('/api/v1/currencies/create', {
+		const data = await apiRequest('/api/v1/currencies/create', {
 			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${token}`,
-			},
+			requireAuth: true,
 			body: JSON.stringify(currencyData),
 		});
 
-		if (!response.ok) {
-			const errorData = await response.json();
-			throw new Error(errorData.message || 'Failed to create currency');
-		}
-
-		const data = await response.json();
 		return {
 			success: true,
 			data,
@@ -51,26 +34,12 @@ export async function createCurrency(currencyData) {
 
 export async function updateCurrency(currencyData) {
 	try {
-		const token = localStorage.getItem('token');
-		if (!token) {
-			throw new Error('No authentication token found');
-		}
-
-		const response = await fetch('/api/v1/currencies/update', {
+		const data = await apiRequest('/api/v1/currencies/update', {
 			method: 'PUT',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${token}`,
-			},
+			requireAuth: true,
 			body: JSON.stringify(currencyData),
 		});
 
-		if (!response.ok) {
-			const errorData = await response.json();
-			throw new Error(errorData.message || 'Failed to update currency');
-		}
-
-		const data = await response.json();
 		return {
 			success: true,
 			data,
@@ -87,28 +56,12 @@ export async function updateCurrency(currencyData) {
 
 export async function deleteCurrency(currencyId) {
 	try {
-		const token = localStorage.getItem('token');
-		if (!token) {
-			throw new Error('No authentication token found');
-		}
-
-		const response = await fetch('/api/v1/currencies/delete', {
+		const data = await apiRequest('/api/v1/currencies/delete', {
 			method: 'DELETE',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${token}`,
-			},
-			body: JSON.stringify({
-				id: currencyId,
-			}),
+			requireAuth: true,
+			body: JSON.stringify({ id: currencyId }),
 		});
 
-		if (!response.ok) {
-			const errorData = await response.json();
-			throw new Error(errorData.message || 'Failed to delete currency');
-		}
-
-		const data = await response.json();
 		return {
 			success: true,
 			data,
