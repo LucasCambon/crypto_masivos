@@ -43,35 +43,55 @@ You can run the full application using **Docker Compose**.
 
 - [Docker](https://www.docker.com/products/docker-desktop/) installed
 - [Docker Compose](https://docs.docker.com/compose/) (usually included with Docker Desktop)
-- Configure the `.env` file. Use the example file as a template and fill in the fields with any values you like
+- `.env` file configured (you can copy the example):
 
 ```bash
 cp .env.example .env
 ```
 
-### 2. Build and start the services
+### 2. Start the app
 
-In the root directory of the project (where `docker-compose.yml` is located), run:
+In the root folder, run:
 
 ```bash
-docker-compose -f docker-compose.yml up --build
+docker-compose up --build
 ```
-#### 🖥️ Development (local)
+#### 🖥️ Development
 
-This mode you should only use the base file `docker-compose.yml` and exclude the override when running.
+For development, only the base docker-compose.yml is used.
+By default, Docker Compose will automatically apply the file `docker-compose.override.yml` if it exists in the same directory. We use this file to configure development-specific options, such as:
 
-And you should see all the services with created and running status. Also, you can se the real time logs to be sure that the app is running correctly
+- Live reloading and volume mounts for local development.
+- Custom local Nginx configuration.
 
-Tip: You can use the _-d_ flag to run it on background mode so you can keep using the same terminal session. In case you want to see the background logs, just run the following command for the service you want to see (backend, frontend or db):
+To build and run in dev mode (foreground):
+
+```bash
+docker-compose up --build
+```
+
+Or in background mode:
+
+```bash
+docker-compose up --build -d
+```
+
+To follow logs of a specific service:
 
 ```bash
 docker-compose logs <service>
 ```
 
 🚀 Production
+For production, we use `docker-compose.override.prod.yml`, which includes:
 
-When deploying to a server (e.g., with SSL certificates and a domain), you merge `docker-compose.yml` combined with `docker-compose.override.yml` (applied automatically by Docker Compose). 
+- Nginx with SSL (via Certbot)
+- Port 443 exposure (HTTPS)
+- Domain setup
+
+To build and run in dev mode (foreground):
 
 ```bash
-docker-compose up --build
+docker-compose -f docker-compose.yml -f docker-compose.override.prod.yml up --build
 ```
+Once deployed, the app is accessible at: https://crypto-masivos.lat

@@ -38,6 +38,22 @@
 	.delete-icon {
 		--svg: url(https://icongr.am/material/delete.svg?color=cc4444);
 	}
+
+	.exchange-icon {
+		--svg: url(https://icongr.am/material/swap-vertical.svg?color=242247);
+	}
+
+	.withdraw-icon {
+		--svg: url(https://icongr.am/material/arrow-down.svg?color=242247);
+	}
+
+	.add-founds-icon {
+		--svg: url(https://icongr.am/material/plus.svg?color=242247);
+	}
+
+	.delete-wallet-icon {
+		--svg: url(https://icongr.am/material/delete.svg?color=cc4444);
+	}
 }
 
 @media (prefers-color-scheme: dark) {
@@ -66,6 +82,22 @@
 	}
 
 	.delete-icon {
+		--svg: url(https://icongr.am/material/delete.svg?color=cc4444);
+	}
+
+	.exchange-icon {
+		--svg: url(https://icongr.am/material/swap-vertical.svg?color=242247);
+	}
+
+	.withdraw-icon {
+		--svg: url(https://icongr.am/material/arrow-down.svg?color=242247);
+	}
+
+	.add-founds-icon {
+		--svg: url(https://icongr.am/material/plus.svg?color=242247);
+	}
+
+	.delete-wallet-icon {
 		--svg: url(https://icongr.am/material/delete.svg?color=cc4444);
 	}
 }

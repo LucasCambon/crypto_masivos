@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="CryptoMasivos es tu billetera digital para gestionar criptomonedas de forma segura, rápida y sencilla. Control total de tus activos en un solo lugar." />
+
+		<link rel="shortcut icon" href="assets/icon.svg" type="image/x-icon" />
+		<link rel="stylesheet" href="styles/styles.css" />
+		<link rel="stylesheet" href="styles/pages/portfolio.css" />
+		<link
+			rel="preload"
+			as="style"
+			href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+			onload="this.onload=null;this.rel='stylesheet'" />
+		<noscript>
+			<link
+				rel="stylesheet"
+				href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" />
+		</noscript>
+
+		<title>Crypto Masivos - Portfolio</title>
+	</head>
+	<body>
+		<header>
+			<nav>
+				<a href="portfolio.html" class="site-logo">CryptoMasivos</a>
+
+				<div class="btn-container">
+					<button type="button" class="secondary" id="logout-btn">
+						Cerrar sesión
+					</button>
+				</div>
+			</nav>
+			<aside>
+				<p class="user-greeting">
+					Hola
+					<b id="username"></b>
+					👋
+				</p>
+				<button class="edit-profile-btn secondary">
+					Editar perfil
+				</button>
+			</aside>
+		</header>
+
+		<main>
+			<!-- Total card -->
+			<section class="total card">
+				<p>Total</p>
+				<p></p>
+			</section>
+
+			<!-- Action buttons -->
+			<div class="action-btns">
+				<button class="action-btn" title="Transferir">
+					<span class="exchange-icon"></span>
+				</button>
+				<button class="action-btn" title="Retirar">
+					<span class="withdraw-icon"></span>
+				</button>
+				<button class="action-btn" title="Depositar">
+					<span class="add-founds-icon"></span>
+				</button>
+			</div>
+
+			<!-- List of cryptocurrencies -->
+			<section class="wallet-list card"></section>
+		</main>
+
+		<script type="module" src="scripts/pages/portfolio.js"></script>
+	</body>
+</html>

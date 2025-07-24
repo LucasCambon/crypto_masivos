@@ -1,0 +1,52 @@
+.total {
+	width: 85%;
+	min-height: 100px;
+	align-items: flex-start;
+	max-width: 1200px;
+}
+
+.total p:last-child {
+	font-size: 3em;
+}
+
+.action-btns {
+	display: flex;
+	margin: 24px;
+	gap: 24px;
+}
+
+.exchange-icon,
+.withdraw-icon,
+.add-founds-icon {
+	--icon-size: 32px;
+}
+
+.action-btn {
+	--action-btn-size: 4em;
+	border-radius: 8px;
+	background-color: var(--btn-portfolio-action-bg);
+	width: var(--action-btn-size);
+	height: var(--action-btn-size);
+}
+
+.wallet-list {
+	width: 50%;
+	max-width: 768px;
+	min-height: 100px;
+	margin: 16px;
+}
+
+.wallet-item {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.new-wallet-group,
+.existing-wallet-group {
+	gap: 1em;
+}
+
+.delete-wallet-icon:hover {
+	cursor: pointer;
+}
