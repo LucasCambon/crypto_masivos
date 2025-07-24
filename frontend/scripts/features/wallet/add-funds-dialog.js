@@ -63,12 +63,15 @@ export function createAddFundsDialog(onClose) {
 	aliasInput.type = 'text';
 	aliasInput.placeholder = 'Enter wallet alias';
 
+	const error = createElement('span', 'error');
+
 	appendChildren(
 		newWalletGroup,
 		currencyLabel,
 		currencySelect,
 		aliasLabel,
-		aliasInput
+		aliasInput,
+		error
 	);
 
 	// Amount input

@@ -81,6 +81,8 @@ export function createExchangeDialog(onClose) {
 	const exchangeBtn = createElement('button', 'primary', 'Transfer');
 	exchangeBtn.type = 'submit';
 
+	const error = createElement('span', 'error');
+
 	appendChildren(buttonGroup, cancelBtn, exchangeBtn);
 	appendChildren(
 		form,
@@ -90,7 +92,8 @@ export function createExchangeDialog(onClose) {
 		toWalletGroup,
 		toBalanceDisplay,
 		exchangeInfo,
-		buttonGroup
+		buttonGroup,
+		error
 	);
 	appendChildren(content, header, form);
 	container.appendChild(content);
