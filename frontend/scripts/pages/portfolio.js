@@ -1,13 +1,15 @@
 import { getWallet } from '../api/wallet-api.js';
+import { logoutUser } from '../api/auth-api.js';
 
 window.addEventListener('DOMContentLoaded', async () => {
   const totalCard = document.querySelector('.total-card p:last-child');
   const walletList = document.querySelector('.wallet-list');
   const greet = document.querySelector('.portfolio-main p');
+  const logoutBtn = document.querySelector('.logout-btn');
 
   const walletData = await getWallet();
   if (!walletData) return;
-
+  if (logoutBtn) logoutBtn.addEventListener('click', logoutUser);
   // Renderize total
   const total = walletData.reduce((acc, w) => acc + (w.balance || 0), 0);
   if (totalCard) totalCard.textContent = `$${total}`;
