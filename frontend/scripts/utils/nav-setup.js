@@ -1,4 +1,5 @@
 import { fetchUserProfile } from '../api/user-api.js';
+import { logoutUser } from '../api/auth-api.js';
 
 export async function setupNavigationForUser() {
 	const container = document.querySelector('.btn-container');
@@ -27,6 +28,14 @@ export async function setupNavigationForUser() {
 			});
 			container.appendChild(dashboardBtn);
 		}
+
+		const logoutBtn = document.createElement('button');
+		logoutBtn.textContent = 'Cerrar sesión';
+		logoutBtn.className = 'secondary';
+		logoutBtn.addEventListener('click', () => {
+			logoutUser();
+		});
+		container.appendChild(logoutBtn);
 	} catch (error) {
 		console.error('Error setting up user navigation:', error);
 	}
