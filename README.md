@@ -94,4 +94,4 @@ To build and run in dev mode (foreground):
 ```bash
 docker-compose -f docker-compose.yml -f docker-compose.override.prod.yml up --build
 ```
-Once deployed, the app is accessible at: https://crypto-masivos.lat
+Once deployed, the app is accessible at: http://crypto-masivos.lat
