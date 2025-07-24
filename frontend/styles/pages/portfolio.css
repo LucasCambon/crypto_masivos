@@ -1,7 +1,8 @@
 .total {
-	min-width: 85%;
+	width: 85%;
 	min-height: 100px;
 	align-items: flex-start;
+	max-width: 1200px;
 }
 
 .total p:last-child {
@@ -29,8 +30,10 @@
 }
 
 .wallet-list {
-	min-width: 50%;
+	width: 50%;
+	max-width: 768px;
 	min-height: 100px;
+	margin: 16px;
 }
 
 .wallet-item {
