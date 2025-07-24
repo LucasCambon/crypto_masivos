@@ -34,30 +34,30 @@ function updateUserGreeting() {
 function createWalletItem(wallet) {
 	const walletItem = createElement('div', 'wallet-item');
 
-	const walletInfo = createElement('div', 'wallet-info');
-
-	const walletDetails = createElement('div', 'wallet-details');
-	const walletSymbol = createElement(
-		'span',
-		'wallet-symbol',
-		wallet.currency_symbol || 'UNKNOWN'
-	);
 	const walletName = createElement(
 		'span',
 		'wallet-name',
 		wallet.currency_name || wallet.alias || 'Unknown Currency'
 	);
 
-	appendChildren(walletDetails, walletSymbol, walletName);
-	appendChildren(walletInfo, walletDetails);
+	const rightGroup = createElement('div');
+	rightGroup.style.display = 'flex';
+	rightGroup.style.gap = '0.5em';
 
+	const walletSymbol = createElement(
+		'span',
+		'wallet-symbol',
+		wallet.currency_symbol || 'UNKNOWN'
+	);
 	const walletBalance = createElement(
 		'span',
 		'wallet-balance',
 		`${wallet.balance || 0}`
 	);
 
-	appendChildren(walletItem, walletInfo, walletBalance);
+	appendChildren(rightGroup, walletSymbol, walletBalance);
+
+	appendChildren(walletItem, walletName, rightGroup);
 	return walletItem;
 }
 
