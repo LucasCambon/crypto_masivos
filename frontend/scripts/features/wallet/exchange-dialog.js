@@ -323,7 +323,8 @@ export function createExchangeDialog(onClose) {
 		try {
 			const fromResult = await updateWallet({
 				id: fromWalletId,
-				balance: fromWallet.balance - amount,
+				balance: amount,
+				type: 'withdraw',
 			});
 
 			if (!fromResult.success) {
@@ -332,13 +333,15 @@ export function createExchangeDialog(onClose) {
 
 			const toResult = await updateWallet({
 				id: toWalletId,
-				balance: toWallet.balance + convertedAmount,
+				balance: convertedAmount,
+				type: 'deposit',
 			});
 
 			if (!toResult.success) {
 				await updateWallet({
 					id: fromWalletId,
-					balance: fromWallet.balance,
+					balance: amount,
+					type: 'deposit',
 				});
 				throw new Error('Failed to update destination wallet');
 			}

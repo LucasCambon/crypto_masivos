@@ -131,18 +131,20 @@ async function updateWallet(req, res) {
     }
 
     const wallet = result.rows[0];
+    const numericBalance = parseFloat(balance);
+    const currentBalance = parseFloat(wallet.balance);
     let newBalance;
 
     if (type === "deposit") {
-      newBalance = wallet.balance + Number(balance);
+      newBalance = currentBalance + numericBalance;
     } else if (type === "withdraw") {
-      if (Number(balance) > wallet.balance) {
+      if (numericBalance > currentBalance) {
         return res.status(400).json({
           status: "error",
           message: "Insufficient balance for withdrawal",
         });
       }
-      newBalance = wallet.balance - Number(balance);
+      newBalance = currentBalance  - numericBalance;
     }
 
     const last_activity = new Date();
