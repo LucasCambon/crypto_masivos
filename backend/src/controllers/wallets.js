@@ -97,7 +97,7 @@ async function createWallet(req, res) {
 }
 
 async function updateWallet(req, res) {
-  const { id, balance } = req.body;
+  const { id, balance, type } = req.body;
   const user_id = req.user.id;
   if (!id) {
     return res.status(400).json({ status: "error", message: "Wallet ID is required" });
@@ -109,7 +109,21 @@ async function updateWallet(req, res) {
       return res.status(404).json({ status: "error", message: "Wallet not found" });
     }
 
-    const current = result.rows[0];
+    const wallet = result.rows[0];
+    let newBalance;
+
+    if (type === "deposit") {
+      newBalance = wallet.balance + Number(amount);
+    } else if (type === "withdraw") {
+      if (Number(amount) > wallet.balance) {
+        return res.status(400).json({
+          status: "error",
+          message: "Insufficient balance for withdrawal",
+        });
+      }
+      newBalance = wallet.balance - Number(amount);
+    }
+
     const last_activity = new Date();
 
     const updated = await pool.query(
@@ -119,7 +133,7 @@ async function updateWallet(req, res) {
        WHERE id = $3
        RETURNING *`,
       [
-        balance || current.balance,
+        newBalance,
         last_activity,
         id
       ]

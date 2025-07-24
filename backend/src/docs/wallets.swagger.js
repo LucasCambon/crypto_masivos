@@ -100,11 +100,17 @@
  *             type: object
  *             required:
  *               - id
+ *               - type
  *             properties:
  *               id:
  *                 type: integer
  *               balance:
  *                 type: number
+ *               type:
+ *                 type: string
+ *                 enum: [withdraw, deposit]
+ *                 description: Movement type to be done
+ *                  
  *     responses:
  *       200:
  *         description: Wallet updated correctly.
