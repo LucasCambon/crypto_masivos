@@ -108,7 +108,7 @@ export function createWithdrawDialog(onClose) {
 			return;
 		}
 
-		if (amount <= 0) {
+		if (amount < 0) {
 			error.textContent = 'Amount must be greater than 0';
 			return;
 		}
@@ -119,11 +119,10 @@ export function createWithdrawDialog(onClose) {
 		}
 
 		try {
-			const newBalance = currentBalance - amount;
-
 			const result = await updateWallet({
 				id: parseInt(walletId),
-				balance: newBalance,
+				balance: amount,
+				type: 'deposit',
 			});
 
 			if (result.success) {

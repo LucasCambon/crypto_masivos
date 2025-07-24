@@ -287,17 +287,19 @@ export function createExchangeDialog(onClose) {
 		const amount = parseFloat(amountInput.value);
 
 		if (!fromWalletId || !toWalletId) {
-			alert('Please select both source and destination wallets');
+			error.textContent =
+				'Please select both source and destination wallets';
 			return;
 		}
 
 		if (fromWalletId === toWalletId) {
-			alert('Source and destination wallets must be different');
+			error.textContent =
+				'Source and destination wallets must be different';
 			return;
 		}
 
-		if (amount <= 0) {
-			alert('Amount must be greater than 0');
+		if (amount < 0) {
+			error.textContent = 'Amount must be greater than 0';
 			return;
 		}
 
@@ -307,7 +309,7 @@ export function createExchangeDialog(onClose) {
 		const toWallet = wallets.find((w) => w.id.toString() === toWalletId);
 
 		if (amount > fromWallet.balance) {
-			alert('Insufficient funds in source wallet');
+			error.textContent = 'Insufficient funds in source wallet';
 			return;
 		}
 
@@ -319,10 +321,6 @@ export function createExchangeDialog(onClose) {
 		const convertedAmount = amount * conversionRate;
 
 		try {
-			exchangeBtn.disabled = true;
-			exchangeBtn.textContent = 'Processing...';
-
-			// Update both wallets with conversion
 			const fromResult = await updateWallet({
 				id: fromWalletId,
 				balance: fromWallet.balance - amount,
@@ -338,7 +336,6 @@ export function createExchangeDialog(onClose) {
 			});
 
 			if (!toResult.success) {
-				// Try to revert the first transaction
 				await updateWallet({
 					id: fromWalletId,
 					balance: fromWallet.balance,

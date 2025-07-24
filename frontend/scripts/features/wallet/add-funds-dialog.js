@@ -181,7 +181,7 @@ export function createAddFundsDialog(onClose) {
 			return;
 		}
 
-		if (amount <= 0) {
+		if (amount < 0) {
 			return;
 		}
 
