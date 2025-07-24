@@ -3,6 +3,7 @@ import { renderCurrencies } from '../utils/currency-helpers.js';
 import { setCurrencies } from '../features/currency/currency-converter.js';
 import { addCurrencyButtons } from '../features/currency/convert-button.js';
 import { addLoginRegisterEventHandlers } from '../features/auth/auth-handlers.js';
+import { setupNavigationForUser } from '../utils/nav-setup.js';
 
 async function loadAllCurrencies() {
 	try {
@@ -27,4 +28,5 @@ async function loadAllCurrencies() {
 document.addEventListener('DOMContentLoaded', () => {
 	loadAllCurrencies();
 	addLoginRegisterEventHandlers();
+	setupNavigationForUser();
 });

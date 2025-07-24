@@ -53,3 +53,25 @@ export async function fetchUserProfile() {
 		};
 	}
 }
+
+export async function updateUser(userData) {
+	try {
+		const data = await apiRequest('/api/v1/users/update', {
+			method: 'PUT',
+			requireAuth: true,
+			body: JSON.stringify(userData),
+		});
+
+		return {
+			success: true,
+			data,
+			user: data.data,
+		};
+	} catch (error) {
+		console.error('Failed to update user:', error);
+		return {
+			success: false,
+			error: error.message,
+		};
+	}
+}

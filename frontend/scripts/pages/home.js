@@ -1,6 +1,7 @@
 import { fetchCurrencies } from '../api/currency-api.js';
 import { renderCurrencies } from '../utils/currency-helpers.js';
 import { addLoginRegisterEventHandlers } from '../features/auth/auth-handlers.js';
+import { setupNavigationForUser } from '../utils/nav-setup.js';
 
 async function loadHomeCurrencies() {
 	try {
@@ -16,7 +17,9 @@ async function loadHomeCurrencies() {
 	}
 }
 
+
 document.addEventListener('DOMContentLoaded', () => {
 	loadHomeCurrencies();
 	addLoginRegisterEventHandlers();
+	setupNavigationForUser();
 });

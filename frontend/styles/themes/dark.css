@@ -42,5 +42,7 @@
 		--btn-dashboard-fg: var(--color-indigo-600);
 		--btn-dashboard-hover-bg: var(--color-indigo-300);
 		--btn-dashboard-active-bg: var(--color-indigo-100);
+
+		--btn-portfolio-action-bg: var(--color-indigo-400);
 	}
 }

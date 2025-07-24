@@ -4,6 +4,10 @@ import { createRegister } from '../features/auth/register-form.js';
 import { createDeleteCurrencyDialog } from '../features/currency/delete-currency-dialog.js';
 import { createCreateCurrency } from '../features/currency/create-currency-form.js';
 import { createEditCurrency } from '../features/currency/edit-currency-form.js';
+import { createEditProfileDialog } from '../features/user/edit-user-profile.js';
+import { createWithdrawDialog } from '../features/wallet/withdraw-dialog.js';
+import { createAddFundsDialog } from '../features/wallet/add-funds-dialog.js';
+import { createExchangeDialog } from '../features/wallet/exchange-dialog.js';
 import { createElement } from '../utils/dom-helpers.js';
 
 function createDialog(content) {
@@ -57,6 +61,50 @@ export function showDeleteCurrencyDialog(currency, onSuccess) {
 			dialog.remove();
 			if (typeof onSuccess === 'function') {
 				onSuccess(currency);
+			}
+		})
+	);
+}
+
+export function showEditProfileDialog(user, onSuccess) {
+	const dialog = createDialog(
+		createEditProfileDialog(user, (wasUpdated) => {
+			dialog.remove();
+			if (wasUpdated && typeof onSuccess === 'function') {
+				onSuccess();
+			}
+		})
+	);
+}
+
+export function showWithdrawDialog(onSuccess) {
+	const dialog = createDialog(
+		createWithdrawDialog(() => {
+			dialog.remove();
+			if (typeof onSuccess === 'function') {
+				onSuccess();
+			}
+		})
+	);
+}
+
+export function showAddFundsDialog(onSuccess) {
+	const dialog = createDialog(
+		createAddFundsDialog(() => {
+			dialog.remove();
+			if (typeof onSuccess === 'function') {
+				onSuccess();
+			}
+		})
+	);
+}
+
+export function showExchangeDialog(onSuccess) {
+	const dialog = createDialog(
+		createExchangeDialog(() => {
+			dialog.remove();
+			if (typeof onSuccess === 'function') {
+				onSuccess();
 			}
 		})
 	);
