@@ -1,50 +1,7 @@
 const pool = require("../db");
 
 async function getWallets(req, res) {
-  try {
-    const result = await pool.query(`SELECT * FROM wallets`);
-    res.status(200).json({ status: "ok", data: result.rows, count: result.rowCount });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ status: "error", message: "Error fetching wallets" });
-  }
-}
-
-async function getWalletById(req, res) {
-  const { id } = req.params;
-
-  if (!id || isNaN(id)) {
-    return res.status(400).json({ status: "error", message: "Invalid or missing wallet ID" });
-  }
-
-  try {
-    const result = await pool.query(
-      `
-      SELECT w.*, u.username
-      FROM wallets w
-      JOIN users u ON w.user_id = u.id
-      WHERE w.id = $1
-      `,
-      [id]
-    );
-
-    if (result.rows.length === 0) {
-      return res.status(404).json({ status: "error", message: "Wallet not found" });
-    }
-
-    res.status(200).json({ status: "ok", data: result.rows[0] });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ status: "error", message: "Error retrieving wallet" });
-  }
-}
-
-const getWalletsByUserId = async (req, res) => {
-  const { user_id } = req.params;
-
-  if (!user_id || isNaN(user_id)) {
-    return res.status(400).json({ status: "error", message: "Invalid or missing user ID" });
-  }
+  const user_id = req.user.id
 
   try {
     const result = await pool.query(
@@ -70,7 +27,37 @@ const getWalletsByUserId = async (req, res) => {
     console.error("Error retrieving wallets by user_id:", error);
     res.status(500).json({ status: "error", message: "Internal server error" });
   }
-};
+}
+
+async function getWalletById(req, res) {
+  const { id } = req.params;
+  const user_id = req.user.id;
+
+  if (!id || isNaN(id)) {
+    return res.status(400).json({ status: "error", message: "Invalid or missing wallet ID" });
+  }
+
+  try {
+    const result = await pool.query(
+      `
+      SELECT w.*, u.username 
+      FROM wallets w
+      JOIN users u ON w.user_id = u.id
+      WHERE w.id = $1 AND w.user_id = $2
+      `,
+      [id , user_id]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ status: "error", message: "Wallet not found" });
+    }
+
+    res.status(200).json({ status: "ok", data: result.rows[0] });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ status: "error", message: "Error retrieving wallet" });
+  }
+}
 
 async function createWallet(req, res) {
   const { user_id, address, alias, currency_id } = req.body;

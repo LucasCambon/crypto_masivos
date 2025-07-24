@@ -16,8 +16,6 @@ main {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(275px, 1fr));
 
-	align-items: center;
-	justify-content: space-around;
 	gap: 32px;
 	width: fit-content;
 	margin: 16px auto;

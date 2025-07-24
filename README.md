@@ -45,13 +45,20 @@ You can run the full application using **Docker Compose**.
 - [Docker Compose](https://docs.docker.com/compose/) (usually included with Docker Desktop)
 - Configure the `.env` file. Use the example file as a template and fill in the fields with any values you like
 
+```bash
+cp .env.example .env
+```
+
 ### 2. Build and start the services
 
 In the root directory of the project (where `docker-compose.yml` is located), run:
 
 ```bash
-docker-compose up --build
+docker-compose -f docker-compose.yml up --build
 ```
+#### 🖥️ Development (local)
+
+This mode you should only use the base file `docker-compose.yml` and exclude the override when running.
 
 And you should see all the services with created and running status. Also, you can se the real time logs to be sure that the app is running correctly
 
@@ -59,4 +66,12 @@ Tip: You can use the _-d_ flag to run it on background mode so you can keep usin
 
 ```bash
 docker-compose logs <service>
+```
+
+🚀 Production
+
+When deploying to a server (e.g., with SSL certificates and a domain), you merge `docker-compose.yml` combined with `docker-compose.override.yml` (applied automatically by Docker Compose). 
+
+```bash
+docker-compose up --build
 ```

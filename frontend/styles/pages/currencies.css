@@ -65,20 +65,6 @@ main {
 	.currencies {
 		border-radius: 16px;
 	}
-
-	.about h2 {
-		font-size: 3em;
-		margin-left: 1em;
-		transform: translateX(0);
-	}
-
-	.about p {
-		text-align: left;
-	}
-
-	.about a {
-		align-self: flex-start;
-	}
 }
 
 @media (min-width: 768px) {

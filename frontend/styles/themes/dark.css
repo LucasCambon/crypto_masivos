@@ -15,20 +15,10 @@
 		--card-border-gradient-from: var(--color-indigo-400);
 		--card-border-gradient-to: var(--color-indigo-500);
 
-		--conversor-bg: var(--color-indigo-600);
-		--conversor-border: 2px solid var(--color-gold-300);
-		--conversor-input-bg: var(--color-indigo-500);
-		--conversor-input-border: 1px solid var(--color-indigo-300);
-
-		--login-bg: var(--color-indigo-600);
-		--login-border: 2px solid var(--color-gold-300);
-		--login-input-bg: var(--color-indigo-500);
-		--login-input-border: 1px solid var(--color-indigo-300);
-
-		--register-bg: var(--color-indigo-600);
-		--register-border: 2px solid var(--color-gold-300);
-		--register-input-bg: var(--color-indigo-500);
-		--register-input-border: 1px solid var(--color-indigo-300);
+		--dialog-bg: var(--color-indigo-600);
+		--dialog-border: 2px solid var(--color-gold-300);
+		--dialog-input-bg: var(--color-indigo-500);
+		--dialog-input-border: 1px solid var(--color-indigo-300);
 
 		/* Utilities colors */
 		--btn-primary-bg: var(--color-gold-400);

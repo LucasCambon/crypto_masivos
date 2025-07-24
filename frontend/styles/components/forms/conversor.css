@@ -1,26 +1,14 @@
 .conversor {
-	background-color: var(--conversor-bg);
-	border: var(--conversor-border);
-	min-width: 300px;
+	border: var(--dialog-border);
 }
 
-.conversor,
 .conversor form {
-	justify-content: center;
 	align-items: center;
-	display: flex;
-	flex-direction: column;
-	gap: 1em;
 }
 
 .conversor input,
 .conversor select {
-	user-select: all;
-	padding: 0.5em;
-	height: 100%;
-	border: var(--conversor-input-border);
-	background-color: var(--conversor-input-bg);
-	color: var(--color-fg);
+	height: 2rem;
 }
 
 .conversor input {
