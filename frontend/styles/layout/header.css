@@ -14,10 +14,6 @@ nav {
 	gap: 8px;
 }
 
-nav .btn-container {
-	margin-left: auto;
-}
-
 .site-logo {
 	font-size: 2rem;
 	font-weight: bold;
@@ -44,7 +40,12 @@ nav .btn-container {
 	.site-logo {
 		font-size: 2.5rem;
 	}
+
 	nav {
 		padding: 16px 24px;
+	}
+
+	nav .btn-container {
+		margin-left: auto;
 	}
 }
