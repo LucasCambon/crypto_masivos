@@ -1,6 +1,6 @@
-import { fetchCurrencies } from './modules/api.js';
-import { createCurrency } from './modules/currency-ui.js';
-import { addLoginRegisterEventHandlers } from './modules/event-handlers.js';
+import { fetchCurrencies } from '../api/currency-api.js';
+import { createCurrency } from '../features/currency/currency-card.js';
+import { addLoginRegisterEventHandlers } from '../features/auth/auth-handlers.js';
 
 async function loadCurrencies() {
 	try {

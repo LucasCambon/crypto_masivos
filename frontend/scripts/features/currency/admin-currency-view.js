@@ -1,5 +1,8 @@
-import { fetchCurrencies } from './api.js';
-import { showDeleteCurrencyDialog, showEditCurrencyDialog } from './dialog.js';
+import { fetchCurrencies } from '../../api/currency-api.js';
+import {
+	showDeleteCurrencyDialog,
+	showEditCurrencyDialog,
+} from '../../components/dialog-manager.js';
 
 export async function showCurrencies() {
 	const content = document.querySelector('.content');

@@ -1,4 +1,4 @@
-import { updateCurrency } from './api.js';
+import { updateCurrency } from '../../api/currency-api.js';
 
 export function createEditCurrency(currency, onClose) {
 	const newEditCurrency = document.createElement('div');

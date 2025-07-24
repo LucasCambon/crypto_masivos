@@ -1,7 +1,8 @@
-import { showUsers } from './modules/users-view.js';
-import { showCurrencies } from './modules/currency-view.js';
-import { logoutUser, fetchUserProfile } from './modules/api.js';
-import { showCreateCurrencyDialog } from './modules/dialog.js';
+import { showUsers } from '../features/user/admin-user-view.js';
+import { showCurrencies } from '../features/currency/admin-currency-view.js';
+import { logoutUser } from '../api/auth-api.js';
+import { fetchUserProfile } from '../api/user-api.js';
+import { showCreateCurrencyDialog } from '../components/dialog-manager.js';
 
 async function checkAdminAccess() {
 	try {

@@ -1,4 +1,4 @@
-import { updateConversion } from './converter.js';
+import { updateConversion } from './conversion-utils.js';
 
 let allCurrencies = [];
 

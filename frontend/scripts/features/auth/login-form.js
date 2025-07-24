@@ -1,4 +1,4 @@
-import { loginUser } from './api.js';
+import { loginUser } from '../../api/auth-api.js';
 
 export function createLogin(onClose) {
 	const newLogin = document.createElement('div');

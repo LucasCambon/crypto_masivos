@@ -1,4 +1,4 @@
-import { registerUser } from './api.js';
+import { registerUser } from '../../api/auth-api.js';
 
 export function createRegister(onClose) {
 	const newRegister = document.createElement('div');

@@ -1,4 +1,4 @@
-import { fetchUsers, updateUserRole } from './api.js';
+import { fetchUsers, updateUserRole } from '../../api/user-api.js';
 
 export async function showUsers() {
 	const content = document.querySelector('.content');

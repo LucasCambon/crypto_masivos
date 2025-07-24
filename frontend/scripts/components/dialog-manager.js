@@ -1,9 +1,9 @@
-import { createConversor } from './conversor.js';
-import { createLogin } from './login.js';
-import { createRegister } from './register.js';
-import { createDeleteCurrencyDialog } from './delete-currency.js';
-import { createCreateCurrency } from './create-currency.js';
-import { createEditCurrency } from './edit-currency.js';
+import { createConversor } from '../features/currency/currency-converter.js';
+import { createLogin } from '../features/auth/login-form.js';
+import { createRegister } from '../features/auth/register-form.js';
+import { createDeleteCurrencyDialog } from '../features/currency/delete-currency-dialog.js';
+import { createCreateCurrency } from '../features/currency/create-currency-form.js';
+import { createEditCurrency } from '../features/currency/edit-currency-form.js';
 
 export function showConverterDialog(currency) {
 	const newDialog = document.createElement('section');

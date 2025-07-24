@@ -1,8 +1,8 @@
-import { fetchCurrencies } from './modules/api.js';
-import { createCurrency } from './modules/currency-ui.js';
-import { setCurrencies } from './modules/conversor.js';
-import { addCurrencyButtons } from './modules/currency-buttons.js';
-import { addLoginRegisterEventHandlers } from './modules/event-handlers.js';
+import { fetchCurrencies } from '../api/currency-api.js';
+import { createCurrency } from '../features/currency/currency-card.js';
+import { setCurrencies } from '../features/currency/currency-converter.js';
+import { addCurrencyButtons } from '../features/currency/convert-button.js';
+import { addLoginRegisterEventHandlers } from '../features/auth/auth-handlers.js';
 
 async function loadCurrencies() {
 	try {

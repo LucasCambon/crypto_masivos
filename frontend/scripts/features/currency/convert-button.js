@@ -1,4 +1,4 @@
-import { showConverterDialog } from './dialog.js';
+import { showConverterDialog } from '../../components/dialog-manager.js';
 
 export function addCurrencyButtons() {
 	document.querySelectorAll('.currency').forEach((currencyDiv) => {

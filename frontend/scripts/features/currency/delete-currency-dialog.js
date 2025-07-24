@@ -1,4 +1,4 @@
-import { deleteCurrency } from './api.js';
+import { deleteCurrency } from '../../api/currency-api.js';
 
 export function createDeleteCurrencyDialog(currency, onClose) {
 	const newDialog = document.createElement('div');
