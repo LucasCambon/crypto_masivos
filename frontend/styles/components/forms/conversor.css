@@ -2,6 +2,15 @@
 	border: var(--dialog-border);
 }
 
+.conversor form {
+	align-items: center;
+}
+
+.conversor input,
+.conversor select {
+	height: 2rem;
+}
+
 .conversor input {
 	border-right-width: 0.5px;
 	border-radius: 6px 0 0 6px;

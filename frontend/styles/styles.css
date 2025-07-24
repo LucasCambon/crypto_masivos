@@ -22,6 +22,7 @@
 /* Layout */
 @import 'layout/header.css';
 @import 'layout/main.css';
+@import 'layout/body.css';
 
 /* Themes */
 @import 'themes/light.css';
