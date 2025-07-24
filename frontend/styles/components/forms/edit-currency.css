@@ -1,47 +1,4 @@
 .edit-currency {
-	background-color: var(--edit-currency-bg);
-	border: var(--edit-currency-border);
-	width: 350px;
-}
-
-.edit-currency,
-#edit-currency-form {
-	display: flex;
-	flex-direction: column;
-	gap: 1em;
-}
-
-.edit-currency input {
-	border-radius: 6px;
-	user-select: all;
-	padding: 0.5em;
-	height: 100%;
-	border: var(--edit-currency-input-border);
-	background-color: var(--edit-currency-input-bg);
-	color: var(--color-fg);
-}
-
-.edit-currency-input-group {
-	display: flex;
-	width: 100%;
-	align-items: center;
-}
-
-.edit-currency button {
-	margin-top: 8px;
-	border-radius: var(--INF);
-	padding: 0.5em 1em;
-}
-
-.edit-currency label {
-	color: var(--color-fg);
-	font-weight: 500;
-	margin-bottom: 4px;
-}
-
-.edit-currency .error {
-	color: var(--color-error);
-	font-size: 0.9em;
-	margin-top: 8px;
-	text-align: center;
+	border: var(--dialog-border);
+	width: 400px;
 }

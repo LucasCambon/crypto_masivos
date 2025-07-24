@@ -3,5 +3,5 @@
 }
 
 .error {
-	color: var(--color-red-400);
+	color: var(--color-error);
 }

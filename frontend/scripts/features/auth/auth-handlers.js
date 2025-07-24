@@ -1,4 +1,7 @@
-import { showLoginDialog, showRegisterDialog } from './dialog.js';
+import {
+	showLoginDialog,
+	showRegisterDialog,
+} from '../../components/dialog-manager.js';
 
 export function addLoginRegisterEventHandlers() {
 	const registerBtn = document.getElementById('register-btn');
