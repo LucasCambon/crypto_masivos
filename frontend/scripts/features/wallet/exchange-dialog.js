@@ -6,7 +6,7 @@ export function createExchangeDialog(onClose) {
 	const content = createElement('div', 'dialog-content');
 
 	const header = createElement('div', 'dialog-header');
-	const title = createElement('h2', '', 'Exchange Between Wallets');
+	const title = createElement('h2', '', 'Exchange');
 	const closeBtn = createElement('span', 'close-icon');
 	closeBtn.addEventListener('click', onClose);
 	appendChildren(header, title, closeBtn);
