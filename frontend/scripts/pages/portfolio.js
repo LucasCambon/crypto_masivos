@@ -18,6 +18,13 @@ async function loadUserProfile() {
 		if (result.success) {
 			currentUser = result.user;
 			updateUserGreeting();
+      const adminBtn = document.querySelector('.admin-btn');
+      if (adminBtn && currentUser?.role === 'admin') {
+        adminBtn.style.display = 'inline-block';
+        adminBtn.addEventListener('click', () => {
+          window.location.href = '/dashboard.html';
+        });
+      }
 		}
 	} catch (error) {
 		console.error('Failed to load user profile:', error);

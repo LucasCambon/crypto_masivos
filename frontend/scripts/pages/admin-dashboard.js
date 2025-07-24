@@ -55,12 +55,16 @@ async function initDashboard() {
 
 	const usersBtn = document.getElementById('users-btn');
 	const currenciesBtn = document.getElementById('currencies-btn');
+	const portfolioBtn = document.querySelector('.portfolio-btn');
 	const logoutBtn = document.querySelector('.logout-btn');
 
 	setupNavigation(usersBtn, currenciesBtn);
 	setupCreateCurrencyHandler();
 
 	logoutBtn.addEventListener('click', logoutUser);
+		portfolioBtn.addEventListener('click', () => {
+		window.location.href = '/portfolio.html';
+	});
 }
 
 document.addEventListener('DOMContentLoaded', initDashboard);
