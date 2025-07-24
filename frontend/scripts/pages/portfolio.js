@@ -1,10 +1,14 @@
 import { fetchWallets } from '../api/wallet-api.js';
 import { logoutUser } from '../api/auth-api.js';
 import { fetchUserProfile } from '../api/user-api.js';
-import { fetchCurrencies } from '../api/currency-api.js';
 import { requireAuth } from '../utils/auth-helpers.js';
 import { createElement, appendChildren } from '../utils/dom-helpers.js';
-import { showEditProfileDialog } from '../components/dialog-manager.js';
+import {
+	showEditProfileDialog,
+	showWithdrawDialog,
+	showAddFundsDialog,
+	showExchangeDialog,
+} from '../components/dialog-manager.js';
 
 let currentUser = null;
 
@@ -27,23 +31,10 @@ function updateUserGreeting() {
 	}
 }
 
-function getCryptoIcon(symbol) {
-	const icons = {
-		BTC: '🟧',
-		ETH: '🟦',
-	};
-	return icons[symbol] || '🪙';
-}
-
 function createWalletItem(wallet) {
 	const walletItem = createElement('div', 'wallet-item');
 
 	const walletInfo = createElement('div', 'wallet-info');
-	const cryptoIcon = createElement(
-		'span',
-		'crypto-icon',
-		getCryptoIcon(wallet.currency_symbol || 'UNKNOWN')
-	);
 
 	const walletDetails = createElement('div', 'wallet-details');
 	const walletSymbol = createElement(
@@ -58,7 +49,7 @@ function createWalletItem(wallet) {
 	);
 
 	appendChildren(walletDetails, walletSymbol, walletName);
-	appendChildren(walletInfo, cryptoIcon, walletDetails);
+	appendChildren(walletInfo, walletDetails);
 
 	const walletBalance = createElement(
 		'span',
@@ -133,6 +124,34 @@ function setupEventListeners() {
 		editProfileBtn.addEventListener('click', () => {
 			showEditProfileDialog(currentUser, () => {
 				loadUserProfile(); // Refresh user data after edit
+			});
+		});
+	}
+
+	// Wallet action buttons
+	const exchangeButton = document.querySelector('.exchange-icon');
+	if (exchangeButton) {
+		exchangeButton.addEventListener('click', () => {
+			showExchangeDialog(() => {
+				loadPortfolioData();
+			});
+		});
+	}
+
+	const withdrawButton = document.querySelector('.withdraw-icon');
+	if (withdrawButton) {
+		withdrawButton.addEventListener('click', () => {
+			showWithdrawDialog(() => {
+				loadPortfolioData();
+			});
+		});
+	}
+
+	const addFundsButton = document.querySelector('.add-founds-icon');
+	if (addFundsButton) {
+		addFundsButton.addEventListener('click', () => {
+			showAddFundsDialog(() => {
+				loadPortfolioData();
 			});
 		});
 	}
